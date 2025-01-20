@@ -1,3 +1,10 @@
 [build]
-  command = "flutter build web"
+  command = "bash build.sh"
   publish = "build/web"
+
+[[plugins]]
+  package = "@netlify/plugin-functions-install-core"
+
+[build.environment]
+  FLUTTER_HOME = "/opt/flutter"
+
