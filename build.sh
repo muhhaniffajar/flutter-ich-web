@@ -1,11 +1,21 @@
 #!/bin/bash
+set -e
 
-# Install Flutter SDK
-git clone https://github.com/flutter/flutter.git -b stable --depth 1
-export PATH="$PATH:`pwd`/flutter/bin"
+# Pindah ke channel stable dan pastikan Flutter up-to-date
+echo "Switching to stable channel..."
+flutter channel stable
 
-# Cek apakah Flutter berhasil diinstall
+echo "Upgrading Flutter..."
+flutter upgrade
+
+# Resolusi dependencies
+echo "Resolving dependencies..."
+flutter pub get
+
+# Build untuk web
+echo "Building for web (release)..."
+flutter build web --release
+
+# Periksa konfigurasi dan lingkungan
+echo "Checking Flutter environment..."
 flutter doctor
-
-# Membuat build web untuk Flutter
-flutter build web
