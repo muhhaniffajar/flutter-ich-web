@@ -1,9 +1,7 @@
 #!/bin/bash
 # Install Flutter
-
-# Install dependencies first (in case they are missing)
-sudo apt-get update
-sudo apt-get install -y wget curl git unzip
+apt-get update
+apt-get install -y git curl unzip
 
 # Download and install Flutter
 git clone https://github.com/flutter/flutter.git -b stable --depth 1
