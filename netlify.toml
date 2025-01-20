@@ -1,8 +1,10 @@
 [build]
 command = "bash build.sh"
 publish = "build/web"
+
 [build.environment]
 NETLIFY_USE_YARN = "true"
+PATH = "/opt/build/repo/flutter/bin:$PATH"  # Pastikan ini benar
 
 [context.production]
 command = "bash build.sh"
