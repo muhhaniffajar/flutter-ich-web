@@ -32,3 +32,7 @@ flutter pub get
 
 # Build the Flutter web app
 flutter build web
+wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.1-stable.tar.xz
+tar xf flutter_linux_3.13.1-stable.tar.xz
+export PATH="$PWD/flutter/bin:$PATH"
+flutter doctor
