@@ -1,9 +1,11 @@
 #!/bin/bash
 
 # Install Flutter SDK
-git clone https://github.com/flutter/flutter.git /opt/flutter
-export PATH="$PATH:/opt/flutter/bin"
+git clone https://github.com/flutter/flutter.git -b stable --depth 1
+export PATH="$PATH:`pwd`/flutter/bin"
 
-# Menjalankan perintah build
+# Cek apakah Flutter berhasil diinstall
 flutter doctor
+
+# Membuat build web untuk Flutter
 flutter build web
