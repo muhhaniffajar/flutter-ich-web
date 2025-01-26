@@ -3,24 +3,26 @@ description: A new Flutter project.
 
 # Environment setup specifying the minimum and maximum versions of the Dart SDK
 environment:
-  sdk: ">=2.17.0 <3.0.0"
+  sdk: ">=2.17.0 <4.0.0"
 
 # Dependencies required for the project to function correctly
 dependencies:
   flutter:
     sdk: flutter
   dicom: ^0.0.3
-  flutter_lints: ^2.0.0
   http: ^1.2.2
   file_picker: ^8.1.7
-  dio: ^4.0.4
+  dio: ^5.7.0
   path: ^1.8.0
   html: ^0.15.5
-  logger: ^1.0.0
+  flutter_lints: ^5.0.0
+  logger: ^2.5.0
   http_parser: ^4.1.2
   cupertino_icons: ^1.0.5
 flutter_icons: ^1.1.0
-
+cached_network_image: ^3.3.0
+flutter_image_compress: ^2.1.0
+flutter_native_splash: ^2.2.8
 
 dev_dependencies:
   flutter_test:

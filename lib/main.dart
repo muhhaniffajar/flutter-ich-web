@@ -35,7 +35,7 @@ void main() {
 // widget utama yang digunakan dalam aplikasi
 // Menggunakan StatelessWidget karena widget ini tidak mengubah state
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key); // Konstruktor dari MyApp
+  const MyApp({super.key}); // Konstruktor dari MyApp
 
   // Fungsi build untuk membuat tampilan aplikasi
   @override
@@ -114,7 +114,7 @@ class MainPage extends StatelessWidget {
 // ========================================================
 
 class EducationPage extends StatefulWidget {
-  const EducationPage({Key? key}) : super(key: key); // Konstruktor untuk EducationPage
+  const EducationPage({super.key}); // Konstruktor untuk EducationPage
 
   @override
   EducationPageState createState() => EducationPageState(); // Membuat state untuk EducationPage

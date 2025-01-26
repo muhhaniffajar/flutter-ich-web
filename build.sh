@@ -1,38 +1,38 @@
 #!/bin/bash
-# Install Flutter if not found
-if ! command -v flutter &> /dev/null
-then
-    echo "Flutter could not be found, installing..."
-    git clone https://github.com/flutter/flutter.git -b stable --depth 1
-    export PATH="$PATH:`pwd`/flutter/bin"
+# Stop build jika ada error
+set -e
+
+# Install Flutter jika belum ditemukan
+if ! command -v flutter &> /dev/null; then
+    echo "Flutter tidak ditemukan. Mengunduh Flutter..."
+    
+    # Periksa apakah wget atau curl tersedia
+    if command -v wget &> /dev/null; then
+        wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.1-stable.tar.xz
+    elif command -v curl &> /dev/null; then
+        curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.1-stable.tar.xz
+    else
+        echo "wget atau curl tidak ditemukan, instal salah satu untuk melanjutkan."
+        exit 1
+    fi
+
+    tar xf flutter_linux_3.13.1-stable.tar.xz
+    export PATH="$PWD/flutter/bin:$PATH"
 fi
 
-# Debugging: Cek apakah Flutter ada di path
+# Debugging: Cek apakah Flutter sudah terpasang
 echo "PATH: $PATH"
-echo "Listing contents of /opt/build/repo:"
-ls -al /opt/build/repo
-echo "Listing contents of flutter directory:"
-ls -al /opt/build/repo/flutter
-
-# Pastikan flutter/bin ada di direktori yang benar
-if [ ! -d "/opt/build/repo/flutter/bin" ]; then
-  echo "Flutter not found in the specified directory!"
-  exit 1
-fi
-
-# Check flutter installation
 flutter --version
 
-# Switch to stable channel
+# Pastikan menggunakan stable channel
 flutter channel stable
 flutter upgrade
 
-# Get dependencies
+# Aktifkan dukungan web
+flutter config --enable-web
+
+# Install dependencies
 flutter pub get
 
-# Build the Flutter web app
+# Build aplikasi untuk web
 flutter build web
-wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.13.1-stable.tar.xz
-tar xf flutter_linux_3.13.1-stable.tar.xz
-export PATH="$PWD/flutter/bin:$PATH"
-flutter doctor

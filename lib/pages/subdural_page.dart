@@ -1,36 +1,21 @@
-// ========================================================
-// IMPORT LIBRARIES
-// Mengimpor berbagai library yang dibutuhkan untuk melakukan pembangunan antarmuka pengguna pada aplikasi Flutter. 
-// Material.dart menyediakan komponen-komponen UI dasar yang digunakan dalam pengembangan aplikasi Flutter, seperti AppBar, Scaffold, dan lain-lain.
-// ========================================================
 import 'package:flutter/material.dart';
 
-// ========================================================
-// SubduralPage Widget
-// Halaman ini menampilkan informasi terkait Subdural Hemorrhage
-// dengan elemen-elemen teks dan gambar-gambar yang dapat dipindah-pindah
-// ========================================================
 class SubduralPage extends StatelessWidget {
   const SubduralPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ========================================================
-      // AppBar
-      // Membuat AppBar dengan judul halaman, tombol kembali, 
-      // dan tema warna latar belakang yang disesuaikan.
-      // ========================================================
       appBar: AppBar(
         title: const Text('Subdural Hemorrhage', style: TextStyle(color: Colors.white60)),
-        backgroundColor: const Color(0xFF1B1E25),  // Warna latar belakang AppBar
-        iconTheme: const IconThemeData(color: Colors.white), // Warna ikon di AppBar
+        backgroundColor: const Color(0xFF1B1E25),
+        iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',  // Tooltip untuk menunjukkan pesan ketika tombol ditekan
+          message: 'Back to Home',
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);  // Kembali ke halaman sebelumnya
+              Navigator.pop(context);
             },
           ),
         ),
@@ -38,11 +23,6 @@ class SubduralPage extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        // ========================================================
-        // Latar belakang dengan gradasi warna
-        // Menambahkan latar belakang dengan efek gradien vertikal 
-        // dari warna gelap ke putih.
-        // ========================================================
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF1B1E25), Colors.white],
@@ -50,22 +30,12 @@ class SubduralPage extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        // ========================================================
-        // SingleChildScrollView
-        // Menggunakan SingleChildScrollView untuk memungkinkan
-        // konten halaman digulir jika konten melebihi layar.
-        // ========================================================
-        child: SingleChildScrollView( 
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // ========================================================
-                // Row untuk Informasi Subdural Hemorrhage
-                // Menampilkan informasi terkait Subdural Hemorrhage di sisi kiri
-                // dan slider gambar di sisi kanan.
-                // ========================================================
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,10 +46,6 @@ class SubduralPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // ========================================================
-                            // Container untuk Teks Informasi
-                            // Menampilkan teks yang menjelaskan tentang Subdural Hemorrhage.
-                            // ========================================================
                             Container(
                               padding: const EdgeInsets.all(16.0),
                               decoration: BoxDecoration(
@@ -100,16 +66,13 @@ class SubduralPage extends StatelessWidget {
                                   SizedBox(height: 16),
                                   Text(
                                     'Subdural hemorrhage (SDH) refers to a collection of blood between the dura mater (the outer protective layer of the brain) and the arachnoid layer. It is commonly caused by trauma to the head, leading to the rupture of blood vessels. Symptoms of subdural hemorrhage can include headaches, confusion, dizziness, and in severe cases, loss of consciousness. SDH can be classified into acute, subacute, and chronic, based on the duration between the injury and the appearance of symptoms. Prompt medical intervention is crucial for the treatment and management of subdural hemorrhages.',
+                                    textAlign: TextAlign.justify,
                                     style: TextStyle(
                                       color: Colors.white30,
                                       fontSize: 16,
                                     ),
                                   ),
                                   SizedBox(height: 16),
-                                  // ========================================================
-                                  // Bagian Location
-                                  // Menampilkan informasi lokasi Subdural Hemorrhage
-                                  // ========================================================
                                   Text(
                                     'Location:',
                                     style: TextStyle(
@@ -127,10 +90,6 @@ class SubduralPage extends StatelessWidget {
                                     textAlign: TextAlign.justify,
                                   ),
                                   SizedBox(height: 10),
-                                  // ========================================================
-                                  // Bagian Causes
-                                  // Menampilkan informasi penyebab Subdural Hemorrhage
-                                  // ========================================================
                                   Text(
                                     'Causes:',
                                     style: TextStyle(
@@ -148,10 +107,6 @@ class SubduralPage extends StatelessWidget {
                                     textAlign: TextAlign.justify,
                                   ),
                                   SizedBox(height: 10),
-                                  // ========================================================
-                                  // Bagian Characteristics
-                                  // Menampilkan karakteristik Subdural Hemorrhage
-                                  // ========================================================
                                   Text(
                                     'Characteristics:',
                                     style: TextStyle(
@@ -169,10 +124,6 @@ class SubduralPage extends StatelessWidget {
                                     textAlign: TextAlign.justify,
                                   ),
                                   SizedBox(height: 10),
-                                  // ========================================================
-                                  // Bagian Symptoms
-                                  // Menampilkan gejala-gejala yang dapat terjadi akibat Subdural Hemorrhage
-                                  // ========================================================
                                   Text(
                                     'Symptoms:',
                                     style: TextStyle(
@@ -196,10 +147,6 @@ class SubduralPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // ========================================================
-                    // SubduralImageSlider Widget
-                    // Menampilkan slider gambar di sebelah kanan informasi.
-                    // ========================================================
                     const Expanded(
                       flex: 1,
                       child: Padding(
@@ -218,11 +165,6 @@ class SubduralPage extends StatelessWidget {
   }
 }
 
-// ========================================================
-// SubduralImageSlider Widget
-// Widget ini menampilkan gambar-gambar terkait Subdural Hemorrhage
-// dengan slider yang memungkinkan pengguna melihat gambar yang berbeda.
-// ========================================================
 class SubduralImageSlider extends StatefulWidget {
   const SubduralImageSlider({super.key});
 
@@ -231,24 +173,19 @@ class SubduralImageSlider extends StatefulWidget {
 }
 
 class SubduralImageSliderState extends State<SubduralImageSlider> {
-  final PageController _pageController = PageController();  // Kontrol untuk menggeser halaman gambar
-  int _currentIndex = 0;  // Indeks gambar yang sedang ditampilkan
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
   List<String> imagePaths = [
-    'assets/subdural1.jpg',  // Path gambar pertama
-    'assets/subdural2.jpg',  // Path gambar kedua
-    'assets/subdural3.jpg',  // Path gambar ketiga
-    'assets/subdural4.jpg',  // Path gambar keempat
+    'assets/subdural1.jpg',
+    'assets/subdural2.jpg',
+    'assets/subdural3.jpg',
+    'assets/subdural4.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ========================================================
-        // Title for Image Slider
-        // Menambahkan judul untuk slider gambar yang menjelaskan
-        // tentang gambar yang sedang ditampilkan.
-        // ========================================================
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
@@ -267,11 +204,6 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
             ),
           ),
         ),
-        // ========================================================
-        // Image Slider Container
-        // Menyusun tampilan slider gambar dengan kontrol navigasi
-        // untuk berpindah antar gambar.
-        // ========================================================
         Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(204, 36, 39, 48),
@@ -280,11 +212,6 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // ========================================================
-              // PageView.builder untuk Gambar
-              // Menampilkan gambar-gambar menggunakan PageView dengan
-              // kemampuan scroll antar gambar.
-              // ========================================================
               SizedBox(
                 height: 600,
                 child: PageView.builder(
@@ -308,11 +235,6 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
                   },
                 ),
               ),
-              // ========================================================
-              // Page Indicator
-              // Indikator halaman untuk menunjukkan gambar mana yang
-              // sedang ditampilkan.
-              // ========================================================
               Positioned(
                 bottom: 10,
                 child: Row(
@@ -330,10 +252,6 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
                   }),
                 ),
               ),
-              // ========================================================
-              // Navigation Buttons
-              // Tombol untuk berpindah ke gambar sebelumnya atau berikutnya.
-              // ========================================================
               Positioned(
                 left: 0,
                 child: Tooltip(
@@ -374,16 +292,4 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
       ],
     );
   }
-
- // ========================================================
-// Dispose Method
-// Melepaskan resource yang digunakan oleh widget ketika widget dihapus
-// Dalam hal ini, melepaskan controller halaman (_pageController)
-// ========================================================
-// @override
-// void dispose() {
-//   _pageController.dispose();  // Melepaskan controller halaman ketika widget dihapus
-//   super.dispose();  // Memanggil dispose pada superclass untuk memastikan semua resource dibersihkan dengan baik
-// }
-
 }
