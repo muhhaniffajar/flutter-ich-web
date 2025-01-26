@@ -36,7 +36,7 @@ class UploadFile extends StatelessWidget {
   // ========================================================
 
   UploadFile({
-    Key? key,
+    super.key,
     required this.dicomFile,
     required this.isLoading,
     required this.onFileSelected,
@@ -44,7 +44,7 @@ class UploadFile extends StatelessWidget {
     required this.onLoadingStateChanged,
     required this.onClassifyCompleted,
     required this.onFileRemoved,
-  }) : super(key: key);
+  });
 
   // ========================================================
   // FUNGSI UNTUK MEMILIH FILE DICOM DARI PERANGKAT PENGGUNA
@@ -77,7 +77,7 @@ class UploadFile extends StatelessWidget {
     onLoadingStateChanged(true);
 
     try {
-      final dio = Dio(); // Instance Dio untuk request HTTP (https://pub.dev/packages/dio)
+      var dio = Dio(); // Instance Dio untuk request HTTP (https://pub.dev/packages/dio)
       const url = 'https://mortality-campaigns-choir-pix.trycloudflare.com/image-model/?with_gradcam=true&with_windowing=true';
 
       // Membuat FormData untuk mengunggah file (https://pub.dev/packages/dio)
