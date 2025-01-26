@@ -150,7 +150,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                     height: screenWidth * 0.45 + 40,  // Mengatur tinggi untuk konten gambar
                     child: PageView.builder(
                       controller: _pageController,
-                      itemCount: heatmapImages.length,  // Banyaknya gambar
+                      itemCount: inferences.length,  // Banyaknya gambar
                       onPageChanged: (int page) {
                         setState(() {
                           _currentPage = page;  // Menyimpan halaman aktif

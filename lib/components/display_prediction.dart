@@ -60,15 +60,6 @@ class DisplayPrediction extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    // ========================================================
-                    // JIKA TERDAPAT LABEL PADA responseData, MENAMPILKAN LABEL TERSEBUT
-                    // ========================================================
-                    if (responseData?['label'] != null)
-                      Text(
-                        'Label: ${responseData!['label']}', // Menampilkan label dari responseData
-                        style: const TextStyle(color: Colors.white, fontSize: 14),
-                      ),
                     const SizedBox(height: 30),
                     // ========================================================
                     // MENAMPILKAN TEKS "PREDICTION DETAILS" SEBAGAI HEADER

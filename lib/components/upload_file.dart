@@ -77,7 +77,7 @@ class UploadFile extends StatelessWidget {
     onLoadingStateChanged(true);
 
     try {
-      var dio = Dio(); // Instance Dio untuk request HTTP (https://pub.dev/packages/dio)
+      final dio = Dio(); // Instance Dio untuk request HTTP (https://pub.dev/packages/dio)
       const url = 'https://mortality-campaigns-choir-pix.trycloudflare.com/image-model/?with_gradcam=true&with_windowing=true';
 
       // Membuat FormData untuk mengunggah file (https://pub.dev/packages/dio)
