@@ -12,7 +12,7 @@ class DisplayHeatmap extends StatefulWidget {
   // ========================================================
   final Map<String, dynamic>? responseData;
 
-  const DisplayHeatmap({Key? key, required this.responseData}) : super(key: key);
+  const DisplayHeatmap({super.key, required this.responseData});
 
   @override
   DisplayHeatmapState createState() => DisplayHeatmapState();
@@ -33,7 +33,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
     // URL DASAR UNTUK GAMBAR HEATMAP
     // baseUrl: URL tempat gambar heatmap dapat diakses.
     // ========================================================
-    const String baseUrl = "https://mortality-campaigns-choir-pix.trycloudflare.com/";
+    const String baseUrl = 'https://mortality-campaigns-choir-pix.trycloudflare.com/';
     final screenWidth = MediaQuery.of(context).size.width;  // Mengambil lebar layar perangkat
 
     // ========================================================
@@ -65,7 +65,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
       // ========================================================
       if (heatmapPath == null || heatmapPath.isEmpty) return const SizedBox();
 
-      final String fullImageUrl = "$baseUrl$heatmapPath";  // Menghasilkan URL lengkap gambar
+      final String fullImageUrl = '$baseUrl$heatmapPath';  // Menghasilkan URL lengkap gambar
 
       // ========================================================
       // MEMBUAT WIDGET UNTUK SETIAP GAMBAR HEATMAP

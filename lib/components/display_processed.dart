@@ -13,7 +13,7 @@ class DisplayProcessed extends StatefulWidget {
   final Map<String, dynamic>? responseData; // Data JSON yang berisi informasi gambar
 
   // Constructor widget
-  const DisplayProcessed({Key? key, required this.responseData}) : super(key: key);
+  const DisplayProcessed({super.key, required this.responseData});
 
   @override
   DisplayProcessedState createState() => DisplayProcessedState();
@@ -33,7 +33,7 @@ class DisplayProcessedState extends State<DisplayProcessed> {
     // BASE URL UNTUK MENDAPATKAN GAMBAR DARI BACKEND
     // Base URL untuk mendapatkan gambar dari backend
     // ========================================================
-    const String baseUrl = "https://mortality-campaigns-choir-pix.trycloudflare.com/";
+    const String baseUrl = 'https://mortality-campaigns-choir-pix.trycloudflare.com/';
 
     // ========================================================
     // MENDAPATKAN LEBAR LAYAR UNTUK MENYESUAIKAN UKURAN GAMBAR
@@ -56,19 +56,19 @@ class DisplayProcessedState extends State<DisplayProcessed> {
     // ========================================================
     final List<Widget> images = [];
     if (imagePath != null) {
-      final String fullImageUrl = "$baseUrl$imagePath"; // Menggabungkan base URL dan path gambar
+      final String fullImageUrl = '$baseUrl$imagePath'; // Menggabungkan base URL dan path gambar
       images.add(_buildImage('Brain Window', fullImageUrl)); // Menambahkan widget gambar ke daftar
     }
     if (imagePath2 != null) {
-      final String fullImageUrl = "$baseUrl$imagePath2";
+      final String fullImageUrl = '$baseUrl$imagePath2';
       images.add(_buildImage('Subdural Window', fullImageUrl));
     }
     if (imagePath3 != null) {
-      final String fullImageUrl = "$baseUrl$imagePath3";
+      final String fullImageUrl = '$baseUrl$imagePath3';
       images.add(_buildImage('Soft Window', fullImageUrl));
     }
     if (imagePath4 != null) {
-      final String fullImageUrl = "$baseUrl$imagePath4";
+      final String fullImageUrl = '$baseUrl$imagePath4';
       images.add(_buildImage('Stacked Window', fullImageUrl));
     }
 

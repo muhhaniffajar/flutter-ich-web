@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // karena tidak memerlukan perubahan state selama masa hidupnya.
 // ========================================================
 class IntraparenchymalPage extends StatelessWidget {
-  const IntraparenchymalPage({Key? key}) : super(key: key);
+  const IntraparenchymalPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -247,7 +247,7 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Example of Intraparenchymal Hemorrhage",
+              'Example of Intraparenchymal Hemorrhage',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 18,

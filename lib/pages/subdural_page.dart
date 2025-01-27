@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SubduralPage extends StatelessWidget {
-  const SubduralPage({Key? key}) : super(key: key);
+  const SubduralPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +195,7 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Example of Subdural Hemorrhage",
+              'Example of Subdural Hemorrhage',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 18,

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Halaman EpiduralPage menampilkan informasi tentang Epidural Hemorrhage
 // ========================================================
 class EpiduralPage extends StatelessWidget {
-  const EpiduralPage({Key? key}) : super(key: key);
+  const EpiduralPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +294,7 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Example of Epidural Hemorrhage",
+              'Example of Epidural Hemorrhage',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 18,

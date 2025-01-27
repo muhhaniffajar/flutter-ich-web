@@ -23,7 +23,7 @@ import 'package:ich_web/main.dart';
 // StatefulWidget: Digunakan karena halaman ini akan mengalami perubahan dinamis (seperti file yang diunggah, hasil analisis, dll).
 // createState: Membuat instance dari ClassificationPageState, yang akan menangani state halaman ini.
 class ClassificationPage extends StatefulWidget {
-  const ClassificationPage({Key? key}) : super(key: key);
+  const ClassificationPage({super.key});
 
   @override
   ClassificationPageState createState() => ClassificationPageState();
@@ -166,7 +166,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
       appBar: _isAppBarVisible
           ? AppBar(
               leading: Tooltip(
-                message: "Back to Home",
+                message: 'Back to Home',
                 child: IconButton(
                   icon: const Icon(Icons.home, color: Colors.white60),
                   onPressed: _goToHomePage,

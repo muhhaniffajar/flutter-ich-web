@@ -77,7 +77,7 @@ class MainPage extends StatelessWidget {
 
   Widget _buildClassificationButton(BuildContext context) {
     return Tooltip(
-      message: "Go to ICH classification", // Pesan tooltip untuk tombol
+      message: 'Go to ICH classification', // Pesan tooltip untuk tombol
       child: Padding(
         padding: const EdgeInsets.only(right: 16.0), // Jarak tombol di AppBar
         child: IconButton(

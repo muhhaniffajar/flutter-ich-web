@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // Merupakan widget stateless yang akan membangun struktur antarmuka pengguna untuk menampilkan informasi medis mengenai IVH.
 // ========================================================
 class IntraventricularPage extends StatelessWidget {
-  const IntraventricularPage({Key? key}) : super(key: key);
+  const IntraventricularPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +252,7 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Example of Intraventricular Hemorrhage",
+              'Example of Intraventricular Hemorrhage',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 18,

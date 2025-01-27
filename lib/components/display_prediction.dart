@@ -15,7 +15,7 @@ class DisplayPrediction extends StatelessWidget {
   final Map<String, dynamic>? responseData;
 
   // Konstruktor untuk menerima parameter responseData
-  const DisplayPrediction({Key? key, required this.responseData}) : super(key: key);
+  const DisplayPrediction({super.key, required this.responseData});
 
   @override
   Widget build(BuildContext context) {

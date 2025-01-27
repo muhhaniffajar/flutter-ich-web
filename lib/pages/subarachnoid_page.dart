@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 // dengan elemen-elemen teks dan gambar-gambar yang dapat dipindah-pindah
 // ========================================================
 class SubarachnoidPage extends StatelessWidget {
-  const SubarachnoidPage({Key? key}) : super(key: key);
+  const SubarachnoidPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +256,7 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
           child: const Align(
             alignment: Alignment.center,
             child: Text(
-              "Example of Subarachnoid Hemorrhage",
+              'Example of Subarachnoid Hemorrhage',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 18,
