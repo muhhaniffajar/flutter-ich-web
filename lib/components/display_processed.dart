@@ -187,21 +187,23 @@ class DisplayProcessedState extends State<DisplayProcessed> {
           // GAMBAR DENGAN SUDUT MELENGKUNG
           // Gambar dengan sudut melengkung
           // ========================================================
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15), // Sudut melengkung gambar
-            child: Image.network(
-              imageUrl, // URL gambar
-              width: MediaQuery.of(context).size.width * 0.7, // Menyesuaikan lebar gambar
-              fit: BoxFit.contain, // Menyesuaikan gambar dengan kotak tanpa memotong
-              errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.broken_image, size: 48, color: Colors.red), // Ikon jika gagal memuat gambar
+          Flexible(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15), // Sudut melengkung gambar
+              child: Image.network(
+                imageUrl, // URL gambar
+                width: MediaQuery.of(context).size.width * 0.7, // Menyesuaikan lebar gambar
+                fit: BoxFit.contain, // Menyesuaikan gambar dengan kotak tanpa memotong
+                errorBuilder: (context, error, stackTrace) => const Center(
+                  child: Icon(Icons.broken_image, size: 48, color: Colors.red), // Ikon jika gagal memuat gambar
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child; // Jika selesai memuat, tampilkan gambar
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.white), // Indikator loading
+                  );
+                },  
               ),
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child; // Jika selesai memuat, tampilkan gambar
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.white), // Indikator loading
-                );
-              },  
             ),
           ),
           const SizedBox(height: 8), // Jarak antara gambar dan teks judul
@@ -213,6 +215,7 @@ class DisplayProcessedState extends State<DisplayProcessed> {
       ),
     );
   }
+
   // ========================================================
   // Dispose Method
   // Melepaskan resource yang digunakan oleh widget ketika widget dihapus

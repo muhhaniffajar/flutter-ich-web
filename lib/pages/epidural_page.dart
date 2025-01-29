@@ -6,251 +6,213 @@ import 'package:flutter/material.dart';
 class EpiduralPage extends StatelessWidget {
   const EpiduralPage({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ========================================================
-      // AppBar untuk menampilkan judul halaman dan ikon kembali
-      // ========================================================
       appBar: AppBar(
-        // ========================================================
-        // Menampilkan judul halaman dan ikon kembali di bagian atas aplikasi
-        // ========================================================
-        title: const Text(
-          'Epidural Hemorrhage', 
-          style: TextStyle(color: Colors.white60), // Menentukan warna teks judul
-        ),
-        
-        // ========================================================
-        // Mengatur warna latar belakang AppBar
-        // Warna latar belakang menggunakan kode hex #1B1E25 untuk tampilan yang gelap
-        // ========================================================
-        backgroundColor: const Color(0xFF1B1E25), 
-
-        // ========================================================
-        // Mengatur warna ikon yang ada di AppBar (seperti ikon kembali)
-        // Warna ikon disesuaikan dengan tema warna putih untuk kontras
-        // ========================================================
+        title: const Text('Epidural Hemorrhage', style: TextStyle(color: Colors.white60)),
+        backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
-
-        // ========================================================
-        // Ikon tombol kembali (leading) dengan tooltip
-        // Tooltip memberikan informasi kepada pengguna ketika mereka menahan tombol
-        // ========================================================
         leading: Tooltip(
-          message: 'Back to Home',  // Pesan yang muncul saat ikon kembali di-hover
+          message: 'Back to Home',
           child: IconButton(
-            icon: const Icon(Icons.arrow_back),  // Ikon tombol kembali
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              // ========================================================
-              // Fungsi onPressed digunakan untuk mengembalikan pengguna ke halaman sebelumnya
-              // Navigator.pop(context) akan menutup halaman saat ini dan kembali ke halaman sebelumnya
-              // ========================================================
-              Navigator.pop(context); 
+              Navigator.pop(context);
             },
           ),
         ),
       ),
-
-      // ========================================================
-      // Bagian utama Body untuk konten halaman
-      // ========================================================
       body: Container(
-        width: double.infinity, // Mengatur lebar kontainer
-        height: double.infinity, // Mengatur tinggi kontainer
-
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1B1E25), Colors.white],  // Warna gradasi
-            begin: Alignment.topCenter,  // Gradasi dimulai dari bagian atas layar
-            end: Alignment.bottomCenter,  // Gradasi berakhir di bagian bawah layar
+            colors: [Color(0xFF1B1E25), Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-
-        // ========================================================
-        // SingleChildScrollView digunakan agar konten halaman bisa digulir jika melebihi batas layar
-        // Padding ditambahkan untuk memberikan ruang di sekitar konten halaman
-        // ========================================================
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0),  // Memberikan padding 16 piksel di sekitar konten
-          child: Column(
-            children: [
-              // ========================================================
-              // Row digunakan untuk membagi layar secara horizontal
-              // Menyusun konten dalam dua bagian (konten teks di sebelah kiri dan gambar di sebelah kanan)
-              // ========================================================
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Menyusun elemen di tengah layar
+          padding: const EdgeInsets.all(16.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              bool isNarrow = constraints.maxWidth < 800;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 1,  // Memberikan bagian yang fleksibel untuk teks
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),  // Memberikan padding di sekitar teks
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,  // Penataan teks di sebelah kiri
-                        children: [
-                          // ========================================================
-                          // Container untuk informasi tentang Epidural Hemorrhage
-                          // Memberikan padding dan latar belakang yang gelap untuk informasi ini
-                          // ========================================================
-                          Container(
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(204, 36, 39, 48), // Latar belakang berwarna gelap
-                              borderRadius: BorderRadius.circular(16), // Sudut kontainer melengkung
-                            ),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start, // Penataan teks di kiri
-                              children: [
-                                // ========================================================
-                                // Teks Judul: Menyediakan informasi tentang Epidural Hemorrhage
-                                // ========================================================
-                                Text(
-                                  'What is Epidural Hemorrhage?',
-                                  style: TextStyle(
-                                    color: Colors.white60,  // Warna teks putih
-                                    fontSize: 24,  // Ukuran font besar
-                                    fontWeight: FontWeight.bold,  // Font tebal
-                                  ),
-                                ),
-                                SizedBox(height: 16),
-                                // ========================================================
-                                // Teks Penjelasan: Memberikan deskripsi singkat tentang Epidural Hemorrhage
-                                // ========================================================
-                                Text(
-                                  'Epidural Hemorrhage (EDH) is a type of bleeding that occurs between the dura mater (the outer protective layer of the brain) and the skull. It is typically caused by trauma, especially head injuries that lead to the rupture of arteries, often the middle meningeal artery. Epidural hemorrhages are considered a medical emergency because they can cause rapid deterioration in a patient’s condition if not treated promptly.',
-                                  style: TextStyle(
-                                    color: Colors.white30,  // Warna teks putih pudar
-                                    fontSize: 16,  // Ukuran font yang sedikit lebih kecil
-                                  ),
-                                ),
-                                SizedBox(height: 16),
-                                // ========================================================
-                                // Lokasi Epidural Hemorrhage
-                                // Menjelaskan tempat terjadinya perdarahan di otak
-                                // ========================================================
-                                Text(
-                                  'Location:',
-                                  style: TextStyle(
-                                    color: Colors.white60,  // Warna teks putih
-                                    fontSize: 20,  // Ukuran font sedang
-                                    fontWeight: FontWeight.bold,  // Font tebal
-                                  ),
-                                ),
-                                Text(
-                                  'Bleeding occurs between the dura mater (the outermost layer of the meninges) and the inner surface of the skull. This type of hemorrhage typically occurs after trauma and can cause significant pressure on the brain.',
-                                  style: TextStyle(
-                                    color: Colors.white30,  // Warna teks putih pudar
-                                    fontSize: 18,  // Ukuran font lebih besar untuk penjelasan lebih rinci
-                                  ),
-                                  textAlign: TextAlign.justify,  // Menyusun teks rata kiri-kanan
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Penyebab Epidural Hemorrhage
-                                // Memberikan informasi tentang penyebab umum
-                                // ========================================================
-                                Text(
-                                  'Causes:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Traumatic brain injury: Commonly from head trauma such as falls, motor vehicle accidents, or assaults.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                Text(
-                                  '- Middle meningeal artery rupture: The most common source of bleeding, often resulting from a direct blow to the side of the head.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Karakteristik Epidural Hemorrhage
-                                // Penjelasan Karakteristik epidural hemorrage
-                                // ========================================================
-                                Text(
-                                  'Characteristics:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Blood accumulates in a localized area and can compress the brain.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                Text(
-                                  '- The hemorrhage typically appears as a biconvex (lens-shaped) collection on imaging, confined to a specific area.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                Text(
-                                  '- Rapid accumulation of blood may cause a shift in brain structures, leading to brain herniation if untreated.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Gejala Epidural Hemorrhage
-                                // Penjelasan tentang Gejala kondisi ini
-                                // ========================================================
-                                Text(
-                                  'Symptoms:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Loss of consciousness after injury.\n- Headache, nausea, vomiting, and dizziness.\n- Progressive neurological decline, such as weakness or paralysis on one side of the body.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                  SizedBox(height: 50),
+                  if (isNarrow) ...[
+                    const EpiduralTextContent(),
+                    const SizedBox(height: 16),
+                    const EpiduralImageSlider(),
+                  ] else ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Expanded(flex: 1, child: EpiduralTextContent()),
+                        SizedBox(width: 16),
+                        Expanded(flex: 1, child: EpiduralImageSlider()),
+                      ],
                     ),
-                  ),
-                  const Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: EpiduralImageSlider(),  // Menampilkan slider gambar terkait Epidural Hemorrhage
-                    ),
-                  ),
+                  ]
                 ],
-              ),
-            ],
+              );
+            },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class EpiduralTextContent extends StatelessWidget {
+  const EpiduralTextContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(204, 36, 39, 48),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ========================================================
+          // Teks Judul: Menyediakan informasi tentang Epidural Hemorrhage
+          // ========================================================
+          Text(
+            'What is Epidural Hemorrhage?',
+            style: TextStyle(
+              color: Colors.white60,  // Warna teks putih
+              fontSize: 24,  // Ukuran font besar
+              fontWeight: FontWeight.bold,  // Font tebal
+            ),
+          ),
+          SizedBox(height: 16),
+          // ========================================================
+          // Teks Penjelasan: Memberikan deskripsi singkat tentang Epidural Hemorrhage
+          // ========================================================
+          Text(
+            'Epidural Hemorrhage (EDH) is a type of bleeding that occurs between the dura mater (the outer protective layer of the brain) and the skull. It is typically caused by trauma, especially head injuries that lead to the rupture of arteries, often the middle meningeal artery. Epidural hemorrhages are considered a medical emergency because they can cause rapid deterioration in a patient’s condition if not treated promptly.',
+            style: TextStyle(
+              color: Colors.white30,  // Warna teks putih pudar
+              fontSize: 16,  // Ukuran font yang sedikit lebih kecil
+            ),
+          ),
+          SizedBox(height: 16),
+          // ========================================================
+          // Lokasi Epidural Hemorrhage
+          // Menjelaskan tempat terjadinya perdarahan di otak
+          // ========================================================
+          Text(
+            'Location:',
+            style: TextStyle(
+              color: Colors.white60,  // Warna teks putih
+              fontSize: 20,  // Ukuran font sedang
+              fontWeight: FontWeight.bold,  // Font tebal
+            ),
+          ),
+          Text(
+            'Bleeding occurs between the dura mater (the outermost layer of the meninges) and the inner surface of the skull. This type of hemorrhage typically occurs after trauma and can cause significant pressure on the brain.',
+            style: TextStyle(
+              color: Colors.white30,  // Warna teks putih pudar
+              fontSize: 18,  // Ukuran font lebih besar untuk penjelasan lebih rinci
+            ),
+            textAlign: TextAlign.justify,  // Menyusun teks rata kiri-kanan
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Penyebab Epidural Hemorrhage
+          // Memberikan informasi tentang penyebab umum
+          // ========================================================
+          Text(
+            'Causes:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Traumatic brain injury: Commonly from head trauma such as falls, motor vehicle accidents, or assaults.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          Text(
+            '- Middle meningeal artery rupture: The most common source of bleeding, often resulting from a direct blow to the side of the head.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Karakteristik Epidural Hemorrhage
+          // Penjelasan Karakteristik epidural hemorrage
+          // ========================================================
+          Text(
+            'Characteristics:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Blood accumulates in a localized area and can compress the brain.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          Text(
+            '- The hemorrhage typically appears as a biconvex (lens-shaped) collection on imaging, confined to a specific area.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          Text(
+            '- Rapid accumulation of blood may cause a shift in brain structures, leading to brain herniation if untreated.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Gejala Epidural Hemorrhage
+          // Penjelasan tentang Gejala kondisi ini
+          // ========================================================
+          Text(
+            'Symptoms:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Loss of consciousness after injury.\n- Headache, nausea, vomiting, and dizziness.\n- Progressive neurological decline, such as weakness or paralysis on one side of the body.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ],
       ),
     );
   }
@@ -402,15 +364,5 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
         ),
       ],
     );
-  }
-
-  // ========================================================
-  // MENGHAPUS PAGE CONTROLLER SAAT WIDGET DIBERSIHKAN
-  // dispose() digunakan untuk mengelola sumber daya dan menghindari kebocoran memori.
-  // ========================================================
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 }

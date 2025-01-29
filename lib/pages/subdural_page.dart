@@ -32,134 +32,127 @@ class SubduralPage extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(16.0),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(204, 36, 39, 48),
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'What is Subdural Hemorrhage?',
-                                    style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Subdural hemorrhage (SDH) refers to a collection of blood between the dura mater (the outer protective layer of the brain) and the arachnoid layer. It is commonly caused by trauma to the head, leading to the rupture of blood vessels. Symptoms of subdural hemorrhage can include headaches, confusion, dizziness, and in severe cases, loss of consciousness. SDH can be classified into acute, subacute, and chronic, based on the duration between the injury and the appearance of symptoms. Prompt medical intervention is crucial for the treatment and management of subdural hemorrhages.',
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Location:',
-                                    style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Bleeding occurs between the dura mater (the outermost meningeal layer) and the arachnoid mater.',
-                                    style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Causes:',
-                                    style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '- Traumatic brain injury (e.g., falls, motor vehicle accidents) leading to tearing of bridging veins.\n- In older adults or alcoholics, minor trauma can cause SDH due to brain atrophy, which stretches the veins.',
-                                    style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Characteristics:',
-                                    style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '- Blood spreads along the brain surface and follows the contours of the brain (crescent-shaped on imaging).\n- It can be acute (sudden), subacute, or chronic (developing over weeks to months).',
-                                    style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text(
-                                    'Symptoms:',
-                                    style: TextStyle(
-                                      color: Colors.white60,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    '- Acute SDH: Rapid onset of headache, altered consciousness, and focal neurological deficits.\n- Chronic SDH: Gradual headache, confusion, memory problems, or weakness.',
-                                    style: TextStyle(
-                                      color: Colors.white30,
-                                      fontSize: 18,
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              bool isNarrow = constraints.maxWidth < 800;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 50),
+                  if (isNarrow) ...[
+                    const SubduralTextContent(),
+                    const SizedBox(height: 16),
+                    const SubduralImageSlider(),
+                  ] else ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Expanded(flex: 1, child: SubduralTextContent()),
+                        SizedBox(width: 16),
+                        Expanded(flex: 1, child: SubduralImageSlider()),
+                      ],
                     ),
-                    const Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: SubduralImageSlider(),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ]
+                ],
+              );
+            },
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SubduralTextContent extends StatelessWidget {
+  const SubduralTextContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(204, 36, 39, 48),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('What is Subdural Hemorrhage?',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text('Subdural hemorrhage (SDH) refers to a collection of blood between the dura mater (the outer protective layer of the brain) and the arachnoid layer. It is commonly caused by trauma to the head, leading to the rupture of blood vessels. Symptoms of subdural hemorrhage can include headaches, confusion, dizziness, and in severe cases, loss of consciousness. SDH can be classified into acute, subacute, and chronic, based on the duration between the injury and the appearance of symptoms. Prompt medical intervention is crucial for the treatment and management of subdural hemorrhages.',
+            textAlign: TextAlign.justify,
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(height: 16),
+          Text('Location:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('Bleeding occurs between the dura mater (the outermost meningeal layer) and the arachnoid mater.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          Text('Causes:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Traumatic brain injury (e.g., falls, motor vehicle accidents) leading to tearing of bridging veins.\n- In older adults or alcoholics, minor trauma can cause SDH due to brain atrophy, which stretches the veins.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          Text('Characteristics:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Blood spreads along the brain surface and follows the contours of the brain (crescent-shaped on imaging).\n- It can be acute (sudden), subacute, or chronic (developing over weeks to months).',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          Text('Symptoms:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Acute SDH: Rapid onset of headache, altered consciousness, and focal neurological deficits.\n- Chronic SDH: Gradual headache, confusion, memory problems, or weakness.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ],
       ),
     );
   }

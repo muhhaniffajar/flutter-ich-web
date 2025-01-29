@@ -1,215 +1,62 @@
-// ========================================================
-// IMPORT LIBRARIES
-// Mengimpor berbagai library yang dibutuhkan untuk melakukan pembangunan antarmuka pengguna pada aplikasi Flutter. 
-// Material.dart menyediakan komponen-komponen UI dasar yang digunakan dalam pengembangan aplikasi Flutter, seperti AppBar, Scaffold, dan lain-lain.
-// ========================================================
 import 'package:flutter/material.dart';
 
-// ========================================================
-// SubarachnoidPage Widget
-// Halaman ini menampilkan informasi terkait Subarachnoid Hemorrhage
-// dengan elemen-elemen teks dan gambar-gambar yang dapat dipindah-pindah
-// ========================================================
 class SubarachnoidPage extends StatelessWidget {
   const SubarachnoidPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ========================================================
-    // Scaffold Widget
-    // Menyediakan struktur dasar halaman dengan AppBar dan body.
-    // AppBar berfungsi untuk menampilkan judul halaman dan tombol kembali, 
-    // sedangkan body menampilkan konten berupa teks dan gambar.
-    // ========================================================
     return Scaffold(
       appBar: AppBar(
         title: const Text('Subarachnoid Hemorrhage', style: TextStyle(color: Colors.white60)),
-        backgroundColor: const Color(0xFF1B1E25), // Warna latar belakang AppBar
-        iconTheme: const IconThemeData(color: Colors.white), // Warna ikon di AppBar
+        backgroundColor: const Color(0xFF1B1E25),
+        iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',  // Teks yang muncul saat menekan tombol kembali
+          message: 'Back to Home',
           child: IconButton(
-            icon: const Icon(Icons.arrow_back), // Ikon untuk kembali ke halaman sebelumnya
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context); // Fungsi untuk kembali ke halaman sebelumnya
+              Navigator.pop(context);
             },
           ),
         ),
       ),
       body: Container(
-        width: double.infinity, // Membuat container memenuhi lebar layar
-        height: double.infinity, // Membuat container memenuhi tinggi layar
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1B1E25), Colors.white], // Warna gradasi dari atas ke bawah
+            colors: [Color(0xFF1B1E25), Colors.white],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(16.0), // Padding di sekitar konten
-          child: Column(
-            children: [
-              // ========================================================
-              // Row Widget
-              // Menyusun elemen-elemen konten secara horizontal (kolom teks dan gambar)
-              // ========================================================
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center, // Menyusun anak secara horizontal
+          padding: const EdgeInsets.all(16.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              bool isNarrow = constraints.maxWidth < 800;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // ========================================================
-                  // Expanded Widget
-                  // Kolom pertama untuk menampilkan teks informasi mengenai SAH
-                  // ========================================================
-                  Expanded(
-                    flex: 1, // Mengatur fleksibilitas kolom
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start, // Menyusun elemen secara vertikal
-                        children: [
-                          // ========================================================
-                          // Container Widget
-                          // Untuk menampilkan teks informasi dalam bentuk box dengan gaya yang lebih menarik
-                          // ========================================================
-                          Container(
-                            padding: const EdgeInsets.all(16.0),
-                            decoration: BoxDecoration(
-                              color: const Color.fromARGB(204, 36, 39, 48),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: const Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan judul "What is Subarachnoid Hemorrhage?"
-                                // ========================================================
-                                Text(
-                                  'What is Subarachnoid Hemorrhage?',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                SizedBox(height: 16),
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan deskripsi tentang Subarachnoid Hemorrhage
-                                // ========================================================
-                                Text(
-                                  'Subarachnoid hemorrhage (SAH) is the bleeding that occurs between the brain and the thin tissues covering it, known as the arachnoid membrane. The most common cause of SAH is the rupture of an aneurysm. Symptoms include sudden severe headache, nausea, vomiting, loss of consciousness, and in some cases, seizures. A SAH is a medical emergency that often requires surgical intervention to prevent further complications like stroke. Early treatment is essential for improving outcomes.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                SizedBox(height: 16),
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan penjelasan mengenai lokasi SAH
-                                // ========================================================
-                                Text(
-                                  'Location:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  'Bleeding occurs in the subarachnoid space between the arachnoid mater and pia mater, where cerebrospinal fluid (CSF) circulates.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan penjelasan tentang penyebab SAH
-                                // ========================================================
-                                Text(
-                                  'Causes:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Ruptured aneurysms are the most common cause (e.g., berry aneurysms).\n- Trauma, vascular malformations, or spontaneous bleeding due to high blood pressure.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan karakteristik SAH
-                                // ========================================================
-                                Text(
-                                  'Characteristics:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Blood mixes with CSF, spreading throughout the subarachnoid space.\n- Visible on imaging as hyperdensity in basal cisterns and sulci.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                                SizedBox(height: 10),
-                                // ========================================================
-                                // Text Widget
-                                // Menampilkan gejala-gejala SAH
-                                // ========================================================
-                                Text(
-                                  'Symptoms:',
-                                  style: TextStyle(
-                                    color: Colors.white60,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '- Sudden, severe headache ("thunderclap headache"), nausea, vomiting, neck stiffness, and altered consciousness.\n- May lead to stroke or long-term complications like hydrocephalus.',
-                                  style: TextStyle(
-                                    color: Colors.white30,
-                                    fontSize: 18,
-                                  ),
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                  SizedBox(height: 50),
+                  if (isNarrow) ...[
+                    const SubarachnoidTextContent(),
+                    const SizedBox(height: 16),
+                    const SubarachnoidImageSlider(),
+                  ] else ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Expanded(flex: 1, child: SubarachnoidTextContent()),
+                        SizedBox(width: 16),
+                        Expanded(flex: 1, child: SubarachnoidImageSlider()),
+                      ],
                     ),
-                  ),
-                  // ========================================================
-                  // Expanded Widget
-                  // Kolom kedua untuk menampilkan gambar slider
-                  // ========================================================
-                  const Expanded(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: SubarachnoidImageSlider(), // Widget untuk menampilkan gambar slider
-                    ),
-                  ),
+                  ]
                 ],
-              ),
-            ],
+              );
+            },
           ),
         ),
       ),
@@ -217,11 +64,120 @@ class SubarachnoidPage extends StatelessWidget {
   }
 }
 
-// ========================================================
-// SubarachnoidImageSlider Widget
-// Widget ini digunakan untuk menampilkan gambar-gambar tentang Subarachnoid Hemorrhage
-// Gambar dapat digeser secara horizontal dengan menggunakan PageView
-// ========================================================
+class SubarachnoidTextContent extends StatelessWidget {
+  const SubarachnoidTextContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(204, 36, 39, 48),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('What is Subarachnoid Hemorrhage?',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16),
+          // ========================================================
+          // Text Widget
+          // Menampilkan deskripsi tentang Subarachnoid Hemorrhage
+          // ========================================================
+          Text('Subarachnoid hemorrhage (SAH) is the bleeding that occurs between the brain and the thin tissues covering it, known as the arachnoid membrane. The most common cause of SAH is the rupture of an aneurysm. Symptoms include sudden severe headache, nausea, vomiting, loss of consciousness, and in some cases, seizures. A SAH is a medical emergency that often requires surgical intervention to prevent further complications like stroke. Early treatment is essential for improving outcomes.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 16,
+            ),
+          ),
+          SizedBox(height: 16),
+          // ========================================================
+          // Text Widget
+          // Menampilkan penjelasan mengenai lokasi SAH
+          // ========================================================
+          Text('Location:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('Bleeding occurs in the subarachnoid space between the arachnoid mater and pia mater, where cerebrospinal fluid (CSF) circulates.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Text Widget
+          // Menampilkan penjelasan tentang penyebab SAH
+          // ========================================================
+          Text('Causes:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Ruptured aneurysms are the most common cause (e.g., berry aneurysms).\n- Trauma, vascular malformations, or spontaneous bleeding due to high blood pressure.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Text Widget
+          // Menampilkan karakteristik SAH
+          // ========================================================
+          Text('Characteristics:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Blood mixes with CSF, spreading throughout the subarachnoid space.\n- Visible on imaging as hyperdensity in basal cisterns and sulci.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Text Widget
+          // Menampilkan gejala-gejala SAH
+          // ========================================================
+          Text('Symptoms:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Sudden, severe headache ("thunderclap headache"), nausea, vomiting, neck stiffness, and altered consciousness.\n- May lead to stroke or long-term complications like hydrocephalus.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class SubarachnoidImageSlider extends StatefulWidget {
   const SubarachnoidImageSlider({super.key});
 
@@ -243,10 +199,6 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ========================================================
-        // Container Widget
-        // Bagian atas untuk menampilkan judul gambar
-        // ========================================================
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
@@ -265,10 +217,6 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
             ),
           ),
         ),
-        // ========================================================
-        // Container Widget
-        // Bagian utama untuk menampilkan gambar dengan PageView
-        // ========================================================
         Container(
           decoration: const BoxDecoration(
             color: Color.fromARGB(204, 36, 39, 48),
@@ -277,25 +225,21 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              // ========================================================
-              // PageView Widget
-              // Menampilkan gambar yang bisa di-scroll secara horizontal
-              // ========================================================
               SizedBox(
                 height: 600,
                 child: PageView.builder(
                   controller: _pageController,
-                  itemCount: imagePaths.length, // Menentukan jumlah gambar
+                  itemCount: imagePaths.length,
                   onPageChanged: (index) {
                     setState(() {
-                      _currentIndex = index; // Memperbarui indeks saat gambar berganti
+                      _currentIndex = index;
                     });
                   },
                   itemBuilder: (context, index) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
-                        imagePaths[index], // Menampilkan gambar berdasarkan indeks
+                        imagePaths[index],
                         width: double.infinity,
                         height: 600,
                         fit: BoxFit.contain,
@@ -304,10 +248,6 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
                   },
                 ),
               ),
-              // ========================================================
-              // Positioned Widget
-              // Indikator titik di bawah gambar untuk menunjukkan halaman yang aktif
-              // ========================================================
               Positioned(
                 bottom: 10,
                 child: Row(
@@ -325,10 +265,6 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
                   }),
                 ),
               ),
-              // ========================================================
-              // IconButton Widget
-              // Tombol untuk kembali ke gambar sebelumnya
-              // ========================================================
               Positioned(
                 left: 0,
                 child: Tooltip(
@@ -346,10 +282,6 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
                   ),
                 ),
               ),
-              // ========================================================
-              // IconButton Widget
-              // Tombol untuk melanjutkan ke gambar berikutnya
-              // ========================================================
               Positioned(
                 right: 0,
                 child: Tooltip(
@@ -372,15 +304,5 @@ class SubarachnoidImageSliderState extends State<SubarachnoidImageSlider> {
         ),
       ],
     );
-  }
-  // ========================================================
-  // Dispose Method
-  // Melepaskan resource yang digunakan oleh widget ketika widget dihapus
-  // Dalam hal ini, melepaskan controller halaman (_pageController)
-  // ========================================================
-  @override
-  void dispose() {
-    _pageController.dispose(); // Melepaskan controller halaman ketika widget dihapus
-    super.dispose(); // Memanggil dispose pada superclass untuk memastikan semua resource dibersihkan dengan baik
   }
 }

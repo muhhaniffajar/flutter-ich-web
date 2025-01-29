@@ -29,11 +29,6 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
 
   @override
   Widget build(BuildContext context) {
-    // ========================================================
-    // URL DASAR UNTUK GAMBAR HEATMAP
-    // baseUrl: URL tempat gambar heatmap dapat diakses.
-    // ========================================================
-    const String baseUrl = 'https://mortality-campaigns-choir-pix.trycloudflare.com/';
     final screenWidth = MediaQuery.of(context).size.width;  // Mengambil lebar layar perangkat
 
     // ========================================================
@@ -54,63 +49,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
     // MEMBUAT LIST WIDGET GAMBARS HEATMAP UNTUK DITAMPILKAN
     // heatmapImages: List widget gambar heatmap yang akan ditampilkan.
     // ========================================================
-    List<Widget> heatmapImages = inferences.map((inference) {
-      final String? heatmapPath = inference['heatmap'];
-      final String? label = inference['label'];
-      final String? confidence = inference['confidence'];
-
-      // ========================================================
-      // MEMERIKSA PATH GAMBAR HEATMAP
-      // Jika path gambar heatmap kosong, gambar tidak akan ditampilkan.
-      // ========================================================
-      if (heatmapPath == null || heatmapPath.isEmpty) return const SizedBox();
-
-      final String fullImageUrl = '$baseUrl$heatmapPath';  // Menghasilkan URL lengkap gambar
-
-      // ========================================================
-      // MEMBUAT WIDGET UNTUK SETIAP GAMBAR HEATMAP
-      // Setiap gambar heatmap akan menampilkan label dan confidence jika ada.
-      // ========================================================
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(fullImageUrl,
-              width: screenWidth * 0.7,  // Mengatur lebar gambar sesuai layar
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) => const Center(
-                child: Icon(Icons.broken_image, size: 48, color: Colors.red),
-              ),
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;  // Menampilkan gambar ketika sudah dimuat
-                return const Center(
-                  child: CircularProgressIndicator(color: Colors.white),
-                );
-              },
-            ),
-          ),
-          if (label != null && confidence != null)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Label: $label',
-                    style: const TextStyle(color: Colors.white, fontSize: 14),
-                  ),
-                  Text(
-                    'Confidence: $confidence',
-                    style: const TextStyle(color: Colors.white, fontSize: 12),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      );
-    }).toList();  // Mengubah data inferensi menjadi list widget gambar
+    final List<Widget> heatmapImages = _buildHeatmapImages(inferences, screenWidth);
 
     // ========================================================
     // MENAMPILKAN GAMBARS HEATMAP DENGAN SCROLLABLE DAN PAGEVIEW
@@ -198,6 +137,75 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
         ),
       ),
     );
+  }
+
+  // ========================================================
+  // MEMBUAT LIST WIDGET GAMBARS HEATMAP UNTUK DITAMPILKAN
+  // heatmapImages: List widget gambar heatmap yang akan ditampilkan.
+  // ========================================================
+  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth) {
+    const String baseUrl = 'https://mortality-campaigns-choir-pix.trycloudflare.com/';
+
+    return inferences.map((inference) {
+      final String? heatmapPath = inference['heatmap'];
+      final String? label = inference['label'];
+      final String? confidence = inference['confidence'];
+
+      // ========================================================
+      // MEMERIKSA PATH GAMBAR HEATMAP
+      // Jika path gambar heatmap kosong, gambar tidak akan ditampilkan.
+      // ========================================================
+      if (heatmapPath == null || heatmapPath.isEmpty) return const SizedBox();
+
+      final String fullImageUrl = '$baseUrl$heatmapPath';  // Menghasilkan URL lengkap gambar
+
+      // ========================================================
+      // MEMBUAT WIDGET UNTUK SETIAP GAMBAR HEATMAP
+      // Setiap gambar heatmap akan menampilkan label dan confidence jika ada.
+      // ========================================================
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Flexible(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                fullImageUrl,
+                width: screenWidth * 0.7,  // Mengatur lebar gambar sesuai layar
+                fit: BoxFit.contain,  // Menggunakan BoxFit.contain untuk memastikan gambar tidak terpotong
+                errorBuilder: (context, error, stackTrace) => const Center(
+                  child: Icon(Icons.broken_image, size: 48, color: Colors.red),
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;  // Menampilkan gambar ketika sudah dimuat
+                  return const Center(
+                    child: CircularProgressIndicator(color: Colors.white),
+                  );
+                },
+              ),
+            ),
+          ),
+          if (label != null && confidence != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Label: $label',
+                    style: const TextStyle(color: Colors.white, fontSize: 14),
+                  ),
+                  Text(
+                    'Confidence: $confidence',
+                    style: const TextStyle(color: Colors.white, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      );
+    }).toList();  // Mengubah data inferensi menjadi list widget gambar
   }
 
   // ========================================================

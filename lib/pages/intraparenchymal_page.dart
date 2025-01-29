@@ -1,208 +1,188 @@
-// ========================================================
-// IMPORT LIBRARIES
-// Mengimpor berbagai library yang dibutuhkan untuk melakukan pembangunan antarmuka pengguna pada aplikasi Flutter. 
-// Material.dart menyediakan komponen-komponen UI dasar yang digunakan dalam pengembangan aplikasi Flutter, seperti AppBar, Scaffold, dan lain-lain.
-// ========================================================
 import 'package:flutter/material.dart';
 
-// ========================================================
-// IntraparenchymalPage Widget
-// Halaman ini menunjukkan informasi mengenai Intraparenchymal Hemorrhage menggunakan widget Stateless, 
-// karena tidak memerlukan perubahan state selama masa hidupnya.
-// ========================================================
 class IntraparenchymalPage extends StatelessWidget {
   const IntraparenchymalPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ========================================================
-      // AppBar Configuration
-      // AppBar berfungsi untuk menampilkan bar di atas layar, menampilkan judul dan tombol navigasi kembali.
-      // ========================================================
       appBar: AppBar(
         title: const Text('Intraparenchymal Hemorrhage', style: TextStyle(color: Colors.white60)),
-        backgroundColor: const Color(0xFF1B1E25),  // Warna background AppBar
-        iconTheme: const IconThemeData(color: Colors.white),  // Ikon warna putih
+        backgroundColor: const Color(0xFF1B1E25),
+        iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-                          message: 'Back to Home',  // Pesan yang muncul saat hover atau tekan lama pada tombol
-                          child: IconButton(
-                          icon: const Icon(Icons.arrow_back),  // Ikon kembali
-                          onPressed: () {
-                                          Navigator.pop(context);  // Navigasi untuk kembali ke halaman sebelumnya
-                            },
-                          ),
+          message: 'Back to Home',
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
+        ),
       ),
-      // ========================================================
-      // Bagian utama Body untuk konten halaman
-      // ========================================================
       body: Container(
-        width: double.infinity,  // Lebar container mengisi seluruh lebar layar
-        height: double.infinity,  // Tinggi container mengisi seluruh tinggi layar
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [
-              Color(0xFF1B1E25),  // Warna gradasi untuk background
-              Colors.white
-            ],
-            begin: Alignment.topCenter,  // Mulai dari bagian atas layar
-            end: Alignment.bottomCenter,  // Berakhir di bagian bawah layar
+            colors: [Color(0xFF1B1E25), Colors.white],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              bool isNarrow = constraints.maxWidth < 800;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: 50),
+                  if (isNarrow) ...[
+                    const IntraparenchymalTextContent(),
+                    const SizedBox(height: 16),
+                    const IntraparenchymalImageSlider(),
+                  ] else ...[
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Expanded(flex: 1, child: IntraparenchymalTextContent()),
+                        SizedBox(width: 16),
+                        Expanded(flex: 1, child: IntraparenchymalImageSlider()),
+                      ],
+                    ),
+                  ]
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
 
-        // ========================================================
-        // SingleChildScrollView digunakan agar konten halaman bisa digulir jika melebihi batas layar
-        // Padding ditambahkan untuk memberikan ruang di sekitar konten halaman
-        // ========================================================
-        child: SingleChildScrollView( // SingleChildScrollView untuk memungkinkan pengguna menggulirkan layar
-          padding: const EdgeInsets.all(16.0),  // Padding untuk konten di dalam SingleChildScrollView
+class IntraparenchymalTextContent extends StatelessWidget {
+  const IntraparenchymalTextContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(204, 36, 39, 48),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           // ========================================================
-          // Row digunakan untuk membagi layar secara horizontal
-          // Menyusun konten dalam dua bagian (konten teks di sebelah kiri dan gambar di sebelah kanan)
+          // Teks Penjelasan: Memberikan deskripsi singkat tentang Intraparenchymal Hemorrhage
           // ========================================================
-          child: Row(
-            children: [
-              Expanded(
-                flex: 1,  // Menyediakan ruang proporsional bagi kolom pertama
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,  // Membuat teks sejajar ke kiri
-                    children: [
-                      // ========================================================
-                      // Deskripsi Intraparenchymal Hemorrhage
-                      // Container utama untuk menampilkan deskripsi mengenai Intraparenchymal Hemorrhage.
-                      // ========================================================
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: const Color.fromARGB(204, 36, 39, 48),  // Background container
-                          borderRadius: BorderRadius.circular(16),  // Sudut tumpul pada container
-                        ),
-                        child: const Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // ========================================================
-                            // Teks Penjelasan: Memberikan deskripsi singkat tentang Intraparenchymal Hemorrhage
-                            // ========================================================
-                            Text(
-                              'What is Intraparenchymal Hemorrhage?',  // Judul
-                              style: TextStyle(
-                                color: Colors.white60,  // Warna teks judul
-                                fontSize: 24,  // Ukuran font judul
-                                fontWeight: FontWeight.bold,  // Gaya font tebal
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Intraparenchymal hemorrhage refers to bleeding that occurs within the brain tissue itself (the parenchyma). This type of hemorrhage is typically caused by high blood pressure, trauma, or vascular malformations. Symptoms can include sudden onset of headache, weakness, confusion, or loss of consciousness, depending on the location of the hemorrhage. Intraparenchymal hemorrhage is often diagnosed through imaging, such as a CT scan or MRI. Treatment may involve managing the underlying condition and reducing intracranial pressure.',
-                              style: TextStyle(
-                                color: Colors.white30,  // Warna teks penjelasan
-                                fontSize: 16,  // Ukuran font penjelasan
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            // ========================================================
-                            // Lokasi Intraparenchymal Hemorrhage
-                            // Menjelaskan tempat terjadinya perdarahan di otak
-                            // ========================================================
-                            Text(
-                              'Location:',  // Subjudul
-                              style: TextStyle(
-                                color: Colors.white60,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              'Bleeding occurs directly within the brain parenchyma, leading to localized damage and increased intracranial pressure.',
-                              style: TextStyle(
-                                color: Colors.white30,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.justify,  // Justifikasi teks untuk perataan rata kiri dan kanan
-                            ),
-                            SizedBox(height: 10),
-                            // ========================================================
-                            // Penyebab Intraparenchymal Hemorrhage
-                            // Memberikan informasi tentang penyebab umum
-                            // ========================================================
-                            Text(
-                              'Causes:',  // Subjudul
-                              style: TextStyle(
-                                color: Colors.white60,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '- Chronic hypertension causing rupture of small penetrating arteries.\n- Trauma, vascular malformations, brain tumors, or anticoagulant medication use. \n- Secondary causes include amyloid angiopathy, infections, or clotting disorders.',
-                              style: TextStyle(
-                                color: Colors.white30,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                            SizedBox(height: 10),
-                            // ========================================================
-                            // Karakteristik Intraparenchymal Hemorrhage
-                            // Penjelasan tentang karakteristik kondisi ini
-                            // ========================================================
-                            Text(
-                              'Characteristics:',  // Subjudul
-                              style: TextStyle(
-                                color: Colors.white60,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '- Commonly affects deep brain structures like the basal ganglia, thalamus, cerebellum, and brainstem.\n- Hemorrhage may cause mass effect and edema, leading to compression of surrounding tissues.',
-                              style: TextStyle(
-                                color: Colors.white30,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                            SizedBox(height: 10),
-                            // ========================================================
-                            // Gejala Intraparenchymal Hemorrhage
-                            // Penjelasan tentang Gejala kondisi ini
-                            // ========================================================
-                            Text(
-                              'Symptoms:',  // Subjudul
-                              style: TextStyle(
-                                color: Colors.white60,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '- Sudden onset of neurological deficits, such as hemiparesis, aphasia, or vision changes.\n- Severe headache, nausea, vomiting, and progressive decline in consciousness.\n- Larger bleeds may result in life-threatening increases in intracranial pressure.',
-                              style: TextStyle(
-                                color: Colors.white30,
-                                fontSize: 18,
-                              ),
-                              textAlign: TextAlign.justify,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const Expanded(
-                flex: 1,  // Kolom kedua untuk menampilkan slider gambar
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: IntraparenchymalImageSlider(),
-                ),
-              ),
-            ],
+          Text(
+            'What is Intraparenchymal Hemorrhage?',  // Judul
+            style: TextStyle(
+              color: Colors.white60,  // Warna teks judul
+              fontSize: 24,  // Ukuran font judul
+              fontWeight: FontWeight.bold,  // Gaya font tebal
+            ),
           ),
-        ),
+          SizedBox(height: 16),
+          Text(
+            'Intraparenchymal hemorrhage refers to bleeding that occurs within the brain tissue itself (the parenchyma). This type of hemorrhage is typically caused by high blood pressure, trauma, or vascular malformations. Symptoms can include sudden onset of headache, weakness, confusion, or loss of consciousness, depending on the location of the hemorrhage. Intraparenchymal hemorrhage is often diagnosed through imaging, such as a CT scan or MRI. Treatment may involve managing the underlying condition and reducing intracranial pressure.',
+            style: TextStyle(
+              color: Colors.white30,  // Warna teks penjelasan
+              fontSize: 16,  // Ukuran font penjelasan
+            ),
+          ),
+          SizedBox(height: 16),
+          // ========================================================
+          // Lokasi Intraparenchymal Hemorrhage
+          // Menjelaskan tempat terjadinya perdarahan di otak
+          // ========================================================
+          Text(
+            'Location:',  // Subjudul
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Bleeding occurs directly within the brain parenchyma, leading to localized damage and increased intracranial pressure.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,  // Justifikasi teks untuk perataan rata kiri dan kanan
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Penyebab Intraparenchymal Hemorrhage
+          // Memberikan informasi tentang penyebab umum
+          // ========================================================
+          Text(
+            'Causes:',  // Subjudul
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Chronic hypertension causing rupture of small penetrating arteries.\n- Trauma, vascular malformations, brain tumors, or anticoagulant medication use. \n- Secondary causes include amyloid angiopathy, infections, or clotting disorders.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Karakteristik Intraparenchymal Hemorrhage
+          // Penjelasan tentang karakteristik kondisi ini
+          // ========================================================
+          Text(
+            'Characteristics:',  // Subjudul
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Commonly affects deep brain structures like the basal ganglia, thalamus, cerebellum, and brainstem.\n- Hemorrhage may cause mass effect and edema, leading to compression of surrounding tissues.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          // ========================================================
+          // Gejala Intraparenchymal Hemorrhage
+          // Penjelasan tentang Gejala kondisi ini
+          // ========================================================
+          Text(
+            'Symptoms:',  // Subjudul
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            '- Sudden onset of neurological deficits, such as hemiparesis, aphasia, or vision changes.\n- Severe headache, nausea, vomiting, and progressive decline in consciousness.\n- Larger bleeds may result in life-threatening increases in intracranial pressure.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+        ],
       ),
     );
   }
@@ -356,15 +336,5 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
         ),
       ],
     );
-  }
-
-  // ========================================================
-  // MENGHAPUS PAGE CONTROLLER SAAT WIDGET DIBERSIHKAN
-  // dispose() digunakan untuk mengelola sumber daya dan menghindari kebocoran memori.
-  // ========================================================
-  @override
-  void dispose() {
-    _pageController.dispose();  // Membersihkan kontroler ketika widget dihapus
-    super.dispose();
   }
 }
