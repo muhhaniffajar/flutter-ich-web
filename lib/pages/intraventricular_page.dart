@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+//================================================== Kelas IntraventricularPage ==================================================\\
+//================================================== untuk halaman utama informasi tentang Intraventricular Hemorrhage =============================\\
 class IntraventricularPage extends StatelessWidget {
   const IntraventricularPage({super.key});
 
@@ -25,7 +27,7 @@ class IntraventricularPage extends StatelessWidget {
         height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1B1E25), Colors.white],
+            colors: [Color(0xFF1B1E25), Color.fromARGB(255, 73, 73, 73)],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -34,17 +36,20 @@ class IntraventricularPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
+              // Menentukan apakah layar lebar atau sempit berdasarkan lebar maksimum
               bool isNarrow = constraints.maxWidth < 800;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(height: 50),
+                  // Jika layar sempit, tampilkan teks dan slider gambar secara vertikal
                   if (isNarrow) ...[
                     const IntraventricularTextContent(),
                     const SizedBox(height: 16),
                     const IntraventricularImageSlider(),
-                  ] else ...[
+                  ] 
+                  // Jika layar lebar, tampilkan teks dan slider gambar secara horizontal
+                  else ...[
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
@@ -64,6 +69,8 @@ class IntraventricularPage extends StatelessWidget {
   }
 }
 
+//================================================== Kelas IntraventricularTextContent ==================================================\\
+//================================================== untuk konten teks tentang Intraventricular Hemorrhage =============================\\
 class IntraventricularTextContent extends StatelessWidget {
   const IntraventricularTextContent({super.key});
 
@@ -72,17 +79,13 @@ class IntraventricularTextContent extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(204, 36, 39, 48),
+        color:  Color.fromARGB(255, 23, 25, 30),
         borderRadius: BorderRadius.circular(16),
       ),
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ========================================================
-          // Teks Penjelasan: Memberikan deskripsi singkat tentang Intraventricular Hemorrhage
-          // ========================================================
-          Text(
-            'What is Intraventricular Hemorrhage?',  // Judul
+          Text('What is Intraventricular Hemorrhage?',
             style: TextStyle(
               color: Colors.white60,
               fontSize: 24,
@@ -90,49 +93,22 @@ class IntraventricularTextContent extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16),
-          Text(
-            'Intraventricular hemorrhage occurs when bleeding takes place within the brain’s ventricles, the fluid-filled spaces that cushion the brain. This condition can arise due to trauma, premature birth (in neonates), or rupture of blood vessels. The symptoms can vary depending on the amount and location of the bleeding, but they may include vomiting, seizures, and decreased consciousness. Early diagnosis and management are crucial, as untreated intraventricular hemorrhage can lead to long-term complications such as hydrocephalus.',
+          Text('Intraventricular hemorrhage (IVH) refers to bleeding that occurs within the ventricular system of the brain. It is commonly associated with conditions such as aneurysms, arteriovenous malformations (AVMs), and head trauma. Symptoms can include sudden headache, nausea, vomiting, and neurological deficits. IVH can be classified into grades I to IV based on the extent of bleeding and the presence of ventricular enlargement.',
+            textAlign: TextAlign.justify,
             style: TextStyle(
               color: Colors.white30,
               fontSize: 16,
             ),
           ),
           SizedBox(height: 16),
-          // ========================================================
-          // Lokasi Intraventricular Hemorrhage
-          // Menjelaskan tempat terjadinya perdarahan di otak
-          // ========================================================
-          Text(
-            'Location:',
+          Text('Location:',
             style: TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            'Bleeding occurs within the ventricles of the brain, where cerebrospinal fluid (CSF) is produced and circulates.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,  // Menyusun teks rata kiri-kanan
-          ),
-          SizedBox(height: 10),
-          // ========================================================
-          // Penyebab Epidural Hemorrhage
-          // Memberikan informasi tentang penyebab umum
-          // ========================================================                            
-          Text(
-            'Causes:',
-            style: TextStyle(
-              color: Colors.white60,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            '- Often secondary to severe intracerebral hemorrhage extending into ventricles.\n- Prematurity in newborns due to immature brain vasculature.',
+          Text('Bleeding occurs within the ventricular system of the brain, including the lateral ventricles, third ventricle, and fourth ventricle.',
             style: TextStyle(
               color: Colors.white30,
               fontSize: 18,
@@ -140,20 +116,14 @@ class IntraventricularTextContent extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
           SizedBox(height: 10),
-          // ========================================================
-          // Karakteristik Intraventricular Hemorrhage
-          // Penjelasan tentang karakteristik kondisi ini
-          // ========================================================
-          Text(
-            'Characteristics:',
+          Text('Causes:',
             style: TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            '- Blood mixes with CSF, increasing the risk of hydrocephalus.\n- Visible as hyperdensity filling the ventricles on imaging.',
+          Text('- Aneurysms\n- Arteriovenous malformations (AVMs)\n- Head trauma\n- Hypertension\n- Coagulopathy',
             style: TextStyle(
               color: Colors.white30,
               fontSize: 18,
@@ -161,20 +131,29 @@ class IntraventricularTextContent extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
           SizedBox(height: 10),
-          // ========================================================
-          // Gejala Intraventricular Hemorrhage
-          // Penjelasan tentang Gejala kondisi ini
-          // ========================================================
-          Text(
-            'Symptoms:',
+          Text('Characteristics:',
             style: TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            '- Headache, nausea, vomiting, altered consciousness, and signs of hydrocephalus.\n- In newborns, symptoms may include apnea, lethargy, and bulging fontanelles.',
+          Text('- Blood accumulates within the ventricular system.\n- Can cause ventricular enlargement and increased intracranial pressure.\n- Classified into grades I to IV based on the extent of bleeding and ventricular enlargement.',
+            style: TextStyle(
+              color: Colors.white30,
+              fontSize: 18,
+            ),
+            textAlign: TextAlign.justify,
+          ),
+          SizedBox(height: 10),
+          Text('Symptoms:',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text('- Sudden headache\n- Nausea and vomiting\n- Neurological deficits\n- Altered consciousness\n- Seizures',
             style: TextStyle(
               color: Colors.white30,
               fontSize: 18,
@@ -187,10 +166,8 @@ class IntraventricularTextContent extends StatelessWidget {
   }
 }
 
-// ========================================================
-// INTRAVENTRICULAR IMAGE SLIDER
-// Widget untuk menampilkan gambar-gambar yang dapat digeser (Image Slider)
-// ========================================================
+//================================================== Kelas IntraventricularImageSlider ==================================================\\
+//================================================== untuk slider gambar tentang Intraventricular Hemorrhage =============================\\
 class IntraventricularImageSlider extends StatefulWidget {
   const IntraventricularImageSlider({super.key});
 
@@ -198,31 +175,25 @@ class IntraventricularImageSlider extends StatefulWidget {
   IntraventricularImageSliderState createState() => IntraventricularImageSliderState();
 }
 
-// ========================================================
-// STATE FOR IMAGE SLIDER
-// Menangani logika perubahan gambar dan kontrol slider.
-// ========================================================
 class IntraventricularImageSliderState extends State<IntraventricularImageSlider> {
-  final PageController _pageController = PageController();  // Kontrol halaman untuk slider
-  int _currentIndex = 0;  // Indeks gambar yang ditampilkan
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
   List<String> imagePaths = [
-    'assets/Intraventricular1.jpg',
-    'assets/Intraventricular2.jpg',
-    'assets/Intraventricular3.jpg',
-    'assets/Intraventricular4.jpg',
+    'assets/intraventricular1.jpg',
+    'assets/intraventricular2.jpg',
+    'assets/intraventricular3.jpg',
+    'assets/intraventricular4.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // ========================================================
-        // Judul bagian slider
-        // ========================================================
+        // Judul slider gambar
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-            color: Color.fromARGB(204, 25, 27, 32),
+          color:  Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
           child: const Align(
@@ -237,43 +208,40 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
             ),
           ),
         ),
-        // ========================================================
-        // Container untuk gambar slider
-        // ========================================================
+        // Kontainer utama untuk slider gambar
         Container(
           decoration: const BoxDecoration(
-            color: Color.fromARGB(204, 36, 39, 48),
+          color:  Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
           ),
           child: Stack(
             alignment: Alignment.center,
             children: [
+              // PageView untuk menampilkan gambar secara berurutan
               SizedBox(
-                height: 600,  // Tinggi slider gambar
+                height: 600,
                 child: PageView.builder(
-                  controller: _pageController,  // Mengontrol halaman slider
-                  itemCount: imagePaths.length,  // Banyaknya gambar dalam slider
+                  controller: _pageController,
+                  itemCount: imagePaths.length,
                   onPageChanged: (index) {
                     setState(() {
-                      _currentIndex = index;  // Memperbarui indeks gambar yang aktif
+                      _currentIndex = index;
                     });
                   },
                   itemBuilder: (context, index) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(0),
                       child: Image.asset(
-                        imagePaths[index],  // Menampilkan gambar berdasarkan indeks
+                        imagePaths[index],
                         width: double.infinity,
                         height: 600,
-                        fit: BoxFit.contain,  // Mengatur tampilan gambar
+                        fit: BoxFit.contain,
                       ),
                     );
                   },
                 ),
               ),
-              // ========================================================
-              // Indikator untuk menunjukkan gambar yang sedang aktif
-              // ========================================================
+              // Indikator halaman saat ini
               Positioned(
                 bottom: 10,
                 child: Row(
@@ -291,40 +259,36 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
                   }),
                 ),
               ),
-              // ========================================================
-              // Tombol untuk mengganti gambar ke kiri
-              // ========================================================
+              // Tombol navigasi ke gambar sebelumnya
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: 'Previous Image',  // Tooltip untuk tombol sebelumnya
+                  message: 'Previous Image',
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
-                      if (_pageController.page != 0) {  // Cek apakah bukan gambar pertama
-                        _pageController.previousPage(  // Pindah ke halaman sebelumnya
+                      if (_pageController.page != 0) {
+                        _pageController.previousPage(
                           duration: const Duration(milliseconds: 400),
-                          curve: Curves.easeInOut,  // Transisi animasi
+                          curve: Curves.easeInOut,
                         );
                       }
                     },
                   ),
                 ),
               ),
-              // ========================================================
-              // Tombol untuk mengganti gambar ke kanan
-              // ========================================================
+              // Tombol navigasi ke gambar berikutnya
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: 'Next Image',  // Tooltip untuk tombol selanjutnya
+                  message: 'Next Image',
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {
-                      if (_pageController.page != imagePaths.length - 1) {  // Cek apakah bukan gambar terakhir
-                        _pageController.nextPage(  // Pindah ke halaman selanjutnya
+                      if (_pageController.page != imagePaths.length - 1) {
+                        _pageController.nextPage(
                           duration: const Duration(milliseconds: 400),
-                          curve: Curves.easeInOut,  // Transisi animasi
+                          curve: Curves.easeInOut,
                         );
                       }
                     },

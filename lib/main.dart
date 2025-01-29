@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Mengembalikan MaterialApp yang merupakan kerangka dasar aplikasi.
     return const MaterialApp(
       debugShowCheckedModeBanner: false, // Menyembunyikan banner debug.
       home: MainPage(), // Menetapkan MainPage sebagai halaman awal.
@@ -212,7 +211,7 @@ class EducationPageState extends State<EducationPage> {
             gradient: LinearGradient(
               colors: [
                 Color(0xFF1B1E25), // Warna awal gradien.
-                Color.fromARGB(255, 255, 255, 255), // Warna akhir gradien.
+                Color.fromARGB(255, 73, 73, 73), // Warna akhir gradien.
               ],
               begin: Alignment.topCenter, // Titik awal gradien.
               end: Alignment.bottomCenter, // Titik akhir gradien.
@@ -348,14 +347,18 @@ class EducationText extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10), // Jarak antara judul dan teks berikutnya.
-        Text(
-          'Intracranial hemorrhage (ICH) is a general term for bleeding inside the skull. It encompasses all types of brain bleeds, including subdural, intraparenchymal, intraventricular, subarachnoid, and epidural hemorrhages. ICH is commonly caused by trauma, high blood pressure, blood vessel abnormalities, or aneurysms. The symptoms of ICH vary depending on the location and severity of the bleed, and can range from headaches and dizziness to loss of consciousness or death. Prompt medical attention is required to manage ICH, and the treatment approach depends on the cause, type, and severity of the hemorrhage.',
-          style: TextStyle(
-            color: Colors.white60,
-            fontSize: 18,
-            fontWeight: FontWeight.normal,
+        SingleChildScrollView(
+          child: Text(
+            'Intracranial hemorrhage (ICH) is a general term for bleeding inside the skull. It encompasses all types of brain bleeds, including subdural, intraparenchymal, intraventricular, subarachnoid, and epidural hemorrhages. ICH is commonly caused by trauma, high blood pressure, blood vessel abnormalities, or aneurysms. The symptoms of ICH vary depending on the location and severity of the bleed, and can range from headaches and dizziness to loss of consciousness or death. Prompt medical attention is required to manage ICH, and the treatment approach depends on the cause, type, and severity of the hemorrhage.',
+            style: TextStyle(
+              color: Colors.white60,
+              fontSize: 18,
+              fontWeight: FontWeight.normal,
+            ),
+            textAlign: TextAlign.justify, // Menyelaraskan teks.
+            softWrap: true, // Memungkinkan teks untuk berlanjut ke baris berikutnya.
+            overflow: TextOverflow.visible, // Mengatur bagaimana teks yang melebihi batas ditampilkan.
           ),
-          textAlign: TextAlign.justify, // Menyelaraskan teks.
         ),
         SizedBox(height: 40), // Jarak antara teks dan bagian berikutnya.
         Text(
@@ -444,8 +447,7 @@ class _HemorrhageTypesListState extends State<HemorrhageTypesList> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.2, // Tinggi kontainer.
+        IntrinsicHeight(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center, // Menyelaraskan konten di tengah.
             children: [
@@ -502,6 +504,8 @@ class _HemorrhageTypesListState extends State<HemorrhageTypesList> {
   }
 }
 
+
+
 // ========================================================
 // HEMORRHAGE TYPE CARD WIDGET
 // Widget untuk menampilkan informasi tentang jenis hemorrhage dalam bentuk kartu.
@@ -531,7 +535,7 @@ class HemorrhageTypeCard extends StatelessWidget {
           width: double.infinity, // Lebar kartu penuh.
           padding: const EdgeInsets.all(8.0), // Padding di dalam kartu.
           decoration: BoxDecoration(
-            color: const Color(0xFF2A2D37), // Warna latar belakang kartu.
+            color: const Color.fromARGB(255, 23, 25, 30), // Warna latar belakang kartu.
             borderRadius: BorderRadius.circular(16), // Sudut melengkung pada kartu.
             boxShadow: [
               BoxShadow(

@@ -1,7 +1,7 @@
-// ========================================================
+// ================================================================
 // IMPORT PACKAGE DAN HALAMAN-HALAMAN
 // Mengimpor package Flutter dan halaman-halaman untuk navigasi antar layar
-// ========================================================
+// ================================================================
 
 import 'package:flutter/foundation.dart'; // Untuk debugging dengan kDebugMode
 import 'package:flutter/material.dart'; // Untuk membangun antarmuka pengguna menggunakan Material Design (Flutter Framework: https://flutter.dev/docs)
@@ -10,30 +10,42 @@ import 'package:dio/dio.dart'; // Untuk membuat permintaan HTTP dengan lebih mud
 import 'package:http_parser/http_parser.dart'; // Untuk menentukan jenis konten file (HttpParser: https://pub.dev/packages/http_parser)
 import 'package:flutter/services.dart'; // Untuk mengakses file yang disimpan sebagai aset aplikasi (Flutter Framework: https://flutter.dev/docs)
 
-// ========================================================
+// ================================================================
 // WIDGET UPLOAD FILE
 // Widget untuk mengelola pemilihan, pengunggahan, dan penghapusan file DICOM
-// ========================================================
+// ================================================================
 
 class UploadFile extends StatelessWidget {
-
-  // ========================================================
+  // ================================================================
   // DEKLARASI PROPERTI
   // Menyediakan properti untuk menangani file yang dipilih, status operasi, dan callback
-  // ========================================================
+  // ================================================================
 
-  final dynamic dicomFile; // File DICOM yang dipilih oleh pengguna
-  final bool isLoading; // Status apakah file sedang diunggah atau tidak
-  final Function(dynamic) onFileSelected; // Callback untuk menangani file yang dipilih
-  final Function(Map<String, dynamic>?) onResponseReceived; // Callback untuk menangani respons dari server
-  final Function(bool) onLoadingStateChanged; // Callback untuk mengubah status loading
-  final Function onClassifyCompleted; // Callback untuk menangani selesai proses klasifikasi
-  final Function onFileRemoved; // Callback untuk menghapus file yang dipilih
+  /// File DICOM yang dipilih oleh pengguna
+  final dynamic dicomFile;
 
-  // ========================================================
+  /// Status apakah file sedang diunggah atau tidak
+  final bool isLoading;
+
+  /// Callback untuk menangani file yang dipilih
+  final Function(dynamic) onFileSelected;
+
+  /// Callback untuk menangani respons dari server
+  final Function(Map<String, dynamic>?) onResponseReceived;
+
+  /// Callback untuk mengubah status loading
+  final Function(bool) onLoadingStateChanged;
+
+  /// Callback untuk menangani selesai proses klasifikasi
+  final Function onClassifyCompleted;
+
+  /// Callback untuk menghapus file yang dipilih
+  final Function onFileRemoved;
+
+  // ================================================================
   // KONSTRUKTOR
   // Menginisialisasi semua properti widget dengan nilai yang diteruskan
-  // ========================================================
+  // ================================================================
 
   UploadFile({
     super.key,
@@ -46,11 +58,12 @@ class UploadFile extends StatelessWidget {
     required this.onFileRemoved,
   });
 
-  // ========================================================
+  // ================================================================
   // FUNGSI UNTUK MEMILIH FILE DICOM DARI PERANGKAT PENGGUNA
   // Fungsi ini membuka dialog pemilihan file untuk memilih file DICOM menggunakan package file_picker.
-  // ========================================================
+  // ================================================================
 
+  /// Memilih file DICOM dari perangkat pengguna menggunakan FilePicker
   Future<void> selectDicomFile() async {
     // Menggunakan FilePicker untuk dialog pemilihan file (https://pub.dev/packages/file_picker)
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -66,11 +79,12 @@ class UploadFile extends StatelessWidget {
     }
   }
 
-  // ========================================================
-  // FUNGSI UNTUK MENGUNDUH FILE DICOM KE SERVER
+  // ================================================================
+  // FUNGSI UNTUK MENGUNGGAH FILE DICOM KE SERVER
   // Fungsi ini mengunggah file DICOM yang dipilih ke server dengan menggunakan HTTP request menggunakan Dio.
-  // ========================================================
+  // ================================================================
 
+  /// Mengunggah file DICOM yang dipilih ke server menggunakan Dio
   Future<void> uploadDicomFile() async {
     if (dicomFile == null) return;
 
@@ -107,11 +121,12 @@ class UploadFile extends StatelessWidget {
     }
   }
 
-  // ========================================================
+  // ================================================================
   // FUNGSI UNTUK MEMUAT FILE DICOM DARI ASET APLIKASI
   // Fungsi ini memuat file DICOM yang berada pada folder aset aplikasi menggunakan rootBundle.
-  // ========================================================
+  // ================================================================
 
+  /// Memuat file DICOM dari aset aplikasi menggunakan rootBundle
   Future<void> loadDicomFromAsset(String filePath) async {
     try {
       final data = await rootBundle.load(filePath); // Memuat file dari aset (https://flutter.dev/docs)
@@ -126,22 +141,24 @@ class UploadFile extends StatelessWidget {
     }
   }
 
-  // ========================================================
+  // ================================================================
   // DAFTAR FILE CONTOH DICOM DARI ASET
   // Menyediakan beberapa file DICOM contoh yang dapat dipilih pengguna.
-  // ========================================================
+  // ================================================================
 
+  /// Daftar file DICOM contoh yang dapat dipilih pengguna
   final List<String> assetFiles = [
     'assets/testing_web/ID_4af939e8d.dcm',
     'assets/testing_web/ID_58e7e2e55.dcm',
     'assets/testing_web/ID_cca25a801.dcm',
   ];
 
-  // ========================================================
+  // ================================================================
   // WIDGET UNTUK MEMPERSIAPKAN UI
   // Widget ini membangun antarmuka pengguna untuk memilih file dan mengunggahnya.
-  // ========================================================
+  // ================================================================
 
+  /// Membangun antarmuka pengguna untuk memilih file dan mengunggahnya
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -154,6 +171,7 @@ class UploadFile extends StatelessWidget {
       ),
       child: Column(
         children: [
+          // Jika tidak ada file DICOM yang dipilih, tampilkan tombol untuk memilih file
           if (dicomFile == null)
             Align(
               alignment: Alignment.center,
@@ -162,7 +180,7 @@ class UploadFile extends StatelessWidget {
                 children: [
                   const SizedBox(height: 100),
                   ElevatedButton(
-                    onPressed: selectDicomFile,
+                    onPressed: selectDicomFile, // Memanggil fungsi selectDicomFile saat tombol ditekan
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.orange,
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
@@ -178,6 +196,7 @@ class UploadFile extends StatelessWidget {
                 ],
               ),
             ),
+          // Jika ada file DICOM yang dipilih, tampilkan detail file dan tombol untuk mengunggah atau menghapus file
           if (dicomFile != null) ...[
             const Spacer(),
             Padding(
@@ -185,7 +204,7 @@ class UploadFile extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   if (kDebugMode) {
-                    print("File name clicked: ${dicomFile['name']}");
+                    print("File name clicked: ${dicomFile['name']}"); // Mencetak nama file yang dipilih saat diklik
                   }
                 },
                 child: Text(
@@ -201,13 +220,13 @@ class UploadFile extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: isLoading ? null : uploadDicomFile,
+              onPressed: isLoading ? null : uploadDicomFile, // Memanggil fungsi uploadDicomFile saat tombol ditekan, jika tidak sedang loading
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
               ),
               child: isLoading
-                  ? const CircularProgressIndicator()
+                  ? const CircularProgressIndicator() // Menampilkan indikator loading jika sedang mengunggah
                   : const Text(
                       'Upload and Classify',
                       style: TextStyle(
@@ -218,7 +237,7 @@ class UploadFile extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => onFileRemoved(),
+              onPressed: () => onFileRemoved(), // Memanggil fungsi onFileRemoved saat tombol ditekan
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
@@ -248,13 +267,13 @@ class UploadFile extends StatelessWidget {
               runSpacing: 10,
               children: assetFiles.map((filePath) {
                 return ElevatedButton(
-                  onPressed: () => loadDicomFromAsset(filePath),
+                  onPressed: () => loadDicomFromAsset(filePath), // Memanggil fungsi loadDicomFromAsset saat tombol ditekan
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey[800],
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                   ),
                   child: Text(
-                    filePath.split('/').last,
+                    filePath.split('/').last, // Menampilkan nama file dari path
                     style: const TextStyle(color: Colors.white60),
                   ),
                 );
