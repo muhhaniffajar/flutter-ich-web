@@ -1,16 +1,16 @@
 // ========================================================
-// IMPORT LIBRARIES
-// Mengimpor berbagai library yang dibutuhkan untuk melakukan pembangunan antarmuka pengguna pada aplikasi Flutter. 
-// Material.dart menyediakan komponen-komponen UI dasar yang digunakan dalam pengembangan aplikasi Flutter, seperti AppBar, Scaffold, dan lain-lain.
+// IMPOR LIBRARY
+// Mengimpor pustaka yang diperlukan untuk membangun antarmuka pengguna aplikasi Flutter.
+// Material.dart menyediakan berbagai widget UI dasar seperti AppBar, Scaffold, dll.
 // ========================================================
 import 'package:flutter/material.dart';
 
 // ========================================================
-// DISPLAY PREDICTION WIDGET
-// Widget ini digunakan untuk menampilkan hasil prediksi yang diterima dari backend atau server.
+// WIDGET UNTUK MENAMPILKAN HASIL PREDIKSI
+// Widget ini menampilkan hasil prediksi yang diterima dari backend atau server.
 // ========================================================
 class DisplayPrediction extends StatelessWidget {
-  // Menerima parameter responseData yang berisi data hasil prediksi yang diterima
+  // Parameter responseData berisi data hasil prediksi yang diterima
   final Map<String, dynamic>? responseData;
 
   // Konstruktor untuk menerima parameter responseData
@@ -18,22 +18,22 @@ class DisplayPrediction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Menyusun tampilan widget dalam bentuk Column
+    // Menyusun tampilan widget dengan menggunakan Column untuk menata komponen secara vertikal
     return Column(
       children: [
         // ========================================================
-        // CONTAINER UNTUK MENAMPILKAN HASIL PREDIKSI DAN INFORMASI LAINNYA
+        // CONTAINER UNTUK MENAMPILKAN HASIL PREDIKSI
         // ========================================================
         Container(
-          padding: const EdgeInsets.all(16.0), // Padding di dalam container
+          padding: const EdgeInsets.all(16.0), // Memberikan jarak dalam container
           decoration: BoxDecoration(
-            color: const Color(0xFF1B1E25), // Warna latar belakang container
-            borderRadius: BorderRadius.circular(20.0), // Membuat sudut container melengkung
+            color: const Color(0xFF1B1E25), // Mengatur warna latar belakang container
+            borderRadius: BorderRadius.circular(20.0), // Membuat sudut melengkung pada container
           ),
-          alignment: Alignment.center, // Mengatur konten di dalam container agar terpusat
+          alignment: Alignment.center, // Menyusun konten agar berada di tengah
           child: responseData != null
-              ? _buildPredictionContent(responseData!)
-              : const DefaultMessage(),
+              ? _buildPredictionContent(responseData!) // Menampilkan isi prediksi jika ada data
+              : const DefaultMessage(), // Menampilkan pesan default jika data kosong
         ),
       ],
     );
@@ -44,28 +44,28 @@ class DisplayPrediction extends StatelessWidget {
   // ========================================================
   Widget _buildPredictionContent(Map<String, dynamic> responseData) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center, // Menyusun konten di tengah
+      crossAxisAlignment: CrossAxisAlignment.center, // Menyusun konten secara terpusat
       children: [
-        const SizedBox(height: 10),
+        const SizedBox(height: 10), // Memberikan jarak vertikal
         // ========================================================
-        // RICH TEXT UNTUK MENAMPILKAN TEKS "PREDICTION" DAN HASIL PREDIKSI
+        // WIDGET UNTUK MENAMPILKAN TEKS "PREDICTION" DENGAN HASILNYA
         // ========================================================
         PredictionText(
-          label: 'Prediction: ',
-          value: responseData['is_positive'] == true ? 'Positive' : 'Negative',
-          valueColor: responseData['is_positive'] == true ? Colors.green.shade300 : Colors.red.shade300,
+          label: 'Prediction: ', // Label untuk hasil prediksi
+          value: responseData['is_positive'] == true ? 'Positive' : 'Negative', // Menampilkan hasil prediksi
+          valueColor: responseData['is_positive'] == true ? Colors.green.shade300 : Colors.red.shade300, // Menyesuaikan warna berdasarkan hasil
         ),
-        const SizedBox(height: 30),
+        const SizedBox(height: 30), // Memberikan jarak vertikal
         // ========================================================
-        // MENAMPILKAN TEKS "PREDICTION DETAILS" SEBAGAI HEADER
+        // HEADER UNTUK MENAMPILKAN DETAIL PREDIKSI
         // ========================================================
         const PredictionHeader(text: 'Prediction Details:'),
-        const SizedBox(height: 8),
+        const SizedBox(height: 8), // Memberikan jarak vertikal
         // ========================================================
-        // JIKA TERDAPAT DATA CLASSIFICATION, MENAMPILKAN NILAI KLASIFIKASINYA
+        // JIKA TERSEDIA DATA KLASIFIKASI, MENAMPILKAN DETAILNYA
         // ========================================================
         if (responseData['classification'] != null)
-          ClassificationDetails(classification: responseData['classification']),
+          ClassificationDetails(classification: responseData['classification']), // Menampilkan detail klasifikasi
       ],
     );
   }
@@ -73,6 +73,7 @@ class DisplayPrediction extends StatelessWidget {
 
 // ========================================================
 // WIDGET UNTUK MENAMPILKAN PESAN DEFAULT
+// Jika tidak ada data prediksi, widget ini menampilkan pesan default.
 // ========================================================
 class DefaultMessage extends StatelessWidget {
   const DefaultMessage({super.key});
@@ -80,19 +81,19 @@ class DefaultMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Text(
-      'Classification result will display here', // Pesan default saat tidak ada data prediksi
-      style: TextStyle(color: Colors.white),
+      'Classification result will display here', // Pesan default yang ditampilkan
+      style: TextStyle(color: Colors.white), // Menyusun teks dengan warna putih
     );
   }
 }
 
 // ========================================================
-// WIDGET UNTUK MENAMPILKAN TEKS PREDIKSI
+// WIDGET UNTUK MENAMPILKAN TEKS "PREDICTION"
 // ========================================================
 class PredictionText extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color valueColor;
+  final String label; // Label yang digunakan untuk hasil prediksi
+  final String value; // Nilai hasil prediksi (Positive/Negative)
+  final Color valueColor; // Warna teks berdasarkan hasil prediksi
 
   const PredictionText({
     super.key,
@@ -107,13 +108,13 @@ class PredictionText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: label, // Teks label untuk hasil prediksi
-            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+            text: label, // Menampilkan label
+            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold), // Mengatur gaya teks label
           ),
           TextSpan(
-            text: value, // Menampilkan status positif atau negatif
+            text: value, // Menampilkan nilai hasil prediksi
             style: TextStyle(
-              color: valueColor,
+              color: valueColor, // Mengatur warna teks berdasarkan nilai
               fontSize: 16,
             ),
           ),
@@ -127,24 +128,25 @@ class PredictionText extends StatelessWidget {
 // WIDGET UNTUK MENAMPILKAN HEADER PREDIKSI
 // ========================================================
 class PredictionHeader extends StatelessWidget {
-  final String text;
+  final String text; // Teks header
 
   const PredictionHeader({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text,
-      style: const TextStyle(color: Colors.white, fontSize: 13),
+      text, // Menampilkan teks header
+      style: const TextStyle(color: Colors.white, fontSize: 13), // Mengatur gaya teks header
     );
   }
 }
 
 // ========================================================
 // WIDGET UNTUK MENAMPILKAN DETAIL KLASIFIKASI
+// Menampilkan detail klasifikasi jika tersedia.
 // ========================================================
 class ClassificationDetails extends StatelessWidget {
-  final Map<String, dynamic> classification;
+  final Map<String, dynamic> classification; // Data klasifikasi
 
   const ClassificationDetails({super.key, required this.classification});
 
@@ -153,10 +155,10 @@ class ClassificationDetails extends StatelessWidget {
     return Column(
       children: classification.entries.map(
         (entry) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0),
+          padding: const EdgeInsets.symmetric(vertical: 2.0), // Memberikan jarak antar elemen
           child: Text(
             '${entry.key}: ${entry.value.toStringAsFixed(4)}', // Menampilkan key dan value dari classification
-            style: const TextStyle(color: Colors.white, fontSize: 12),
+            style: const TextStyle(color: Colors.white, fontSize: 12), // Mengatur gaya teks
           ),
         ),
       ).toList(),

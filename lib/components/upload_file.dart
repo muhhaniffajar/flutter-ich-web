@@ -10,6 +10,7 @@ import 'package:dio/dio.dart'; // Untuk membuat permintaan HTTP dengan lebih mud
 import 'package:http_parser/http_parser.dart'; // Untuk menentukan jenis konten file (HttpParser: https://pub.dev/packages/http_parser)
 import 'package:flutter/services.dart'; // Untuk mengakses file yang disimpan sebagai aset aplikasi (Flutter Framework: https://flutter.dev/docs)
 
+
 // ================================================================
 // WIDGET UPLOAD FILE
 // Widget untuk mengelola pemilihan, pengunggahan, dan penghapusan file DICOM
@@ -72,6 +73,7 @@ class UploadFile extends StatelessWidget {
     );
 
     if (result != null && result.files.single.bytes != null) {
+      // Setelah file dipilih, mengirimkan data file berupa bytes dan nama file ke callback onFileSelected
       onFileSelected({
         'bytes': result.files.single.bytes,
         'name': result.files.single.name,
@@ -86,8 +88,9 @@ class UploadFile extends StatelessWidget {
 
   /// Mengunggah file DICOM yang dipilih ke server menggunakan Dio
   Future<void> uploadDicomFile() async {
-    if (dicomFile == null) return;
+    if (dicomFile == null) return; // Jika tidak ada file yang dipilih, keluar dari fungsi
 
+    // Mengubah status loading menjadi true
     onLoadingStateChanged(true);
 
     try {
@@ -104,11 +107,14 @@ class UploadFile extends StatelessWidget {
         MultipartFile.fromBytes(dicomFile['bytes'], filename: dicomFile['name'], contentType: MediaType('application', 'dicom')), // HttpParser: https://pub.dev/packages/http_parser
       ));
 
+      // Melakukan POST request ke server dengan FormData yang berisi file DICOM
       Response response = await dio.post(url, data: formData);
 
       if (response.statusCode == 200) {
+        // Jika server merespons dengan status 200, mengirimkan respons data ke callback onResponseReceived
         onResponseReceived(response.data);
       } else {
+        // Jika status code bukan 200, menampilkan exception error
         throw Exception('Failed to upload file');
       }
     } catch (e) {
@@ -116,6 +122,7 @@ class UploadFile extends StatelessWidget {
         print('Error: $e');
       }
     } finally {
+      // Mengubah status loading menjadi false setelah proses selesai
       onLoadingStateChanged(false);
       onClassifyCompleted();
     }
@@ -129,7 +136,9 @@ class UploadFile extends StatelessWidget {
   /// Memuat file DICOM dari aset aplikasi menggunakan rootBundle
   Future<void> loadDicomFromAsset(String filePath) async {
     try {
+      // Menggunakan rootBundle untuk memuat file dari aset aplikasi
       final data = await rootBundle.load(filePath); // Memuat file dari aset (https://flutter.dev/docs)
+      // Mengirimkan data bytes dan nama file ke callback onFileSelected
       onFileSelected({
         'bytes': data.buffer.asUint8List(),
         'name': filePath.split('/').last,
