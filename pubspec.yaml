@@ -9,22 +9,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # dicom: ^0.0.3
-  # http: ^1.2.2
   file_picker: ^8.1.7
   dio: ^5.7.0
-  # path: ^1.8.0
-  # html: ^0.15.5
   flutter_lints: ^5.0.0
-  # logger: ^2.5.0
   http_parser: ^4.1.2
-  # cupertino_icons: ^1.0.5
-# flutter_icons: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # build_runner: ^2.4.14
 
 
 flutter:
