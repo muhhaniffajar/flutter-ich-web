@@ -99,7 +99,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
     );
   }
 
-  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth, AppLocalizations AppLocalizations) {
+  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth, AppLocalizations appLocalizations) {
     final String baseUrl = ApiService.baseUrl; // Use baseUrl from ApiService
 
     return inferences.map((inference) {
@@ -141,11 +141,11 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${AppLocalizations.label}$label',
+                    '${appLocalizations.label}$label',
                     style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Text(
-                    '${AppLocalizations.confidence}$confidence',
+                    '${appLocalizations.confidence}$confidence',
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
