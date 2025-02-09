@@ -8,7 +8,7 @@ class DisplayPrediction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appLocalizationss = AppLocalizationss.of(context);
+    final appLocalizations = AppLocalizations.of(context);
 
     return Column(
       children: [
@@ -20,25 +20,25 @@ class DisplayPrediction extends StatelessWidget {
           ),
           alignment: Alignment.center,
           child: responseData != null
-              ? _buildPredictionContent(responseData!, appLocalizationss)
-              : DefaultMessage(appLocalizationss: appLocalizationss),
+              ? _buildPredictionContent(responseData!, appLocalizations)
+              : DefaultMessage(appLocalizations: appLocalizations),
         ),
       ],
     );
   }
 
-  Widget _buildPredictionContent(Map<String, dynamic> responseData, AppLocalizationss appLocalizationss) {
+  Widget _buildPredictionContent(Map<String, dynamic> responseData, AppLocalizations appLocalizations) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const SizedBox(height: 10),
         PredictionText(
-          label: appLocalizationss.prediction,
-          value: responseData['is_positive'] == true ? appLocalizationss.positive : appLocalizationss.negative,
+          label: appLocalizations.prediction,
+          value: responseData['is_positive'] == true ? appLocalizations.positive : appLocalizations.negative,
           valueColor: responseData['is_positive'] == true ? Colors.green.shade300 : Colors.red.shade300,
         ),
         const SizedBox(height: 30),
-        PredictionHeader(text: appLocalizationss.predictionDetails),
+        PredictionHeader(text: appLocalizations.predictionDetails),
         const SizedBox(height: 8),
         if (responseData['classification'] != null)
           ClassificationDetails(classification: responseData['classification']),
@@ -48,14 +48,14 @@ class DisplayPrediction extends StatelessWidget {
 }
 
 class DefaultMessage extends StatelessWidget {
-  final AppLocalizationss appLocalizationss;
+  final AppLocalizations appLocalizations;
 
-  const DefaultMessage({super.key, required this.appLocalizationss});
+  const DefaultMessage({super.key, required this.appLocalizations});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      appLocalizationss.classificationResultWillDisplayHere,
+      appLocalizations.classificationResultWillDisplayHere,
       style: const TextStyle(color: Colors.white),
     );
   }

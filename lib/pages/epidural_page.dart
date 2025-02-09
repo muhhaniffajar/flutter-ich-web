@@ -13,13 +13,13 @@ class EpiduralPage extends StatelessWidget {
       // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
         title: Text(
-          AppLocalizationss.of(context).epiduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          AppLocalizations.of(context).epiduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
           style: const TextStyle(color: Colors.white60),
         ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
+          message: AppLocalizations.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -86,20 +86,20 @@ class EpiduralTextContent extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
     final List<String> causes = [
-      AppLocalizationss.of(context).epiduralCause1,
-      AppLocalizationss.of(context).epiduralCause2,
+      AppLocalizations.of(context).epiduralCause1,
+      AppLocalizations.of(context).epiduralCause2,
     ];
 
     final List<String> characteristics = [
-      AppLocalizationss.of(context).epiduralCharacteristic1,
-      AppLocalizationss.of(context).epiduralCharacteristic2,
+      AppLocalizations.of(context).epiduralCharacteristic1,
+      AppLocalizations.of(context).epiduralCharacteristic2,
     ];
 
     final List<String> symptoms = [
-      AppLocalizationss.of(context).epiduralSymptom1,
-      AppLocalizationss.of(context).epiduralSymptom2,
-      AppLocalizationss.of(context).epiduralSymptom3,
-      AppLocalizationss.of(context).epiduralSymptom4,
+      AppLocalizations.of(context).epiduralSymptom1,
+      AppLocalizations.of(context).epiduralSymptom2,
+      AppLocalizations.of(context).epiduralSymptom3,
+      AppLocalizations.of(context).epiduralSymptom4,
     ];
 
     return Container(
@@ -113,7 +113,7 @@ class EpiduralTextContent extends StatelessWidget {
         children: [
           // Judul bagian "What is Epidural Hemorrhage?"
           Text(
-            AppLocalizationss.of(context).whatIsEpiduralHemorrhage, // Menggunakan terjemahan
+            AppLocalizations.of(context).whatIsEpiduralHemorrhage, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
@@ -123,7 +123,7 @@ class EpiduralTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Deskripsi tentang Epidural Hemorrhage
           Text(
-            AppLocalizationss.of(context).epiduralDescription, // Menggunakan terjemahan
+            AppLocalizations.of(context).epiduralDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
             style: const TextStyle(
               color: Colors.white30,
@@ -133,7 +133,7 @@ class EpiduralTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Judul bagian "Location"
           Text(
-            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            AppLocalizations.of(context).location, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -142,17 +142,17 @@ class EpiduralTextContent extends StatelessWidget {
           ),
           // Deskripsi tentang lokasi Epidural Hemorrhage
           Text(
-            AppLocalizationss.of(context).epiduralLocation, // Menggunakan terjemahan
+            AppLocalizations.of(context).epiduralLocation, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white30,
-              fontSize: 18,
+              fontSize: 16,
             ),
             textAlign: TextAlign.justify,
           ),
           const SizedBox(height: 10),
           // Judul bagian "Causes"
           Text(
-            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            AppLocalizations.of(context).causes, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -166,12 +166,12 @@ class EpiduralTextContent extends StatelessWidget {
             itemCount: causes.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   causes[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -180,7 +180,7 @@ class EpiduralTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Characteristics"
           Text(
-            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            AppLocalizations.of(context).characteristics, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -194,12 +194,12 @@ class EpiduralTextContent extends StatelessWidget {
             itemCount: characteristics.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   characteristics[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -208,7 +208,7 @@ class EpiduralTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Symptoms"
           Text(
-            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            AppLocalizations.of(context).symptoms, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -222,12 +222,12 @@ class EpiduralTextContent extends StatelessWidget {
             itemCount: symptoms.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   symptoms[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -273,10 +273,10 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              AppLocalizationss.of(context).exampleOfEpiduralHemorrhage, // Menggunakan terjemahan
+              AppLocalizations.of(context).exampleOfEpiduralHemorrhage, // Menggunakan terjemahan
               style: const TextStyle(
                 color: Colors.white60,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -337,7 +337,7 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -355,7 +355,7 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

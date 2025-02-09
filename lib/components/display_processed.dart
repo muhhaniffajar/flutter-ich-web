@@ -17,7 +17,7 @@ class DisplayProcessedState extends State<DisplayProcessed> {
 
   @override
   Widget build(BuildContext context) {
-    final appLocalizationss = AppLocalizationss.of(context);
+    final appLocalizations = AppLocalizations.of(context);
     final String baseUrl = ApiService.baseUrl; // Use baseUrl from ApiService
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -45,7 +45,7 @@ class DisplayProcessedState extends State<DisplayProcessed> {
     }
 
     if (images.isEmpty) {
-      return Center(child: Text(appLocalizationss.noImagesAvailable));
+      return Center(child: Text(appLocalizations.noImagesAvailable));
     }
 
     return SingleChildScrollView(

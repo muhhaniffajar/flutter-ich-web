@@ -17,15 +17,15 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
 
   @override
   Widget build(BuildContext context) {
-    final appLocalizationss = AppLocalizationss.of(context);
+    final appLocalizations = AppLocalizations.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final List<dynamic>? inferences = widget.responseData?['inferences'];
 
     if (inferences == null || inferences.isEmpty) {
-      return Center(child: Text(appLocalizationss.noHeatmapDataAvailable));
+      return Center(child: Text(appLocalizations.noHeatmapDataAvailable));
     }
 
-    final List<Widget> heatmapImages = _buildHeatmapImages(inferences, screenWidth, appLocalizationss);
+    final List<Widget> heatmapImages = _buildHeatmapImages(inferences, screenWidth, appLocalizations);
 
     return SingleChildScrollView(
       child: Container(
@@ -99,7 +99,7 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
     );
   }
 
-  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth, AppLocalizationss AppLocalizationss) {
+  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth, AppLocalizations AppLocalizations) {
     final String baseUrl = ApiService.baseUrl; // Use baseUrl from ApiService
 
     return inferences.map((inference) {
@@ -141,11 +141,11 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${AppLocalizationss.label}$label',
+                    '${AppLocalizations.label}$label',
                     style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Text(
-                    '${AppLocalizationss.confidence}$confidence',
+                    '${AppLocalizations.confidence}$confidence',
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],

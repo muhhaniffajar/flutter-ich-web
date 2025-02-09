@@ -90,10 +90,10 @@ class S {
     );
   }
 
-  /// `What is Intracranial Hemorrhage?`
+  /// `What is an Intracranial Hemorrhage?`
   String get whatIsICH {
     return Intl.message(
-      'What is Intracranial Hemorrhage?',
+      'What is an Intracranial Hemorrhage?',
       name: 'whatIsICH',
       desc: '',
       args: [],

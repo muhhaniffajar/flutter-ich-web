@@ -49,7 +49,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "epiduralHemorrhage":
             MessageLookupByLibrary.simpleMessage("Perdarahan Epidural"),
         "epiduralLocation": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan terjadi di antara dura mater (lapisan terluar otak) dan tulang tengkorak."),
+            "Perdarahan terjadi di antara dura mater (lapisan terluar otak) dan tulang tengkorak."),
         "epiduralSymptom1":
             MessageLookupByLibrary.simpleMessage("Sakit kepala parah."),
         "epiduralSymptom2":
@@ -91,11 +91,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "intraparenchymalCharacteristic2": MessageLookupByLibrary.simpleMessage(
             "Dapat menyebabkan kerusakan jaringan otak di sekitarnya."),
         "intraparenchymalDescription": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan intraparenkim (IPH) adalah kondisi di mana darah terkumpul di dalam jaringan otak itu sendiri. Ini terjadi ketika pembuluh darah kecil di dalam otak pecah, sering kali akibat tekanan darah tinggi yang tidak terkontrol atau kelainan pembuluh darah. Darah yang terkumpul dapat merusak jaringan otak di sekitarnya dan menyebabkan gejala seperti sakit kepala parah, kelemahan, atau kesulitan berbicara. Kondisi ini sangat serius dan memerlukan penanganan medis segera untuk mencegah kerusakan lebih lanjut."),
+            "Perdarahan intraparenkim (IPH) adalah kondisi di mana darah terkumpul di dalam jaringan otak itu sendiri. Ini terjadi ketika pembuluh darah kecil di dalam otak pecah, sering kali akibat tekanan darah tinggi yang tidak terkontrol atau kelainan pembuluh darah. Darah yang terkumpul dapat merusak jaringan otak di sekitarnya dan menyebabkan gejala seperti sakit kepala parah, kelemahan, atau kesulitan berbicara. Kondisi ini sangat serius dan memerlukan penanganan medis segera untuk mencegah kerusakan lebih lanjut."),
         "intraparenchymalHemorrhage":
-            MessageLookupByLibrary.simpleMessage("Pendarahan Intraparenkim"),
+            MessageLookupByLibrary.simpleMessage("Perdarahan Intraparenkim"),
         "intraparenchymalLocation": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan terjadi di dalam jaringan otak, biasanya di bagian putih otak."),
+            "Perdarahan terjadi di dalam jaringan otak, biasanya di bagian putih otak."),
         "intraparenchymalSymptom1": MessageLookupByLibrary.simpleMessage(
             "Sakit kepala parah yang muncul tiba-tiba, sering digambarkan sebagai sakit kepala terburuk yang pernah dialami."),
         "intraparenchymalSymptom2":
@@ -119,13 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "intraventricularCharacteristic2": MessageLookupByLibrary.simpleMessage(
             "Dapat menyebabkan ventrikel otak membesar dan meningkatkan tekanan di dalam kepala."),
         "intraventricularCharacteristic3": MessageLookupByLibrary.simpleMessage(
-            "Dibagi menjadi empat tingkat (I-IV) berdasarkan seberapa parah pendarahan dan pembesaran ventrikel."),
+            "Dibagi menjadi empat tingkat (I-IV) berdasarkan seberapa parah Perdarahan dan pembesaran ventrikel."),
         "intraventricularDescription": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan intraventrikular (IVH) adalah kondisi di mana darah terkumpul di dalam ventrikel otak, yaitu ruang-ruang berisi cairan di dalam otak yang berfungsi untuk melindungi dan mengalirkan cairan otak. Pendarahan ini sering terjadi akibat pecahnya pembuluh darah di sekitar ventrikel, seperti pada kasus aneurisma, kelainan pembuluh darah, atau cedera kepala. Darah yang terkumpul di ventrikel dapat menghalangi aliran cairan otak, menyebabkan tekanan di dalam kepala meningkat dan berpotensi merusak jaringan otak. Kondisi ini sangat serius dan memerlukan penanganan medis segera."),
+            "Perdarahan intraventrikular (IVH) adalah kondisi di mana darah terkumpul di dalam ventrikel otak, yaitu ruang-ruang berisi cairan di dalam otak yang berfungsi untuk melindungi dan mengalirkan cairan otak. Perdarahan ini sering terjadi akibat pecahnya pembuluh darah di sekitar ventrikel, seperti pada kasus aneurisma, kelainan pembuluh darah, atau cedera kepala. Darah yang terkumpul di ventrikel dapat menghalangi aliran cairan otak, menyebabkan tekanan di dalam kepala meningkat dan berpotensi merusak jaringan otak. Kondisi ini sangat serius dan memerlukan penanganan medis segera."),
         "intraventricularHemorrhage":
-            MessageLookupByLibrary.simpleMessage("Pendarahan Intraventrikular"),
+            MessageLookupByLibrary.simpleMessage("Perdarahan Intraventrikular"),
         "intraventricularLocation": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan terjadi di dalam ventrikel otak, termasuk ventrikel lateral, ventrikel ketiga, dan ventrikel keempat."),
+            "Perdarahan terjadi di dalam ventrikel otak, termasuk ventrikel lateral, ventrikel ketiga, dan ventrikel keempat."),
         "intraventricularSymptom1":
             MessageLookupByLibrary.simpleMessage("Sakit kepala tiba-tiba."),
         "intraventricularSymptom2":
@@ -175,11 +175,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "subarachnoidCharacteristic2": MessageLookupByLibrary.simpleMessage(
             "Dapat menyebabkan sakit kepala yang sangat parah dan tiba-tiba, sering digambarkan sebagai \'sakit kepala terburuk dalam hidup\'."),
         "subarachnoidDescription": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan subarachnoid (SAH) adalah kondisi di mana darah terkumpul di ruang antara dua lapisan pelindung otak, yaitu lapisan arachnoid dan pia mater. Ruang ini biasanya berisi cairan otak (cairan serebrospinal). Pendarahan ini sering disebabkan oleh pecahnya aneurisma, yaitu tonjolan lemah pada dinding pembuluh darah, atau kelainan pembuluh darah lainnya. Gejala utamanya adalah sakit kepala parah yang muncul tiba-tiba, sering digambarkan sebagai \'sakit kepala terburuk dalam hidup\'. Kondisi ini sangat serius dan membutuhkan penanganan medis segera."),
+            "Perdarahan subarachnoid (SAH) adalah kondisi di mana darah terkumpul di ruang antara dua lapisan pelindung otak, yaitu lapisan arachnoid dan pia mater. Ruang ini biasanya berisi cairan otak (cairan serebrospinal). Perdarahan ini sering disebabkan oleh pecahnya aneurisma, yaitu tonjolan lemah pada dinding pembuluh darah, atau kelainan pembuluh darah lainnya. Gejala utamanya adalah sakit kepala parah yang muncul tiba-tiba, sering digambarkan sebagai \'sakit kepala terburuk dalam hidup\'. Kondisi ini sangat serius dan membutuhkan penanganan medis segera."),
         "subarachnoidHemorrhage":
-            MessageLookupByLibrary.simpleMessage("Pendarahan Subarachnoid"),
+            MessageLookupByLibrary.simpleMessage("Perdarahan Subarachnoid"),
         "subarachnoidLocation": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan terjadi di ruang antara lapisan arachnoid dan pia mater, yang berada di sekitar otak."),
+            "Perdarahan terjadi di ruang antara lapisan arachnoid dan pia mater, yang berada di sekitar otak."),
         "subarachnoidSymptom1": MessageLookupByLibrary.simpleMessage(
             "Sakit kepala parah yang muncul tiba-tiba, sering digambarkan sebagai sakit kepala terburuk yang pernah dialami."),
         "subarachnoidSymptom2":
@@ -191,21 +191,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "subduralCause1": MessageLookupByLibrary.simpleMessage(
             "Cedera kepala, seperti jatuh atau kecelakaan mobil, yang menyebabkan pembuluh darah kecil di sekitar otak pecah."),
         "subduralCause2": MessageLookupByLibrary.simpleMessage(
-            "Pada orang lanjut usia atau mereka yang sering mengonsumsi alkohol, cedera ringan pun dapat menyebabkan pendarahan subdural karena otak menyusut dan pembuluh darah menjadi lebih rentan."),
+            "Pada orang lanjut usia atau mereka yang sering mengonsumsi alkohol, cedera ringan pun dapat menyebabkan Perdarahan subdural karena otak menyusut dan pembuluh darah menjadi lebih rentan."),
         "subduralCharacteristic1": MessageLookupByLibrary.simpleMessage(
             "Darah menyebar di permukaan otak dan mengikuti bentuk otak, terlihat seperti bentuk cembung pada hasil pemindaian."),
         "subduralCharacteristic2": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan subdural bisa terjadi secara tiba-tiba (akut), berkembang perlahan (subakut), atau bertahan dalam waktu lama (kronis)."),
+            "Perdarahan subdural bisa terjadi secara tiba-tiba (akut), berkembang perlahan (subakut), atau bertahan dalam waktu lama (kronis)."),
         "subduralDescription": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan subdural (SDH) adalah kondisi di mana darah terkumpul di antara dua lapisan pelindung otak, yaitu dura mater (lapisan terluar) dan lapisan arachnoid. Darah yang terkumpul ini dapat menekan otak dan menyebabkan masalah serius. Pendarahan subdural sering terjadi setelah cedera kepala, seperti jatuh, kecelakaan mobil, atau benturan keras. Pada orang lanjut usia atau mereka yang sering mengonsumsi alkohol, bahkan cedera ringan bisa menyebabkan pendarahan ini karena pembuluh darah di sekitar otak lebih rapuh."),
+            "Perdarahan subdural (SDH) adalah kondisi di mana darah terkumpul di antara dua lapisan pelindung otak, yaitu dura mater (lapisan terluar) dan lapisan arachnoid. Darah yang terkumpul ini dapat menekan otak dan menyebabkan masalah serius. Perdarahan subdural sering terjadi setelah cedera kepala, seperti jatuh, kecelakaan mobil, atau benturan keras. Pada orang lanjut usia atau mereka yang sering mengonsumsi alkohol, bahkan cedera ringan bisa menyebabkan Perdarahan ini karena pembuluh darah di sekitar otak lebih rapuh."),
         "subduralHemorrhage":
-            MessageLookupByLibrary.simpleMessage("Pendarahan Subdural"),
+            MessageLookupByLibrary.simpleMessage("Perdarahan Subdural"),
         "subduralLocation": MessageLookupByLibrary.simpleMessage(
-            "Pendarahan terjadi di antara dura mater (lapisan terluar otak) dan lapisan arachnoid."),
+            "Perdarahan terjadi di antara dura mater (lapisan terluar otak) dan lapisan arachnoid."),
         "subduralSymptom1": MessageLookupByLibrary.simpleMessage(
-            "Pada pendarahan subdural akut: Kesadaran menurun dengan cepat, sakit kepala parah tiba-tiba, dan kelemahan atau gangguan saraf lainnya."),
+            "Pada Perdarahan subdural akut: Kesadaran menurun dengan cepat, sakit kepala parah tiba-tiba, dan kelemahan atau gangguan saraf lainnya."),
         "subduralSymptom2": MessageLookupByLibrary.simpleMessage(
-            "Pada pendarahan subdural kronis: Sakit kepala yang berkembang perlahan, kebingungan, masalah ingatan, atau kelemahan pada tubuh."),
+            "Pada Perdarahan subdural kronis: Sakit kepala yang berkembang perlahan, kebingungan, masalah ingatan, atau kelemahan pada tubuh."),
         "symptoms": MessageLookupByLibrary.simpleMessage("Gejala:"),
         "typesOfICH": MessageLookupByLibrary.simpleMessage(
             "Jenis Perdarahan Intrakranial"),
@@ -221,13 +221,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Apa itu Perdarahan Intrakranial?"),
         "whatIsIntraparenchymalHemorrhage":
             MessageLookupByLibrary.simpleMessage(
-                "Apa itu Pendarahan Intraparenkim?"),
+                "Apa itu Perdarahan Intraparenkim?"),
         "whatIsIntraventricularHemorrhage":
             MessageLookupByLibrary.simpleMessage(
-                "Apa itu Pendarahan Intraventrikular?"),
+                "Apa itu Perdarahan Intraventrikular?"),
         "whatIsSubarachnoidHemorrhage": MessageLookupByLibrary.simpleMessage(
-            "Apa itu Pendarahan Subarachnoid?"),
+            "Apa itu Perdarahan Subarachnoid?"),
         "whatIsSubduralHemorrhage":
-            MessageLookupByLibrary.simpleMessage("Apa itu Pendarahan Subdural?")
+            MessageLookupByLibrary.simpleMessage("Apa itu Perdarahan Subdural?")
       };
 }

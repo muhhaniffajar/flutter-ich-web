@@ -217,7 +217,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "whatIsEpiduralHemorrhage": MessageLookupByLibrary.simpleMessage(
             "What is an Epidural Hemorrhage?"),
         "whatIsICH": MessageLookupByLibrary.simpleMessage(
-            "What is Intracranial Hemorrhage?"),
+            "What is an Intracranial Hemorrhage?"),
         "whatIsIntraparenchymalHemorrhage":
             MessageLookupByLibrary.simpleMessage(
                 "What is an Intraparenchymal Hemorrhage?"),

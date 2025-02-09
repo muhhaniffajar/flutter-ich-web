@@ -13,13 +13,13 @@ class IntraparenchymalPage extends StatelessWidget {
       // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
         title: Text(
-          AppLocalizationss.of(context).intraparenchymalHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          AppLocalizations.of(context).intraparenchymalHemorrhage, // Menggunakan terjemahan untuk judul AppBar
           style: const TextStyle(color: Colors.white60),
         ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
+          message: AppLocalizations.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -86,21 +86,21 @@ class IntraparenchymalTextContent extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
     final List<String> causes = [
-      AppLocalizationss.of(context).intraparenchymalCause1,
-      AppLocalizationss.of(context).intraparenchymalCause2,
-      AppLocalizationss.of(context).intraparenchymalCause3,
+      AppLocalizations.of(context).intraparenchymalCause1,
+      AppLocalizations.of(context).intraparenchymalCause2,
+      AppLocalizations.of(context).intraparenchymalCause3,
     ];
 
     final List<String> characteristics = [
-      AppLocalizationss.of(context).intraparenchymalCharacteristic1,
-      AppLocalizationss.of(context).intraparenchymalCharacteristic2,
+      AppLocalizations.of(context).intraparenchymalCharacteristic1,
+      AppLocalizations.of(context).intraparenchymalCharacteristic2,
     ];
 
     final List<String> symptoms = [
-      AppLocalizationss.of(context).intraparenchymalSymptom1,
-      AppLocalizationss.of(context).intraparenchymalSymptom2,
-      AppLocalizationss.of(context).intraparenchymalSymptom3,
-      AppLocalizationss.of(context).intraparenchymalSymptom4,
+      AppLocalizations.of(context).intraparenchymalSymptom1,
+      AppLocalizations.of(context).intraparenchymalSymptom2,
+      AppLocalizations.of(context).intraparenchymalSymptom3,
+      AppLocalizations.of(context).intraparenchymalSymptom4,
     ];
 
     return Container(
@@ -114,7 +114,7 @@ class IntraparenchymalTextContent extends StatelessWidget {
         children: [
           // Judul bagian "What is Intraparenchymal Hemorrhage?"
           Text(
-            AppLocalizationss.of(context).whatIsIntraparenchymalHemorrhage, // Menggunakan terjemahan
+            AppLocalizations.of(context).whatIsIntraparenchymalHemorrhage, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
@@ -124,7 +124,7 @@ class IntraparenchymalTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Deskripsi tentang Intraparenchymal Hemorrhage
           Text(
-            AppLocalizationss.of(context).intraparenchymalDescription, // Menggunakan terjemahan
+            AppLocalizations.of(context).intraparenchymalDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
             style: const TextStyle(
               color: Colors.white30,
@@ -134,7 +134,7 @@ class IntraparenchymalTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Judul bagian "Location"
           Text(
-            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            AppLocalizations.of(context).location, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -143,17 +143,17 @@ class IntraparenchymalTextContent extends StatelessWidget {
           ),
           // Deskripsi tentang lokasi Intraparenchymal Hemorrhage
           Text(
-            AppLocalizationss.of(context).intraparenchymalLocation, // Menggunakan terjemahan
+            AppLocalizations.of(context).intraparenchymalLocation, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white30,
-              fontSize: 18,
+              fontSize: 16,
             ),
             textAlign: TextAlign.justify,
           ),
           const SizedBox(height: 10),
           // Judul bagian "Causes"
           Text(
-            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            AppLocalizations.of(context).causes, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -167,12 +167,12 @@ class IntraparenchymalTextContent extends StatelessWidget {
             itemCount: causes.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   causes[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -181,7 +181,7 @@ class IntraparenchymalTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Characteristics"
           Text(
-            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            AppLocalizations.of(context).characteristics, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -195,12 +195,12 @@ class IntraparenchymalTextContent extends StatelessWidget {
             itemCount: characteristics.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   characteristics[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -209,7 +209,7 @@ class IntraparenchymalTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Symptoms"
           Text(
-            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            AppLocalizations.of(context).symptoms, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -223,12 +223,12 @@ class IntraparenchymalTextContent extends StatelessWidget {
             itemCount: symptoms.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   symptoms[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -274,10 +274,10 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              AppLocalizationss.of(context).exampleOfIntraparenchymalHemorrhage, // Menggunakan terjemahan
+              AppLocalizations.of(context).exampleOfIntraparenchymalHemorrhage, // Menggunakan terjemahan
               style: const TextStyle(
                 color: Colors.white60,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -338,7 +338,7 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -356,7 +356,7 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

@@ -118,7 +118,7 @@ class UploadFileState extends State<UploadFile> {
                       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                     ),
                     child: Text(
-                      AppLocalizationss.of(context).selectDicomFile,
+                      AppLocalizations.of(context).selectDicomFile,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 58, 60, 63),
                         fontWeight: FontWeight.bold,
@@ -139,7 +139,7 @@ class UploadFileState extends State<UploadFile> {
                   }
                 },
                 child: Text(
-                  '${AppLocalizationss.of(context).fileSelected} ${widget.dicomFile['name']}',
+                  '${AppLocalizations.of(context).fileSelected} ${widget.dicomFile['name']}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class UploadFileState extends State<UploadFile> {
               child: widget.isLoading
                   ? const CircularProgressIndicator()
                   : Text(
-                      AppLocalizationss.of(context).uploadAndClassify,
+                      AppLocalizations.of(context).uploadAndClassify,
                       style: const TextStyle(
                         color: Color.fromARGB(255, 58, 60, 63),
                         fontWeight: FontWeight.bold,
@@ -174,7 +174,7 @@ class UploadFileState extends State<UploadFile> {
                 padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
               ),
               child: Text(
-                AppLocalizationss.of(context).removeFile,
+                AppLocalizations.of(context).removeFile,
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -184,7 +184,7 @@ class UploadFileState extends State<UploadFile> {
           ],
           const Spacer(),
           Text(
-            AppLocalizationss.of(context).selectExampleDicomFile,
+            AppLocalizations.of(context).selectExampleDicomFile,
             style: const TextStyle(
               color: Colors.white60,
               fontWeight: FontWeight.bold,

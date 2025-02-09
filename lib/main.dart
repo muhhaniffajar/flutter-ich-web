@@ -53,7 +53,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       locale: _locale,
       localizationsDelegates: const [
-        AppLocalizationssDelegate(),
+        AppLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -136,13 +136,13 @@ class MainPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: PopupMenuButton<String>(
-              tooltip: AppLocalizationss.of(context).chooseLanguage, // Tooltip kustom
+              tooltip: AppLocalizations.of(context).chooseLanguage, // Tooltip kustom
               icon: Row(
                 children: [
                   const Icon(Icons.language, color: Colors.white60), // Ikon bahasa
                   const SizedBox(width: 8), // Jarak antara ikon dan teks
                   Text(
-                    AppLocalizationss.of(context).language, // Teks "Language" atau "Bahasa"
+                    AppLocalizations.of(context).language, // Teks "Language" atau "Bahasa"
                     style: const TextStyle(
                       color: Colors.white60,
                       fontSize: 16,
@@ -211,7 +211,7 @@ class ClassificationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: AppLocalizationss.of(context).gotoichclass, // Pesan tooltip yang ditampilkan.
+      message: AppLocalizations.of(context).gotoichclass, // Pesan tooltip yang ditampilkan.
       child: Padding(
         padding: const EdgeInsets.only(right: 16.0), // Padding di sebelah kanan.
         child: IconButton(
@@ -221,7 +221,7 @@ class ClassificationButton extends StatelessWidget {
               Icon(Icons.control_point_sharp, color: Colors.white60), // Ikon tombol.
               SizedBox(width: 8), // Jarak antara ikon dan teks.
               Text(
-              AppLocalizationss.of(context).startClassification,
+              AppLocalizations.of(context).startClassification,
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 16,
@@ -418,7 +418,7 @@ class EducationText extends StatelessWidget {
       children: [
         const SizedBox(height: 50), // Jarak atas.
         Text(
-          AppLocalizationss.of(context).appTitle, // Menggunakan terjemahan untuk judul aplikasi
+          AppLocalizations.of(context).appTitle, // Menggunakan terjemahan untuk judul aplikasi
           style: const TextStyle(
             color: Colors.white60,
             fontSize: 32,
@@ -427,7 +427,7 @@ class EducationText extends StatelessWidget {
         ),
         const SizedBox(height: 20), // Jarak antara judul dan teks berikutnya.
         Text(
-          AppLocalizationss.of(context).whatIsICH, // Menggunakan terjemahan untuk "What is Intracranial Hemorrhage?"
+          AppLocalizations.of(context).whatIsICH, // Menggunakan terjemahan untuk "What is Intracranial Hemorrhage?"
           style: const TextStyle(
             color: Colors.white60,
             fontSize: 25,
@@ -437,7 +437,7 @@ class EducationText extends StatelessWidget {
         const SizedBox(height: 10), // Jarak antara judul dan teks berikutnya.
         SingleChildScrollView(
           child: Text(
-            AppLocalizationss.of(context).ichDescription, // Menggunakan terjemahan untuk deskripsi ICH
+            AppLocalizations.of(context).ichDescription, // Menggunakan terjemahan untuk deskripsi ICH
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 18,
@@ -450,7 +450,7 @@ class EducationText extends StatelessWidget {
         ),
         const SizedBox(height: 40), // Jarak antara teks dan bagian berikutnya.
         Text(
-          AppLocalizationss.of(context).typesOfICH, // Menggunakan terjemahan untuk "Types of Intracranial Hemorrhage"
+          AppLocalizations.of(context).typesOfICH, // Menggunakan terjemahan untuk "Types of Intracranial Hemorrhage"
           style: const TextStyle(
             color: Colors.white60,
             fontSize: 24,
@@ -696,7 +696,7 @@ class StartClassificationButton extends StatelessWidget {
             );
           },
           child: Text(
-          AppLocalizationss.of(context).startClassification, // Teks yang ditampilkan pada tombol.
+          AppLocalizations.of(context).startClassification, // Teks yang ditampilkan pada tombol.
             style: TextStyle(color: Colors.white, fontSize: 18), // Gaya teks tombol.
           ),
         ),

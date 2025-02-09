@@ -13,13 +13,13 @@ class SubduralPage extends StatelessWidget {
       // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
         title: Text(
-          AppLocalizationss.of(context).subduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          AppLocalizations.of(context).subduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
           style: const TextStyle(color: Colors.white60),
         ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
+          message: AppLocalizations.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -86,18 +86,18 @@ class SubduralTextContent extends StatelessWidget {
   Widget build(BuildContext context) {
     // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
     final List<String> causes = [
-      AppLocalizationss.of(context).subduralCause1,
-      AppLocalizationss.of(context).subduralCause2,
+      AppLocalizations.of(context).subduralCause1,
+      AppLocalizations.of(context).subduralCause2,
     ];
 
     final List<String> characteristics = [
-      AppLocalizationss.of(context).subduralCharacteristic1,
-      AppLocalizationss.of(context).subduralCharacteristic2,
+      AppLocalizations.of(context).subduralCharacteristic1,
+      AppLocalizations.of(context).subduralCharacteristic2,
     ];
 
     final List<String> symptoms = [
-      AppLocalizationss.of(context).subduralSymptom1,
-      AppLocalizationss.of(context).subduralSymptom2,
+      AppLocalizations.of(context).subduralSymptom1,
+      AppLocalizations.of(context).subduralSymptom2,
     ];
 
     return Container(
@@ -111,7 +111,7 @@ class SubduralTextContent extends StatelessWidget {
         children: [
           // Judul bagian "What is Subdural Hemorrhage?"
           Text(
-            AppLocalizationss.of(context).whatIsSubduralHemorrhage, // Menggunakan terjemahan
+            AppLocalizations.of(context).whatIsSubduralHemorrhage, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
@@ -121,7 +121,7 @@ class SubduralTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Deskripsi tentang Subdural Hemorrhage
           Text(
-            AppLocalizationss.of(context).subduralDescription, // Menggunakan terjemahan
+            AppLocalizations.of(context).subduralDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
             style: const TextStyle(
               color: Colors.white30,
@@ -131,7 +131,7 @@ class SubduralTextContent extends StatelessWidget {
           const SizedBox(height: 16),
           // Judul bagian "Location"
           Text(
-            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            AppLocalizations.of(context).location, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -140,17 +140,17 @@ class SubduralTextContent extends StatelessWidget {
           ),
           // Deskripsi tentang lokasi Subdural Hemorrhage
           Text(
-            AppLocalizationss.of(context).subduralLocation, // Menggunakan terjemahan
+            AppLocalizations.of(context).subduralLocation, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white30,
-              fontSize: 18,
+              fontSize: 16,
             ),
             textAlign: TextAlign.justify,
           ),
           const SizedBox(height: 10),
           // Judul bagian "Causes"
           Text(
-            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            AppLocalizations.of(context).causes, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -164,12 +164,12 @@ class SubduralTextContent extends StatelessWidget {
             itemCount: causes.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   causes[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -178,7 +178,7 @@ class SubduralTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Characteristics"
           Text(
-            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            AppLocalizations.of(context).characteristics, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -192,12 +192,12 @@ class SubduralTextContent extends StatelessWidget {
             itemCount: characteristics.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   characteristics[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -206,7 +206,7 @@ class SubduralTextContent extends StatelessWidget {
           const SizedBox(height: 10),
           // Judul bagian "Symptoms"
           Text(
-            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            AppLocalizations.of(context).symptoms, // Menggunakan terjemahan
             style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
@@ -220,12 +220,12 @@ class SubduralTextContent extends StatelessWidget {
             itemCount: symptoms.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                leading: const Text('•', style: TextStyle(fontSize: 30)),
                 title: Text(
                   symptoms[index],
                   style: const TextStyle(
                     color: Colors.white30,
-                    fontSize: 18,
+                    fontSize: 16,
                   ),
                 ),
               );
@@ -271,10 +271,10 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              AppLocalizationss.of(context).exampleOfSubduralHemorrhage, // Menggunakan terjemahan
+              AppLocalizations.of(context).exampleOfSubduralHemorrhage, // Menggunakan terjemahan
               style: const TextStyle(
                 color: Colors.white60,
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -335,7 +335,7 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -353,7 +353,7 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
+                  message: AppLocalizations.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {
