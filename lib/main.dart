@@ -10,7 +10,8 @@ import 'pages/epidural_page.dart';
 import 'pages/intraparenchymal_page.dart';
 import 'pages/intraventricular_page.dart';
 import 'pages/subarachnoid_page.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'l10n/app_localizations.dart';
 // ========================================================
 // MAIN FUNCTION
 // Fungsi utama yang menjadi titik awal eksekusi aplikasi Flutter. 
@@ -25,14 +26,43 @@ void main() {
 // Kelas MyApp adalah widget Stateless yang berfungsi sebagai aplikasi utama. 
 // Kelas ini mengatur MaterialApp dan halaman awal yang akan ditampilkan.
 // ========================================================
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    MyAppState? state = context.findAncestorStateOfType<MyAppState>();
+    state?.setLocale(newLocale);
+  }
+
+  @override
+  MyAppState createState() => MyAppState();
+}
+
+class MyAppState extends State<MyApp> {
+  Locale? _locale;
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false, // Menyembunyikan banner debug.
-      home: MainPage(), // Menetapkan MainPage sebagai halaman awal.
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      locale: _locale,
+      localizationsDelegates: const [
+        AppLocalizationssDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), // English
+        Locale('id', ''), // Indonesian
+      ],
+      home: const MainPage(),
     );
   }
 }
@@ -99,13 +129,71 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1B1E25), // Warna latar belakang AppBar.
-        iconTheme: const IconThemeData(color: Colors.white60), // Warna ikon di AppBar.
-        actions: <Widget>[
-          ClassificationButton(context), // Menambahkan tombol klasifikasi di AppBar.
+        backgroundColor: const Color(0xFF1B1E25),
+        iconTheme: const IconThemeData(color: Colors.white60),
+        actions: [
+          // Tombol bahasa dengan teks di sebelah kanan ikon
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: PopupMenuButton<String>(
+              tooltip: AppLocalizationss.of(context).chooseLanguage, // Tooltip kustom
+              icon: Row(
+                children: [
+                  const Icon(Icons.language, color: Colors.white60), // Ikon bahasa
+                  const SizedBox(width: 8), // Jarak antara ikon dan teks
+                  Text(
+                    AppLocalizationss.of(context).language, // Teks "Language" atau "Bahasa"
+                    style: const TextStyle(
+                      color: Colors.white60,
+                      fontSize: 16,
+                    ),
+                  ),
+                ],
+              ),
+              color: const Color(0xFF2A2D3E), // Warna latar belakang menu
+              elevation: 5, // Elevasi menu
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Sudut melengkung pada menu
+              ),
+              onSelected: (String value) {
+                // Logika untuk mengubah bahasa
+                final locale = value == 'en' ? const Locale('en') : const Locale('id');
+                MyApp.setLocale(context, locale);
+              },
+              itemBuilder: (BuildContext context) => [
+                // Opsi bahasa Inggris
+                PopupMenuItem<String>(
+                  value: 'en',
+                  child: Text(
+                    'English', // Teks untuk bahasa Inggris
+                    style: TextStyle(
+                      color: Localizations.localeOf(context).languageCode == 'en'
+                          ? Colors.blue // Warna biru jika bahasa Inggris dipilih
+                          : Colors.white60,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+                // Opsi bahasa Indonesia
+                PopupMenuItem<String>(
+                  value: 'id',
+                  child: Text(
+                    'Bahasa Indonesia', // Teks untuk bahasa Indonesia
+                    style: TextStyle(
+                      color: Localizations.localeOf(context).languageCode == 'id'
+                          ? Colors.blue // Warna biru jika bahasa Indonesia dipilih
+                          : Colors.white60,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ClassificationButton(context),
         ],
       ),
-      body: const EducationPage(), // Menetapkan EducationPage sebagai konten utama.
+      body: const EducationPage(),
     );
   }
 }
@@ -123,17 +211,17 @@ class ClassificationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Go to ICH classification', // Pesan tooltip yang ditampilkan.
+      message: AppLocalizationss.of(context).gotoichclass, // Pesan tooltip yang ditampilkan.
       child: Padding(
         padding: const EdgeInsets.only(right: 16.0), // Padding di sebelah kanan.
         child: IconButton(
-          icon: const Row(
+          icon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(Icons.control_point_sharp, color: Colors.white60), // Ikon tombol.
               SizedBox(width: 8), // Jarak antara ikon dan teks.
               Text(
-                'Classification',
+              AppLocalizationss.of(context).startClassification,
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 16,
@@ -327,30 +415,30 @@ class EducationText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: const [
-        SizedBox(height: 50), // Jarak atas.
+      children: [
+        const SizedBox(height: 50), // Jarak atas.
         Text(
-          'Intracranial Hemorrhage Classification',
-          style: TextStyle(
+          AppLocalizationss.of(context).appTitle, // Menggunakan terjemahan untuk judul aplikasi
+          style: const TextStyle(
             color: Colors.white60,
             fontSize: 32,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 20), // Jarak antara judul dan teks berikutnya.
+        const SizedBox(height: 20), // Jarak antara judul dan teks berikutnya.
         Text(
-          'What is Intracranial Hemorrhage?',
-          style: TextStyle(
+          AppLocalizationss.of(context).whatIsICH, // Menggunakan terjemahan untuk "What is Intracranial Hemorrhage?"
+          style: const TextStyle(
             color: Colors.white60,
             fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10), // Jarak antara judul dan teks berikutnya.
+        const SizedBox(height: 10), // Jarak antara judul dan teks berikutnya.
         SingleChildScrollView(
           child: Text(
-            'Intracranial hemorrhage (ICH) is a general term for bleeding inside the skull. It encompasses all types of brain bleeds, including subdural, intraparenchymal, intraventricular, subarachnoid, and epidural hemorrhages. ICH is commonly caused by trauma, high blood pressure, blood vessel abnormalities, or aneurysms. The symptoms of ICH vary depending on the location and severity of the bleed, and can range from headaches and dizziness to loss of consciousness or death. Prompt medical attention is required to manage ICH, and the treatment approach depends on the cause, type, and severity of the hemorrhage.',
-            style: TextStyle(
+            AppLocalizationss.of(context).ichDescription, // Menggunakan terjemahan untuk deskripsi ICH
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 18,
               fontWeight: FontWeight.normal,
@@ -360,16 +448,16 @@ class EducationText extends StatelessWidget {
             overflow: TextOverflow.visible, // Mengatur bagaimana teks yang melebihi batas ditampilkan.
           ),
         ),
-        SizedBox(height: 40), // Jarak antara teks dan bagian berikutnya.
+        const SizedBox(height: 40), // Jarak antara teks dan bagian berikutnya.
         Text(
-          'Types of Intracranial Hemorrhage',
-          style: TextStyle(
+          AppLocalizationss.of(context).typesOfICH, // Menggunakan terjemahan untuk "Types of Intracranial Hemorrhage"
+          style: const TextStyle(
             color: Colors.white60,
             fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 16), // Jarak antara judul dan teks berikutnya.
+        const SizedBox(height: 16), // Jarak antara judul dan teks berikutnya.
       ],
     );
   }
@@ -607,8 +695,8 @@ class StartClassificationButton extends StatelessWidget {
               MaterialPageRoute(builder: (context) => const ClassificationPage()),
             );
           },
-          child: const Text(
-            'Start Classification', // Teks yang ditampilkan pada tombol.
+          child: Text(
+          AppLocalizationss.of(context).startClassification, // Teks yang ditampilkan pada tombol.
             style: TextStyle(color: Colors.white, fontSize: 18), // Gaya teks tombol.
           ),
         ),
@@ -634,7 +722,7 @@ class EducationImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20), // Sudut melengkung pada gambar.
         child: Image.asset(
-          'assets/ICH1.JPG', // Path gambar edukasi.
+          'assets/ICH1.jpg', // Path gambar edukasi.
           height: height, // Mengatur tinggi gambar.
           fit: BoxFit.cover, // Mengatur cara gambar ditampilkan.
         ),

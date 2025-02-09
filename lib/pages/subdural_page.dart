@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
 //================================================== Kelas SubduralPage ==================================================\\
 //================================================== untuk halaman utama informasi tentang Subdural Hemorrhage ==================================================\\
@@ -11,11 +12,14 @@ class SubduralPage extends StatelessWidget {
     return Scaffold(
       // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
-        title: const Text('Subdural Hemorrhage', style: TextStyle(color: Colors.white60)),
+        title: Text(
+          AppLocalizationss.of(context).subduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          style: const TextStyle(color: Colors.white60),
+        ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',
+          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -80,99 +84,152 @@ class SubduralTextContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
+    final List<String> causes = [
+      AppLocalizationss.of(context).subduralCause1,
+      AppLocalizationss.of(context).subduralCause2,
+    ];
+
+    final List<String> characteristics = [
+      AppLocalizationss.of(context).subduralCharacteristic1,
+      AppLocalizationss.of(context).subduralCharacteristic2,
+    ];
+
+    final List<String> symptoms = [
+      AppLocalizationss.of(context).subduralSymptom1,
+      AppLocalizationss.of(context).subduralSymptom2,
+    ];
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 23, 25, 30),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Judul bagian "What is Subdural Hemorrhage?"
-          Text('What is Subdural Hemorrhage?',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).whatIsSubduralHemorrhage, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Deskripsi tentang Subdural Hemorrhage
-          Text('Subdural hemorrhage (SDH) refers to a collection of blood between the dura mater (the outer protective layer of the brain) and the arachnoid layer. It is commonly caused by trauma to the head, leading to the rupture of blood vessels. Symptoms of subdural hemorrhage can include headaches, confusion, dizziness, and in severe cases, loss of consciousness. SDH can be classified into acute, subacute, and chronic, based on the duration between the injury and the appearance of symptoms. Prompt medical intervention is crucial for the treatment and management of subdural hemorrhages.',
+          Text(
+            AppLocalizationss.of(context).subduralDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Judul bagian "Location"
-          Text('Location:',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
           // Deskripsi tentang lokasi Subdural Hemorrhage
-          Text('Bleeding occurs between the dura mater (the outermost meningeal layer) and the arachnoid mater.',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).subduralLocation, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 18,
             ),
             textAlign: TextAlign.justify,
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           // Judul bagian "Causes"
-          Text('Causes:',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          // Deskripsi tentang penyebab Subdural Hemorrhage
-          Text('- Traumatic brain injury (e.g., falls, motor vehicle accidents) leading to tearing of bridging veins.\n- In older adults or alcoholics, minor trauma can cause SDH due to brain atrophy, which stretches the veins.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar penyebab
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: causes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  causes[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           // Judul bagian "Characteristics"
-          Text('Characteristics:',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          // Deskripsi tentang karakteristik Subdural Hemorrhage
-          Text('- Blood spreads along the brain surface and follows the contours of the brain (crescent-shaped on imaging).\n- It can be acute (sudden), subacute, or chronic (developing over weeks to months).',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar karakteristik
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: characteristics.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  characteristics[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           // Judul bagian "Symptoms"
-          Text('Symptoms:',
-            style: TextStyle(
+          Text(
+            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          // Deskripsi tentang gejala Subdural Hemorrhage
-          Text('- Acute SDH: Rapid onset of headache, altered consciousness, and focal neurological deficits.\n- Chronic SDH: Gradual headache, confusion, memory problems, or weakness.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar gejala
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: symptoms.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  symptoms[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -211,11 +268,11 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
             color: Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-          child: const Align(
+          child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Example of Subdural Hemorrhage',
-              style: TextStyle(
+              AppLocalizationss.of(context).exampleOfSubduralHemorrhage, // Menggunakan terjemahan
+              style: const TextStyle(
                 color: Colors.white60,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -278,7 +335,7 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: 'Previous Image',
+                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -296,7 +353,7 @@ class SubduralImageSliderState extends State<SubduralImageSlider> {
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: 'Next Image',
+                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

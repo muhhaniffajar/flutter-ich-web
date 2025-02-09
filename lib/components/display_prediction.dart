@@ -1,99 +1,70 @@
-// ========================================================
-// IMPOR LIBRARY
-// Mengimpor pustaka yang diperlukan untuk membangun antarmuka pengguna aplikasi Flutter.
-// Material.dart menyediakan berbagai widget UI dasar seperti AppBar, Scaffold, dll.
-// ========================================================
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
-// ========================================================
-// WIDGET UNTUK MENAMPILKAN HASIL PREDIKSI
-// Widget ini menampilkan hasil prediksi yang diterima dari backend atau server.
-// ========================================================
 class DisplayPrediction extends StatelessWidget {
-  // Parameter responseData berisi data hasil prediksi yang diterima
   final Map<String, dynamic>? responseData;
 
-  // Konstruktor untuk menerima parameter responseData
   const DisplayPrediction({super.key, required this.responseData});
 
   @override
   Widget build(BuildContext context) {
-    // Menyusun tampilan widget dengan menggunakan Column untuk menata komponen secara vertikal
+    final appLocalizationss = AppLocalizationss.of(context);
+
     return Column(
       children: [
-        // ========================================================
-        // CONTAINER UNTUK MENAMPILKAN HASIL PREDIKSI
-        // ========================================================
         Container(
-          padding: const EdgeInsets.all(16.0), // Memberikan jarak dalam container
+          padding: const EdgeInsets.all(16.0),
           decoration: BoxDecoration(
-            color: const Color(0xFF1B1E25), // Mengatur warna latar belakang container
-            borderRadius: BorderRadius.circular(20.0), // Membuat sudut melengkung pada container
+            color: const Color(0xFF1B1E25),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          alignment: Alignment.center, // Menyusun konten agar berada di tengah
+          alignment: Alignment.center,
           child: responseData != null
-              ? _buildPredictionContent(responseData!) // Menampilkan isi prediksi jika ada data
-              : const DefaultMessage(), // Menampilkan pesan default jika data kosong
+              ? _buildPredictionContent(responseData!, appLocalizationss)
+              : DefaultMessage(appLocalizationss: appLocalizationss),
         ),
       ],
     );
   }
 
-  // ========================================================
-  // WIDGET UNTUK MENAMPILKAN ISI HASIL PREDIKSI
-  // ========================================================
-  Widget _buildPredictionContent(Map<String, dynamic> responseData) {
+  Widget _buildPredictionContent(Map<String, dynamic> responseData, AppLocalizationss appLocalizationss) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center, // Menyusun konten secara terpusat
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const SizedBox(height: 10), // Memberikan jarak vertikal
-        // ========================================================
-        // WIDGET UNTUK MENAMPILKAN TEKS "PREDICTION" DENGAN HASILNYA
-        // ========================================================
+        const SizedBox(height: 10),
         PredictionText(
-          label: 'Prediction: ', // Label untuk hasil prediksi
-          value: responseData['is_positive'] == true ? 'Positive' : 'Negative', // Menampilkan hasil prediksi
-          valueColor: responseData['is_positive'] == true ? Colors.green.shade300 : Colors.red.shade300, // Menyesuaikan warna berdasarkan hasil
+          label: appLocalizationss.prediction,
+          value: responseData['is_positive'] == true ? appLocalizationss.positive : appLocalizationss.negative,
+          valueColor: responseData['is_positive'] == true ? Colors.green.shade300 : Colors.red.shade300,
         ),
-        const SizedBox(height: 30), // Memberikan jarak vertikal
-        // ========================================================
-        // HEADER UNTUK MENAMPILKAN DETAIL PREDIKSI
-        // ========================================================
-        const PredictionHeader(text: 'Prediction Details:'),
-        const SizedBox(height: 8), // Memberikan jarak vertikal
-        // ========================================================
-        // JIKA TERSEDIA DATA KLASIFIKASI, MENAMPILKAN DETAILNYA
-        // ========================================================
+        const SizedBox(height: 30),
+        PredictionHeader(text: appLocalizationss.predictionDetails),
+        const SizedBox(height: 8),
         if (responseData['classification'] != null)
-          ClassificationDetails(classification: responseData['classification']), // Menampilkan detail klasifikasi
+          ClassificationDetails(classification: responseData['classification']),
       ],
     );
   }
 }
 
-// ========================================================
-// WIDGET UNTUK MENAMPILKAN PESAN DEFAULT
-// Jika tidak ada data prediksi, widget ini menampilkan pesan default.
-// ========================================================
 class DefaultMessage extends StatelessWidget {
-  const DefaultMessage({super.key});
+  final AppLocalizationss appLocalizationss;
+
+  const DefaultMessage({super.key, required this.appLocalizationss});
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'Classification result will display here', // Pesan default yang ditampilkan
-      style: TextStyle(color: Colors.white), // Menyusun teks dengan warna putih
+    return Text(
+      appLocalizationss.classificationResultWillDisplayHere,
+      style: const TextStyle(color: Colors.white),
     );
   }
 }
 
-// ========================================================
-// WIDGET UNTUK MENAMPILKAN TEKS "PREDICTION"
-// ========================================================
 class PredictionText extends StatelessWidget {
-  final String label; // Label yang digunakan untuk hasil prediksi
-  final String value; // Nilai hasil prediksi (Positive/Negative)
-  final Color valueColor; // Warna teks berdasarkan hasil prediksi
+  final String label;
+  final String value;
+  final Color valueColor;
 
   const PredictionText({
     super.key,
@@ -108,13 +79,13 @@ class PredictionText extends StatelessWidget {
       text: TextSpan(
         children: [
           TextSpan(
-            text: label, // Menampilkan label
-            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold), // Mengatur gaya teks label
+            text: label,
+            style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
           ),
           TextSpan(
-            text: value, // Menampilkan nilai hasil prediksi
+            text: value,
             style: TextStyle(
-              color: valueColor, // Mengatur warna teks berdasarkan nilai
+              color: valueColor,
               fontSize: 16,
             ),
           ),
@@ -124,29 +95,22 @@ class PredictionText extends StatelessWidget {
   }
 }
 
-// ========================================================
-// WIDGET UNTUK MENAMPILKAN HEADER PREDIKSI
-// ========================================================
 class PredictionHeader extends StatelessWidget {
-  final String text; // Teks header
+  final String text;
 
   const PredictionHeader({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text, // Menampilkan teks header
-      style: const TextStyle(color: Colors.white, fontSize: 13), // Mengatur gaya teks header
+      text,
+      style: const TextStyle(color: Colors.white, fontSize: 13),
     );
   }
 }
 
-// ========================================================
-// WIDGET UNTUK MENAMPILKAN DETAIL KLASIFIKASI
-// Menampilkan detail klasifikasi jika tersedia.
-// ========================================================
 class ClassificationDetails extends StatelessWidget {
-  final Map<String, dynamic> classification; // Data klasifikasi
+  final Map<String, dynamic> classification;
 
   const ClassificationDetails({super.key, required this.classification});
 
@@ -155,10 +119,10 @@ class ClassificationDetails extends StatelessWidget {
     return Column(
       children: classification.entries.map(
         (entry) => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 2.0), // Memberikan jarak antar elemen
+          padding: const EdgeInsets.symmetric(vertical: 2.0),
           child: Text(
-            '${entry.key}: ${entry.value.toStringAsFixed(4)}', // Menampilkan key dan value dari classification
-            style: const TextStyle(color: Colors.white, fontSize: 12), // Mengatur gaya teks
+            '${entry.key}: ${entry.value.toStringAsFixed(4)}',
+            style: const TextStyle(color: Colors.white, fontSize: 12),
           ),
         ),
       ).toList(),

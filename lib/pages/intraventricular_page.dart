@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
-//================================================== Kelas IntraventricularPage ==================================================\\
-//================================================== untuk halaman utama informasi tentang Intraventricular Hemorrhage =============================\\
+//================================================== Kelas Intraventricular Page ==================================================\\
+//================================================== untuk halaman utama informasi tentang Intraventricular Hemorrhage ==================================================\\
+
 class IntraventricularPage extends StatelessWidget {
   const IntraventricularPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
-        title: const Text('Intraventricular Hemorrhage', style: TextStyle(color: Colors.white60)),
+        title: Text(
+          AppLocalizationss.of(context).intraventricularHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          style: const TextStyle(color: Colors.white60),
+        ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',
+          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -22,6 +28,7 @@ class IntraventricularPage extends StatelessWidget {
           ),
         ),
       ),
+      // Body halaman yang berisi konten dan slider gambar
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -69,96 +76,167 @@ class IntraventricularPage extends StatelessWidget {
   }
 }
 
-//================================================== Kelas IntraventricularTextContent ==================================================\\
-//================================================== untuk konten teks tentang Intraventricular Hemorrhage =============================\\
+//================================================== Kelas Intraventricular TextContent ==================================================\\
+//================================================== untuk menampilkan informasi tentang Intraventricular Hemorrhage ==================================================\\
+
 class IntraventricularTextContent extends StatelessWidget {
   const IntraventricularTextContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
+    final List<String> causes = [
+      AppLocalizationss.of(context).intraventricularCause1,
+      AppLocalizationss.of(context).intraventricularCause2,
+      AppLocalizationss.of(context).intraventricularCause3,
+      AppLocalizationss.of(context).intraventricularCause4,
+      AppLocalizationss.of(context).intraventricularCause5,
+    ];
+
+    final List<String> characteristics = [
+      AppLocalizationss.of(context).intraventricularCharacteristic1,
+      AppLocalizationss.of(context).intraventricularCharacteristic2,
+      AppLocalizationss.of(context).intraventricularCharacteristic3,
+    ];
+
+    final List<String> symptoms = [
+      AppLocalizationss.of(context).intraventricularSymptom1,
+      AppLocalizationss.of(context).intraventricularSymptom2,
+      AppLocalizationss.of(context).intraventricularSymptom3,
+      AppLocalizationss.of(context).intraventricularSymptom4,
+      AppLocalizationss.of(context).intraventricularSymptom5,
+    ];
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color:  Color.fromARGB(255, 23, 25, 30),
+        color: const Color.fromARGB(255, 23, 25, 30),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('What is Intraventricular Hemorrhage?',
-            style: TextStyle(
+          // Judul bagian "What is Intraventricular Hemorrhage?"
+          Text(
+            AppLocalizationss.of(context).whatIsIntraventricularHemorrhage, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16),
-          Text('Intraventricular hemorrhage (IVH) refers to bleeding that occurs within the ventricular system of the brain. It is commonly associated with conditions such as aneurysms, arteriovenous malformations (AVMs), and head trauma. Symptoms can include sudden headache, nausea, vomiting, and neurological deficits. IVH can be classified into grades I to IV based on the extent of bleeding and the presence of ventricular enlargement.',
+          const SizedBox(height: 16),
+          // Deskripsi tentang Intraventricular Hemorrhage
+          Text(
+            AppLocalizationss.of(context).intraventricularDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 16),
-          Text('Location:',
-            style: TextStyle(
+          const SizedBox(height: 16),
+          // Judul bagian "Location"
+          Text(
+            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('Bleeding occurs within the ventricular system of the brain, including the lateral ventricles, third ventricle, and fourth ventricle.',
-            style: TextStyle(
+          // Deskripsi tentang lokasi Intraventricular Hemorrhage
+          Text(
+            AppLocalizationss.of(context).intraventricularLocation, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 18,
             ),
             textAlign: TextAlign.justify,
           ),
-          SizedBox(height: 10),
-          Text('Causes:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Causes"
+          Text(
+            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Aneurysms\n- Arteriovenous malformations (AVMs)\n- Head trauma\n- Hypertension\n- Coagulopathy',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar penyebab
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: causes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  causes[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          Text('Characteristics:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Characteristics"
+          Text(
+            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Blood accumulates within the ventricular system.\n- Can cause ventricular enlargement and increased intracranial pressure.\n- Classified into grades I to IV based on the extent of bleeding and ventricular enlargement.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar karakteristik
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: characteristics.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  characteristics[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          Text('Symptoms:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Symptoms"
+          Text(
+            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Sudden headache\n- Nausea and vomiting\n- Neurological deficits\n- Altered consciousness\n- Seizures',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar gejala
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: symptoms.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  symptoms[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -167,22 +245,23 @@ class IntraventricularTextContent extends StatelessWidget {
 }
 
 //================================================== Kelas IntraventricularImageSlider ==================================================\\
-//================================================== untuk slider gambar tentang Intraventricular Hemorrhage =============================\\
+//================================================== untuk menampilkan slider gambar contoh Intraventricular Hemorrhage ==================================================\\
+
 class IntraventricularImageSlider extends StatefulWidget {
   const IntraventricularImageSlider({super.key});
 
   @override
-  IntraventricularImageSliderState createState() => IntraventricularImageSliderState();
+ IntraventricularImageSliderState createState() => IntraventricularImageSliderState();
 }
 
 class IntraventricularImageSliderState extends State<IntraventricularImageSlider> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   List<String> imagePaths = [
-    'assets/intraventricular1.jpg',
-    'assets/intraventricular2.jpg',
-    'assets/intraventricular3.jpg',
-    'assets/intraventricular4.jpg',
+    'assets/Intraventricular1.jpg',
+    'assets/Intraventricular2.jpg',
+    'assets/Intraventricular3.jpg',
+    'assets/Intraventricular4.jpg',
   ];
 
   @override
@@ -193,14 +272,14 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-          color:  Color.fromARGB(255, 23, 25, 30),
+            color: Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-          child: const Align(
+          child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Example of Intraventricular Hemorrhage',
-              style: TextStyle(
+              AppLocalizationss.of(context).exampleOfIntraventricularHemorrhage, // Menggunakan terjemahan
+              style: const TextStyle(
                 color: Colors.white60,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -211,7 +290,7 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
         // Kontainer utama untuk slider gambar
         Container(
           decoration: const BoxDecoration(
-          color:  Color.fromARGB(255, 23, 25, 30),
+            color:  Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
           ),
           child: Stack(
@@ -263,7 +342,7 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: 'Previous Image',
+                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -281,7 +360,7 @@ class IntraventricularImageSliderState extends State<IntraventricularImageSlider
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: 'Next Image',
+                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

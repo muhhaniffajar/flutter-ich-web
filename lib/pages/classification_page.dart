@@ -4,9 +4,8 @@ import '../components/display_heatmap.dart';
 import '../components/display_processed.dart';
 import '../components/display_prediction.dart';
 import 'package:ich_web/main.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
-/// Halaman utama untuk klasifikasi intracranial hemorrhage (ICH).
-/// Halaman ini mengelola file DICOM yang diunggah, menampilkan hasil heatmap, gambar yang diproses, dan hasil klasifikasi.
 class ClassificationPage extends StatefulWidget {
   const ClassificationPage({super.key});
 
@@ -14,187 +13,213 @@ class ClassificationPage extends StatefulWidget {
   ClassificationPageState createState() => ClassificationPageState();
 }
 
-/// Kelas yang mengelola status dan logika interaksi pada halaman klasifikasi.
-/// Menggunakan SingleTickerProviderStateMixin untuk kontrol animasi dan scroll.
 class ClassificationPageState extends State<ClassificationPage> with SingleTickerProviderStateMixin {
-  /// Menyimpan file DICOM yang diunggah. Tipe dinamis karena bisa berubah sesuai file yang diunggah.
   dynamic dicomFile;
-  
-  /// Menyimpan status apakah aplikasi sedang memuat data atau tidak.
   bool isLoading = false;
-
-  /// Menyimpan status apakah klasifikasi sudah selesai dilakukan.
   bool isClassified = false;
-
-  /// Menyimpan data respons dari server yang berisi hasil klasifikasi dan analisis lainnya.
   Map<String, dynamic>? responseData;
-
-  /// Controller untuk mengontrol dan mendeteksi perubahan scroll pada halaman.
   late ScrollController _scrollController;
-
-  /// Kontrol untuk animasi yang mengatur visibilitas AppBar saat halaman di-scroll.
   late AnimationController animationController;
-
-  /// Status visibilitas dari AppBar (Apakah AppBar terlihat atau tidak).
-  bool _isAppBarVisible = true;
-
-  /// Menyimpan posisi scroll terakhir untuk mendeteksi arah scroll (ke atas atau ke bawah).
+  double _appBarOpacity = 1.0; // New variable to control AppBar opacity
   double _lastOffset = 0;
 
-  /// Inisialisasi objek controller untuk scroll dan animasi.
   @override
   void initState() {
     super.initState();
-
-    // Inisialisasi controller untuk scroll
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
-
-    // Inisialisasi controller untuk animasi
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      showUploadStartDialog(context);
+    });
   }
 
-  /// Fungsi untuk menangani pembebasan sumber daya (dispose).
-  /// Digunakan untuk membuang listener dan controller setelah widget dihancurkan 
-  /// untuk mencegah kebocoran memori.
   @override
   void dispose() {
-    _scrollController.removeListener(_scrollListener);  // Hapus listener dari scroll
-    _scrollController.dispose();  // Hapus controller scroll
-    animationController.dispose();  // Hapus controller animasi
-    super.dispose();  // Panggil dispose dari superclass
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    animationController.dispose();
+    super.dispose();
   }
 
-  /// Fungsi untuk mendeteksi perubahan posisi scroll.
-  /// Logika ini digunakan untuk memanipulasi visibilitas AppBar berdasarkan scroll.
   void _scrollListener() {
     double currentOffset = _scrollController.offset;
-
-    // Jika posisi scroll lebih besar dari posisi sebelumnya, scroll ke bawah, sembunyikan AppBar
     if (currentOffset > _lastOffset && currentOffset > 0) {
-      if (_isAppBarVisible) {
-        setState(() {
-          _isAppBarVisible = false;  // Sembunyikan AppBar
-        });
-        animationController.reverse();  // Efek animasi sembunyikan AppBar
-      }
-    } 
-    // Jika posisi scroll lebih kecil, scroll ke atas, tampilkan AppBar
-    else if (currentOffset < _lastOffset) {
-      if (!_isAppBarVisible) {
-        setState(() {
-          _isAppBarVisible = true;  // Tampilkan AppBar
-        });
-        animationController.forward();  // Efek animasi tampilkan AppBar
-      }
+      // Scrolling down
+      setState(() {
+        _appBarOpacity = 0.99; 
+      });
+    } else if (currentOffset < _lastOffset) {
+      // Scrolling up
+      setState(() {
+        _appBarOpacity = 1.0; 
+      });
     }
-
-    // Jika scroll berada di posisi paling atas, pastikan AppBar terlihat
     if (currentOffset == 0) {
-      if (!_isAppBarVisible) {
-        _isAppBarVisible = true;
-        animationController.forward();  // Efek animasi tampilkan AppBar
-      }
+      setState(() {
+        _appBarOpacity = 1.0; 
+      });
     }
-    _lastOffset = currentOffset;  // Update posisi scroll terakhir
+    _lastOffset = currentOffset;
   }
 
-  /// Memperbarui status file DICOM yang diunggah.
-  /// Mengubah nilai dicomFile dengan file yang dipilih dan memicu pembaruan tampilan.
   void updateDicomFile(dynamic file) {
     setState(() {
-      dicomFile = file;  // Update file yang diunggah
+      dicomFile = file;
     });
   }
 
-  /// Memperbarui status data respons hasil analisis.
-  /// Mengubah nilai responseData dengan data hasil klasifikasi dan analisis.
   void updateResponse(Map<String, dynamic>? response) {
     setState(() {
-      responseData = response;  // Update data hasil analisis
+      responseData = response;
     });
   }
 
-  /// Mengatur status ketika klasifikasi selesai dilakukan.
-  /// Fungsi ini akan mengubah status isClassified menjadi true.
   void onClassifyCompleted() {
     setState(() {
-      isClassified = true;  // Tandai klasifikasi selesai
+      isClassified = true;
     });
   }
 
-  /// Fungsi untuk navigasi kembali ke halaman utama (HomePage).
   void _goToHomePage() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const MainPage()),  // Navigasi ke halaman utama
-      (Route<dynamic> route) => false,  // Hapus semua route sebelumnya
+      MaterialPageRoute(builder: (context) => const MainPage()),
+      (Route<dynamic> route) => false,
     );
   }
 
-  /// Fungsi untuk membangun tampilan halaman klasifikasi.
+  Future<void> showUploadStartDialog(BuildContext context) async {
+  showDialog<void>(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      final screenWidth = MediaQuery.of(context).size.width;
+      final dialogWidth = screenWidth * 0.6; // 80% of the screen width
+
+      return Dialog(
+        backgroundColor: const Color(0xFF1B1E25),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        child: AnimatedOpacity(
+          opacity: 1.0,
+          duration: const Duration(milliseconds: 300),
+          child: SizedBox(
+            width: dialogWidth,
+            child: Container(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    AppLocalizationss.of(context).importantDiagnosticDisclaimer,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    AppLocalizationss.of(context).uploadAndClassificationDescription,
+                    style: const TextStyle(
+                      color: Colors.white70,
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.justify,
+                  ),
+                  const SizedBox(height: 20),
+                  TextButton(
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-
-    final containerHeight = screenHeight * 0.4;  // Menentukan tinggi kontainer (40% dari tinggi layar)
-    final isWideScreen = screenWidth > 600;  // Cek apakah layar cukup lebar untuk tampilan horizontal
+    final containerHeight = screenHeight * 0.4;
+    final isWideScreen = screenWidth > 600;
 
     return Scaffold(
-      appBar: _isAppBarVisible  // Jika AppBar terlihat
-          ? AppBar(
-              leading: Tooltip(
-                message: 'Back to Home',  // Tooltip untuk ikon kembali ke home
-                child: IconButton(
-                  icon: const Icon(Icons.home, color: Colors.white60),  // Ikon untuk kembali ke home
-                  onPressed: _goToHomePage,  // Fungsi ketika tombol ditekan
-                ),
-              ),
-              backgroundColor: const Color(0xFF1B1E25),  // Warna latar belakang AppBar
-              elevation: 0,  // Hilangkan bayangan di bawah AppBar
-              title: const Text(
-                'Intracranial Hemorrhage Classification',
-                style: TextStyle(color: Colors.white60),
-              ),
-            )
-          : null,  // Jika AppBar tidak terlihat, jangan tampilkan AppBar
+      appBar: AppBar(
+        leading: Tooltip(
+          message: AppLocalizationss.of(context).backToHome,
+          child: IconButton(
+            icon: const Icon(Icons.home, color: Colors.white60),
+            onPressed: _goToHomePage,
+          ),
+        ),
+        backgroundColor: Colors.transparent, // Set AppBar background to transparent
+        elevation: 0,
+        title: Text(
+          AppLocalizationss.of(context).appTitle,
+          style: const TextStyle(color: Colors.white60),
+        ),
+        flexibleSpace: Opacity(
+          opacity: _appBarOpacity,
+          child: Container(
+            decoration: BoxDecoration(
+              color: const Color(0xFF1B1E25), // Use theme color
+            ),
+          ),
+        ),
+      ),
       body: Column(
         children: [
           Expanded(
             child: LayoutBuilder(
               builder: (context, constraints) {
                 return Container(
-                  width: constraints.maxWidth,  // Menyesuaikan lebar kontainer
-                  color: const Color(0xFF1B1E25),  // Warna latar belakang utama
+                  width: constraints.maxWidth,
+                  color: const Color(0xFF1B1E25),
                   child: SingleChildScrollView(
-                    controller: _scrollController,  // Kontrol scroll
+                    controller: _scrollController,
                     padding: const EdgeInsets.all(16.0),
                     child: ConstrainedBox(
                       constraints: BoxConstraints(
-                        minHeight: constraints.maxHeight,  // Menentukan tinggi minimal kontainer
+                        minHeight: constraints.maxHeight,
                       ),
-                      child: IntrinsicHeight(  // Agar tinggi kontainer menyesuaikan dengan anaknya
+                      child: IntrinsicHeight(
                         child: Column(
                           children: [
                             Center(
                               child: _buildContainer(
-                                title: 'Upload DICOM File',  // Judul kontainer
+                                title: AppLocalizationss.of(context).uploadDicomFile,
                                 child: UploadFile(
-                                  dicomFile: dicomFile,  // Kirim file DICOM
-                                  isLoading: isLoading,  // Status loading
-                                  onFileSelected: updateDicomFile,  // Fungsi untuk update file
-                                  onResponseReceived: updateResponse,  // Fungsi untuk update data respons
-                                  onLoadingStateChanged: (value) => setState(() => isLoading = value),  // Fungsi untuk mengubah status loading
-                                  onClassifyCompleted: onClassifyCompleted,  // Fungsi untuk menandai klasifikasi selesai
+                                  dicomFile: dicomFile,
+                                  isLoading: isLoading,
+                                  onFileSelected: updateDicomFile,
+                                  onResponseReceived: updateResponse,
+                                  onLoadingStateChanged: (value) => setState(() => isLoading = value),
+                                  onClassifyCompleted: onClassifyCompleted,
                                   onFileRemoved: () {
                                     setState(() {
-                                      dicomFile = null;  // Hapus file yang diunggah
-                                      isClassified = false;  // Reset status klasifikasi
-                                      responseData = null;  // Hapus data respons
+                                      dicomFile = null;
+                                      isClassified = false;
+                                      responseData = null;
                                     });
                                   },
                                 ),
@@ -208,28 +233,28 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                                       Expanded(
                                         flex: 1,
                                         child: _buildContainer(
-                                          title: 'HeatMap Detection',  // Judul kontainer Heatmap
+                                          title: AppLocalizationss.of(context).heatmapDetection,
                                           child: isLoading
                                               ? const Center(
                                                   child: CircularProgressIndicator(color: Colors.white60),
                                                 )
                                               : responseData != null
-                                                  ? DisplayHeatmap(responseData: responseData!)  // Tampilkan heatmap jika ada
-                                                  : _buildPlaceholder('No heatmap generated yet', height: containerHeight),  // Placeholder jika tidak ada heatmap
+                                                  ? DisplayHeatmap(responseData: responseData!)
+                                                  : _buildPlaceholder(AppLocalizationss.of(context).noHeatmapGeneratedYet, height: containerHeight),
                                         ),
                                       ),
                                       const SizedBox(width: 16.0),
                                       Expanded(
                                         flex: 1,
                                         child: _buildContainer(
-                                          title: 'Processed Image',  // Judul kontainer gambar yang diproses
+                                          title: AppLocalizationss.of(context).processedImage,
                                           child: isLoading
                                               ? const Center(
                                                   child: CircularProgressIndicator(color: Colors.white60),
                                                 )
                                               : responseData != null
-                                                  ? DisplayProcessed(responseData: responseData!)  // Tampilkan gambar yang diproses jika ada
-                                                  : _buildPlaceholder('No processed image available', height: containerHeight),  // Placeholder jika tidak ada gambar yang diproses
+                                                  ? DisplayProcessed(responseData: responseData!)
+                                                  : _buildPlaceholder(AppLocalizationss.of(context).noProcessedImageAvailable, height: containerHeight),
                                         ),
                                       ),
                                     ],
@@ -237,38 +262,38 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                                 : Column(
                                     children: [
                                       _buildContainer(
-                                        title: 'HeatMap Detection',
+                                        title: AppLocalizationss.of(context).heatmapDetection,
                                         child: isLoading
                                             ? const Center(
                                                 child: CircularProgressIndicator(color: Colors.white60),
                                               )
                                             : responseData != null
                                                 ? DisplayHeatmap(responseData: responseData!)
-                                                : _buildPlaceholder('No heatmap generated yet', height: containerHeight),
+                                                : _buildPlaceholder(AppLocalizationss.of(context).noHeatmapGeneratedYet, height: containerHeight),
                                       ),
                                       const SizedBox(height: 20),
                                       _buildContainer(
-                                        title: 'Processed Image',
+                                        title: AppLocalizationss.of(context).processedImage,
                                         child: isLoading
                                             ? const Center(
                                                 child: CircularProgressIndicator(color: Colors.white60),
                                               )
                                             : responseData != null
                                                 ? DisplayProcessed(responseData: responseData!)
-                                                : _buildPlaceholder('No processed image available', height: containerHeight),
+                                                : _buildPlaceholder(AppLocalizationss.of(context).noProcessedImageAvailable, height: containerHeight),
                                       ),
                                     ],
                                   ),
                             const SizedBox(height: 20),
                             _buildContainer(
-                              title: 'Classification Result',  // Judul kontainer hasil klasifikasi
+                              title: AppLocalizationss.of(context).classificationResult,
                               child: isLoading
                                   ? const Center(
                                       child: CircularProgressIndicator(color: Colors.white60),
                                     )
                                   : isClassified && responseData != null
-                                      ? DisplayPrediction(responseData: responseData!)  // Tampilkan hasil klasifikasi jika ada
-                                      : _buildPlaceholder('No Classification result available'),  // Placeholder jika hasil klasifikasi tidak ada
+                                      ? DisplayPrediction(responseData: responseData!)
+                                      : _buildPlaceholder(AppLocalizationss.of(context).noClassificationResultAvailable),
                             ),
                           ],
                         ),
@@ -284,45 +309,41 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
     );
   }
 
-  /// Membuat kontainer dengan judul dan widget anak.
-  /// Widget ini akan menampilkan elemen UI dalam bentuk kontainer yang memiliki border dan warna latar belakang.
   Widget _buildContainer({required String title, required Widget child}) {
     return Container(
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromARGB(255, 37, 39, 55)),  // Warna border
-        color: const Color(0xFF2A2D3E),  // Warna latar belakang kontainer
-        borderRadius: BorderRadius.circular(8.0),  // Sudut tumpul
+        border: Border.all(color: const Color.fromARGB(255, 37, 39, 55)),
+        color: const Color(0xFF2A2D3E),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
             title,
-            style: const TextStyle(color: Colors.white60),  // Gaya teks untuk judul
+            style: const TextStyle(color: Colors.white60),
           ),
-          const SizedBox(height: 8.0),  // Jarak antara judul dan konten
-          child,  // Widget anak yang diteruskan ke dalam kontainer
+          const SizedBox(height: 8.0),
+          child,
         ],
       ),
     );
   }
 
-  /// Menampilkan pesan placeholder ketika data tidak ada.
-  /// Placeholder ini digunakan untuk memberikan informasi jika hasil atau data belum tersedia.
   Widget _buildPlaceholder(String message, {double? height}) {
     return Container(
       height: height,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: const Color(0xFF1F2233),  // Warna latar belakang placeholder
-        borderRadius: BorderRadius.circular(8.0),  // Sudut tumpul
+        color: const Color(0xFF1F2233),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Center(
         child: Text(
-          message,  // Pesan placeholder
-          style: const TextStyle(color: Colors.white60),  // Gaya teks untuk placeholder
-          textAlign: TextAlign.center,  // Penyusunan teks di tengah
+          message,
+          style: const TextStyle(color: Colors.white60),
+          textAlign: TextAlign.center,
         ),
       ),
     );

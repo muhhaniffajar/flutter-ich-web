@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
-//================================================== Kelas IntraparenchymalPage ==================================================\\
-//================================================== untuk halaman utama informasi tentang Intraparenchymal Hemorrhage =============================\\
+//================================================== Kelas Intraparenchymal Page ==================================================\\
+//================================================== untuk halaman utama informasi tentang Intraparenchymal Hemorrhage ==================================================\\
+
 class IntraparenchymalPage extends StatelessWidget {
   const IntraparenchymalPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
-        title: const Text('Intraparenchymal Hemorrhage', style: TextStyle(color: Colors.white60)),
+        title: Text(
+          AppLocalizationss.of(context).intraparenchymalHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          style: const TextStyle(color: Colors.white60),
+        ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',
+          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -22,6 +28,7 @@ class IntraparenchymalPage extends StatelessWidget {
           ),
         ),
       ),
+      // Body halaman yang berisi konten dan slider gambar
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -69,96 +76,163 @@ class IntraparenchymalPage extends StatelessWidget {
   }
 }
 
-//================================ Kelas IntraparenchymalTextContent ================================\\
-//================================ untuk menampilkan informasi tentang Intraparenchymal Hemorrhage ==============================\\
+//================================================== Kelas Intraparenchymal TextContent ==================================================\\
+//================================================== untuk menampilkan informasi tentang Intraparenchymal Hemorrhage ==================================================\\
+
 class IntraparenchymalTextContent extends StatelessWidget {
   const IntraparenchymalTextContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
+    final List<String> causes = [
+      AppLocalizationss.of(context).intraparenchymalCause1,
+      AppLocalizationss.of(context).intraparenchymalCause2,
+      AppLocalizationss.of(context).intraparenchymalCause3,
+    ];
+
+    final List<String> characteristics = [
+      AppLocalizationss.of(context).intraparenchymalCharacteristic1,
+      AppLocalizationss.of(context).intraparenchymalCharacteristic2,
+    ];
+
+    final List<String> symptoms = [
+      AppLocalizationss.of(context).intraparenchymalSymptom1,
+      AppLocalizationss.of(context).intraparenchymalSymptom2,
+      AppLocalizationss.of(context).intraparenchymalSymptom3,
+      AppLocalizationss.of(context).intraparenchymalSymptom4,
+    ];
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color:  Color.fromARGB(255, 23, 25, 30),
+        color: const Color.fromARGB(255, 23, 25, 30),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('What is Intraparenchymal Hemorrhage?',
-            style: TextStyle(
+          // Judul bagian "What is Intraparenchymal Hemorrhage?"
+          Text(
+            AppLocalizationss.of(context).whatIsIntraparenchymalHemorrhage, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16),
-          Text('Intraparenchymal hemorrhage (IPH) refers to bleeding that occurs within the brain tissue itself. It is typically caused by the rupture of small blood vessels within the brain parenchyma. Symptoms can include sudden headache, nausea, vomiting, and neurological deficits. IPH can be a serious condition requiring immediate medical attention.',
+          const SizedBox(height: 16),
+          // Deskripsi tentang Intraparenchymal Hemorrhage
+          Text(
+            AppLocalizationss.of(context).intraparenchymalDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 16),
-          Text('Location:',
-            style: TextStyle(
+          const SizedBox(height: 16),
+          // Judul bagian "Location"
+          Text(
+            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('Bleeding occurs within the brain tissue itself, typically in the white matter.',
-            style: TextStyle(
+          // Deskripsi tentang lokasi Intraparenchymal Hemorrhage
+          Text(
+            AppLocalizationss.of(context).intraparenchymalLocation, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 18,
             ),
             textAlign: TextAlign.justify,
           ),
-          SizedBox(height: 10),
-          Text('Causes:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Causes"
+          Text(
+            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Hypertension leading to the rupture of small blood vessels.\n- Cerebral amyloid angiography (CAA) in older adults.\n- Other conditions such as arteriovenous malformations (AVMs) or aneurysms.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar penyebab
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: causes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  causes[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          Text('Characteristics:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Characteristics"
+          Text(
+            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Blood is located within the brain parenchyma.\n- Can be detected on imaging studies such as CT scans or MRI.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar karakteristik
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: characteristics.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  characteristics[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          Text('Symptoms:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Symptoms"
+          Text(
+            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text('- Sudden headache, often described as the "worst headache of life."\n- Nausea and vomiting.\n- Neurological deficits such as weakness, numbness, or speech difficulties.\n- Loss of consciousness in severe cases.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar gejala
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: symptoms.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  symptoms[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -166,23 +240,24 @@ class IntraparenchymalTextContent extends StatelessWidget {
   }
 }
 
-//================================ Kelas IntraparenchymalImageSlider ================================\\
-//================================ untuk menampilkan slider gambar contoh Intraparenchymal Hemorrhage ==============================\\
+//================================================== Kelas IntraparenchymalImageSlider ==================================================\\
+//================================================== untuk menampilkan slider gambar contoh Intraparenchymal Hemorrhage ==================================================\\
+
 class IntraparenchymalImageSlider extends StatefulWidget {
   const IntraparenchymalImageSlider({super.key});
 
   @override
-  IntraparenchymalImageSliderState createState() => IntraparenchymalImageSliderState();
+ IntraparenchymalImageSliderState createState() => IntraparenchymalImageSliderState();
 }
 
 class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   List<String> imagePaths = [
-    'assets/intraparenchymal1.jpg',
-    'assets/intraparenchymal2.jpg',
-    'assets/intraparenchymal3.jpg',
-    'assets/intraparenchymal4.jpg',
+    'assets/Intraparenchymal1.jpg',
+    'assets/Intraparenchymal2.jpg',
+    'assets/Intraparenchymal3.jpg',
+    'assets/Intraparenchymal4.jpg',
   ];
 
   @override
@@ -193,14 +268,14 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-          color:  Color.fromARGB(255, 23, 25, 30),
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            color: Color.fromARGB(255, 23, 25, 30),
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-          child: const Align(
+          child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Example of Intraparenchymal Hemorrhage',
-              style: TextStyle(
+              AppLocalizationss.of(context).exampleOfIntraparenchymalHemorrhage, // Menggunakan terjemahan
+              style: const TextStyle(
                 color: Colors.white60,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -263,7 +338,7 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: 'Previous Image',
+                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -281,7 +356,7 @@ class IntraparenchymalImageSliderState extends State<IntraparenchymalImageSlider
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: 'Next Image',
+                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

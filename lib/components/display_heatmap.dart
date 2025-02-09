@@ -1,15 +1,8 @@
-// ========================================================
-// IMPORT LIBRARIES
-// Mengimpor berbagai library yang dibutuhkan untuk melakukan pembangunan antarmuka pengguna pada aplikasi Flutter. 
-// Material.dart menyediakan komponen-komponen UI dasar yang digunakan dalam pengembangan aplikasi Flutter, seperti AppBar, Scaffold, dan lain-lain.
-// ========================================================
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
+import 'package:ich_web/service/api_service.dart';
 
 class DisplayHeatmap extends StatefulWidget {
-  // ========================================================
-  // MENERIMA PARAMETER RESPONSE DATA YANG BERISI DATA INFERENSI
-  // - responseData: Data respon yang diteruskan ke widget ini, berisi informasi inferensi dan heatmap.
-  // ========================================================
   final Map<String, dynamic>? responseData;
 
   const DisplayHeatmap({super.key, required this.responseData});
@@ -19,43 +12,21 @@ class DisplayHeatmap extends StatefulWidget {
 }
 
 class DisplayHeatmapState extends State<DisplayHeatmap> {
-  // ========================================================
-  // INISIALISASI PAGE CONTROLLER UNTUK MENGELOLA HALAMAN PADA PAGEVIEW
-  // _pageController: Digunakan untuk mengatur halaman yang sedang aktif.
-  // _currentPage: Menyimpan indeks halaman yang sedang aktif.
-  // ========================================================
   final PageController _pageController = PageController();
-  int _currentPage = 0;  // Menyimpan halaman yang sedang aktif
+  int _currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;  // Mengambil lebar layar perangkat
-
-    // ========================================================
-    // MENDAPATKAN DATA INFERENSI DARI responseData
-    // Mengambil data heatmap dari responseData yang diterima.
-    // ========================================================
+    final appLocalizationss = AppLocalizationss.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
     final List<dynamic>? inferences = widget.responseData?['inferences'];
 
-    // ========================================================
-    // MENANGANI KASUS KETIKA DATA HEATMAP TIDAK TERSEDIA
-    // Jika tidak ada data heatmap, tampilkan pesan informasi.
-    // ========================================================
     if (inferences == null || inferences.isEmpty) {
-      return const Center(child: Text('No heatmap data available.'));
+      return Center(child: Text(appLocalizationss.noHeatmapDataAvailable));
     }
 
-    // ========================================================
-    // MEMBUAT LIST WIDGET GAMBARS HEATMAP UNTUK DITAMPILKAN
-    // heatmapImages: List widget gambar heatmap yang akan ditampilkan.
-    // ========================================================
-    final List<Widget> heatmapImages = _buildHeatmapImages(inferences, screenWidth);
+    final List<Widget> heatmapImages = _buildHeatmapImages(inferences, screenWidth, appLocalizationss);
 
-    // ========================================================
-    // MENAMPILKAN GAMBARS HEATMAP DENGAN SCROLLABLE DAN PAGEVIEW
-    // SingleChildScrollView memungkinkan konten untuk digulir secara vertikal.
-    // PageView memungkinkan pengguna menavigasi gambar heatmap.
-    // ========================================================
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
@@ -67,13 +38,8 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // ========================================================
-            // ROW UNTUK NAVIGASI DAN HALAMAN
-            // Menampilkan tombol untuk berpindah antar halaman dan PageView untuk gambar.
-            // ========================================================
             Row(
               children: [
-                // Tombol untuk pindah ke gambar sebelumnya
                 IconButton(
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                   onPressed: _currentPage > 0
@@ -83,23 +49,21 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                           )
                       : null,
                 ),
-                // Menampilkan PageView untuk menampilkan gambar
                 Expanded(
                   child: SizedBox(
-                    height: screenWidth * 0.45 + 40,  // Mengatur tinggi untuk konten gambar
+                    height: screenWidth * 0.45 + 40,
                     child: PageView.builder(
                       controller: _pageController,
-                      itemCount: inferences.length,  // Banyaknya gambar
+                      itemCount: inferences.length,
                       onPageChanged: (int page) {
                         setState(() {
-                          _currentPage = page;  // Menyimpan halaman aktif
+                          _currentPage = page;
                         });
                       },
                       itemBuilder: (context, index) => Center(child: heatmapImages[index]),
                     ),
                   ),
                 ),
-                // Tombol untuk pindah ke gambar berikutnya
                 IconButton(
                   icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                   onPressed: _currentPage < heatmapImages.length - 1
@@ -111,10 +75,6 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                 ),
               ],
             ),
-            // ========================================================
-            // INDICATOR HALAMAN UNTUK MENUNJUKKAN HALAMAN AKTIF
-            // Row untuk menunjukkan indikator halaman yang aktif.
-            // ========================================================
             Padding(
               padding: const EdgeInsets.only(top: 5),
               child: Row(
@@ -139,30 +99,18 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
     );
   }
 
-  // ========================================================
-  // MEMBUAT LIST WIDGET GAMBARS HEATMAP UNTUK DITAMPILKAN
-  // heatmapImages: List widget gambar heatmap yang akan ditampilkan.
-  // ========================================================
-  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth) {
-    const String baseUrl = 'https://mortality-campaigns-choir-pix.trycloudflare.com/';
+  List<Widget> _buildHeatmapImages(List<dynamic> inferences, double screenWidth, AppLocalizationss AppLocalizationss) {
+    final String baseUrl = ApiService.baseUrl; // Use baseUrl from ApiService
 
     return inferences.map((inference) {
       final String? heatmapPath = inference['heatmap'];
       final String? label = inference['label'];
       final String? confidence = inference['confidence'];
 
-      // ========================================================
-      // MEMERIKSA PATH GAMBAR HEATMAP
-      // Jika path gambar heatmap kosong, gambar tidak akan ditampilkan.
-      // ========================================================
       if (heatmapPath == null || heatmapPath.isEmpty) return const SizedBox();
 
-      final String fullImageUrl = '$baseUrl$heatmapPath';  // Menghasilkan URL lengkap gambar
+      final String fullImageUrl = '$baseUrl$heatmapPath';
 
-      // ========================================================
-      // MEMBUAT WIDGET UNTUK SETIAP GAMBAR HEATMAP
-      // Setiap gambar heatmap akan menampilkan label dan confidence jika ada.
-      // ========================================================
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
@@ -172,13 +120,13 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
               borderRadius: BorderRadius.circular(15),
               child: Image.network(
                 fullImageUrl,
-                width: screenWidth * 0.7,  // Mengatur lebar gambar sesuai layar
-                fit: BoxFit.contain,  // Menggunakan BoxFit.contain untuk memastikan gambar tidak terpotong
+                width: screenWidth * 0.7,
+                fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) => const Center(
                   child: Icon(Icons.broken_image, size: 48, color: Colors.red),
                 ),
                 loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;  // Menampilkan gambar ketika sudah dimuat
+                  if (loadingProgress == null) return child;
                   return const Center(
                     child: CircularProgressIndicator(color: Colors.white),
                   );
@@ -193,11 +141,11 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Label: $label',
+                    '${AppLocalizationss.label}$label',
                     style: const TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Text(
-                    'Confidence: $confidence',
+                    '${AppLocalizationss.confidence}$confidence',
                     style: const TextStyle(color: Colors.white, fontSize: 12),
                   ),
                 ],
@@ -205,13 +153,9 @@ class DisplayHeatmapState extends State<DisplayHeatmap> {
             ),
         ],
       );
-    }).toList();  // Mengubah data inferensi menjadi list widget gambar
+    }).toList();
   }
 
-  // ========================================================
-  // MENGHAPUS PAGE CONTROLLER SAAT WIDGET DIBERSIHKAN
-  // dispose() digunakan untuk mengelola sumber daya dan menghindari kebocoran memori.
-  // ========================================================
   @override
   void dispose() {
     _pageController.dispose();

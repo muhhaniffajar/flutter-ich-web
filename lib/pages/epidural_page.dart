@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ich_web/l10n/app_localizations.dart';
 
-//================================================== Kelas EpiduralPage ==================================================\\
-//================================================== untuk halaman informasi tentang Epidural Hemorrhage ==============================\\
+//================================================== Kelas Epidural Page ==================================================\\
+//================================================== untuk halaman utama informasi tentang Epidural Hemorrhage ==================================================\\
 
 class EpiduralPage extends StatelessWidget {
   const EpiduralPage({super.key});
@@ -9,14 +10,16 @@ class EpiduralPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //======== AppBar =======================\\
-      //===== untuk judul halaman dan navigasi kembali =====\\
+      // AppBar dengan judul dan navigasi kembali ke halaman utama
       appBar: AppBar(
-        title: const Text('Epidural Hemorrhage', style: TextStyle(color: Colors.white60)),
+        title: Text(
+          AppLocalizationss.of(context).epiduralHemorrhage, // Menggunakan terjemahan untuk judul AppBar
+          style: const TextStyle(color: Colors.white60),
+        ),
         backgroundColor: const Color(0xFF1B1E25),
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Tooltip(
-          message: 'Back to Home',
+          message: AppLocalizationss.of(context).backToHome, // Menggunakan terjemahan untuk tooltip
           child: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -25,8 +28,7 @@ class EpiduralPage extends StatelessWidget {
           ),
         ),
       ),
-      //======== Body =========================\\
-      //===== untuk konten utama halaman =====\\
+      // Body halaman yang berisi konten dan slider gambar
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -41,22 +43,19 @@ class EpiduralPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              //======== LayoutBuilder ==============\\
-              //===== untuk menentukan apakah layar lebar atau sempit =====\\
+              // Menentukan apakah layar lebar atau sempit berdasarkan lebar maksimum
               bool isNarrow = constraints.maxWidth < 800;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: 50),
-                  //======== Konten untuk layar sempit =====\\
-                  //===== menampilkan teks dan slider gambar secara vertikal =====\\
+                  // Jika layar sempit, tampilkan teks dan slider gambar secara vertikal
                   if (isNarrow) ...[
                     const EpiduralTextContent(),
                     const SizedBox(height: 16),
                     const EpiduralImageSlider(),
                   ] 
-                  //======== Konten untuk layar lebar =====\\
-                  //===== menampilkan teks dan slider gambar secara horizontal =====\\
+                  // Jika layar lebar, tampilkan teks dan slider gambar secara horizontal
                   else ...[
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,117 +76,162 @@ class EpiduralPage extends StatelessWidget {
   }
 }
 
-//================================================== Kelas EpiduralTextContent ==================================================\\
-//================================================== untuk menampilkan informasi tentang Epidural Hemorrhage ==============================\\
+//================================================== Kelas Epidural TextContent ==================================================\\
+//================================================== untuk menampilkan informasi tentang Epidural Hemorrhage ==================================================\\
 
 class EpiduralTextContent extends StatelessWidget {
   const EpiduralTextContent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Define the lists of items for "Causes", "Characteristics", and "Symptoms"
+    final List<String> causes = [
+      AppLocalizationss.of(context).epiduralCause1,
+      AppLocalizationss.of(context).epiduralCause2,
+    ];
+
+    final List<String> characteristics = [
+      AppLocalizationss.of(context).epiduralCharacteristic1,
+      AppLocalizationss.of(context).epiduralCharacteristic2,
+    ];
+
+    final List<String> symptoms = [
+      AppLocalizationss.of(context).epiduralSymptom1,
+      AppLocalizationss.of(context).epiduralSymptom2,
+      AppLocalizationss.of(context).epiduralSymptom3,
+      AppLocalizationss.of(context).epiduralSymptom4,
+    ];
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color:  Color.fromARGB(255, 23, 25, 30),
+        color: const Color.fromARGB(255, 23, 25, 30),
         borderRadius: BorderRadius.circular(16),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //======== Judul "What is Epidural Hemorrhage?" =====\\
-          //===== untuk menampilkan judul bagian =====\\
-          Text('What is Epidural Hemorrhage?',
-            style: TextStyle(
+          // Judul bagian "What is Epidural Hemorrhage?"
+          Text(
+            AppLocalizationss.of(context).whatIsEpiduralHemorrhage, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16),
-          //======== Deskripsi Epidural Hemorrhage =====\\
-          //===== untuk menampilkan deskripsi bagian =====\\
-          Text('Epidural hemorrhage (EDH) refers to a collection of blood between the dura mater (the outermost membrane of the brain) and the skull. It is typically caused by a tear in the middle meningeal artery, often due to a traumatic head injury. Symptoms can include severe headache, nausea, vomiting, and loss of consciousness. Prompt medical attention is crucial for diagnosis and treatment.',
+          const SizedBox(height: 16),
+          // Deskripsi tentang Epidural Hemorrhage
+          Text(
+            AppLocalizationss.of(context).epiduralDescription, // Menggunakan terjemahan
             textAlign: TextAlign.justify,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 16,
             ),
           ),
-          SizedBox(height: 16),
-          //======== Judul "Location" =====\\
-          //===== untuk menampilkan judul bagian =====\\
-          Text('Location:',
-            style: TextStyle(
+          const SizedBox(height: 16),
+          // Judul bagian "Location"
+          Text(
+            AppLocalizationss.of(context).location, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          //======== Deskripsi Lokasi =====\\
-          //===== untuk menampilkan deskripsi bagian =====\\
-          Text('Bleeding occurs between the dura mater and the skull.',
-            style: TextStyle(
+          // Deskripsi tentang lokasi Epidural Hemorrhage
+          Text(
+            AppLocalizationss.of(context).epiduralLocation, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white30,
               fontSize: 18,
             ),
             textAlign: TextAlign.justify,
           ),
-          SizedBox(height: 10),
-          //======== Judul "Causes" =====\\
-          //===== untuk menampilkan judul bagian =====\\
-          Text('Causes:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Causes"
+          Text(
+            AppLocalizationss.of(context).causes, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          //======== Deskripsi Penyebab =====\\
-          //===== untuk menampilkan deskripsi bagian =====\\
-          Text('- Traumatic brain injury (e.g., motor vehicle accidents, falls) leading to tearing of the middle meningeal artery.\n- Rarely, it can occur spontaneously in individuals with certain vascular conditions.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar penyebab
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: causes.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  causes[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          //======== Judul "Characteristics" =====\\
-          //===== untuk menampilkan judul bagian =====\\
-          Text('Characteristics:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Characteristics"
+          Text(
+            AppLocalizationss.of(context).characteristics, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          //======== Deskripsi Karakteristik =====\\
-          //===== untuk menampilkan deskripsi bagian =====\\
-          Text('- Blood collects between the dura mater and the skull.\n- It is usually a result of a tear in the middle meningeal artery.',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar karakteristik
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: characteristics.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  characteristics[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
-          SizedBox(height: 10),
-          //======== Judul "Symptoms" =====\\
-          //===== untuk menampilkan judul bagian =====\\
-          Text('Symptoms:',
-            style: TextStyle(
+          const SizedBox(height: 10),
+          // Judul bagian "Symptoms"
+          Text(
+            AppLocalizationss.of(context).symptoms, // Menggunakan terjemahan
+            style: const TextStyle(
               color: Colors.white60,
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          //======== Deskripsi Gejala =====\\
-          //===== untuk menampilkan deskripsi bagian =====\\
-          Text('- Severe headache\n- Nausea and vomiting\n- Loss of consciousness\n- Stiff neck\n- Altered mental status',
-            style: TextStyle(
-              color: Colors.white30,
-              fontSize: 18,
-            ),
-            textAlign: TextAlign.justify,
+          // ListView.builder untuk menampilkan daftar gejala
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: symptoms.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                leading: const Text('•', style: TextStyle(fontSize: 20)),
+                title: Text(
+                  symptoms[index],
+                  style: const TextStyle(
+                    color: Colors.white30,
+                    fontSize: 18,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -196,7 +240,7 @@ class EpiduralTextContent extends StatelessWidget {
 }
 
 //================================================== Kelas EpiduralImageSlider ==================================================\\
-//================================================== untuk menampilkan slider gambar contoh Epidural Hemorrhage ==============================\\
+//================================================== untuk menampilkan slider gambar contoh Epidural Hemorrhage ==================================================\\
 
 class EpiduralImageSlider extends StatefulWidget {
   const EpiduralImageSlider({super.key});
@@ -209,29 +253,28 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
   final PageController _pageController = PageController();
   int _currentIndex = 0;
   List<String> imagePaths = [
-    'assets/epidural1.jpg',
-    'assets/epidural2.jpg',
-    'assets/epidural3.jpg',
-    'assets/epidural4.jpg',
+    'assets/Epidural1.jpg',
+    'assets/Epidural2.jpg',
+    'assets/Epidural3.jpg',
+    'assets/Epidural4.jpg',
   ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        //======== Judul Slider Gambar =====\\
-        //===== untuk menampilkan judul slider gambar =====\\
+        // Judul slider gambar
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: const BoxDecoration(
-            color:  Color.fromARGB(255, 23, 25, 30),
+            color: Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
           ),
-          child: const Align(
+          child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Example of Epidural Hemorrhage',
-              style: TextStyle(
+              AppLocalizationss.of(context).exampleOfEpiduralHemorrhage, // Menggunakan terjemahan
+              style: const TextStyle(
                 color: Colors.white60,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -239,18 +282,16 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
             ),
           ),
         ),
-        //======== Kontainer Utama Slider Gambar =====\\
-        //===== untuk menampilkan kontainer utama slider gambar =====\\
+        // Kontainer utama untuk slider gambar
         Container(
           decoration: const BoxDecoration(
-            color:  Color.fromARGB(255, 23, 25, 30),
+            color: Color.fromARGB(255, 23, 25, 30),
             borderRadius: BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
           ),
           child: Stack(
             alignment: Alignment.center,
             children: [
-              //======== PageView untuk Gambar =====\\
-              //===== untuk menampilkan gambar secara berurutan =====\\
+              // PageView untuk menampilkan gambar secara berurutan
               SizedBox(
                 height: 600,
                 child: PageView.builder(
@@ -274,8 +315,7 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
                   },
                 ),
               ),
-              //======== Indikator Halaman =====\\
-              //===== untuk menunjukkan halaman saat ini =====\\
+              // Indikator halaman saat ini
               Positioned(
                 bottom: 10,
                 child: Row(
@@ -293,12 +333,11 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
                   }),
                 ),
               ),
-              //======== Tombol Navigasi Sebelumnya =====\\
-              //===== untuk navigasi ke gambar sebelumnya =====\\
+              // Tombol navigasi ke gambar sebelumnya
               Positioned(
                 left: 0,
                 child: Tooltip(
-                  message: 'Previous Image',
+                  message: AppLocalizationss.of(context).previousImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.white60),
                     onPressed: () {
@@ -312,12 +351,11 @@ class EpiduralImageSliderState extends State<EpiduralImageSlider> {
                   ),
                 ),
               ),
-              //======== Tombol Navigasi Berikutnya =====\\
-              //===== untuk navigasi ke gambar berikutnya =====\\
+              // Tombol navigasi ke gambar berikutnya
               Positioned(
                 right: 0,
                 child: Tooltip(
-                  message: 'Next Image',
+                  message: AppLocalizationss.of(context).nextImage, // Menggunakan terjemahan
                   child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios, color: Colors.white60),
                     onPressed: () {

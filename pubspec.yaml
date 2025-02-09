@@ -12,15 +12,23 @@ dependencies:
   file_picker: ^8.3.1
   dio: ^5.8.0+1
   flutter_lints: ^5.0.0
-  http_parser: ^4.1.2
+  http_parser: ^4.0.2
+  shared_preferences: ^2.0.6
+  build_runner: ^2.3.0
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+  intl_utils: ^2.8.8
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  intl_translation: ^0.20.1
 
 flutter:
   uses-material-design: true
+  generate: true
   assets:
     - assets/ID_9adc40048_Subdural.jpg
     - assets/ID_f26667baf_Epidural.jpg
@@ -56,3 +64,11 @@ flutter:
     - assets/testing_web/ID_4af939e8d.dcm
     - assets/testing_web/ID_58e7e2e55.dcm
     - assets/testing_web/ID_cca25a801.dcm
+
+# Localization configuration
+arb-dir: lib/l10n
+template-arb-file: intl_en.arb
+output-localization-file: app_localizations.dart
+output-class: ApplLocalizations
+synthetic-package: false
+nullable-getter: false
