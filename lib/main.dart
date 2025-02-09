@@ -12,6 +12,9 @@ import 'pages/intraventricular_page.dart';
 import 'pages/subarachnoid_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'l10n/app_localizations.dart';
+
+
+
 // ========================================================
 // MAIN FUNCTION
 // Fungsi utama yang menjadi titik awal eksekusi aplikasi Flutter. 
@@ -204,24 +207,24 @@ class MainPage extends StatelessWidget {
 // Menggunakan Tooltip untuk memberikan informasi tambahan saat pengguna mengarahkan kursor ke tombol.
 // ========================================================
 class ClassificationButton extends StatelessWidget {
-  final BuildContext parentContext; // Konteks dari halaman induk.
+  final BuildContext parentContext;
 
   const ClassificationButton(this.parentContext, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: AppLocalizations.of(context).gotoichclass, // Pesan tooltip yang ditampilkan.
+      message: AppLocalizations.of(context).gotoichclass,
       child: Padding(
-        padding: const EdgeInsets.only(right: 16.0), // Padding di sebelah kanan.
+        padding: const EdgeInsets.only(right: 16.0),
         child: IconButton(
           icon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.control_point_sharp, color: Colors.white60), // Ikon tombol.
-              SizedBox(width: 8), // Jarak antara ikon dan teks.
+              Icon(Icons.control_point_sharp, color: Colors.white60),
+              SizedBox(width: 8),
               Text(
-              AppLocalizations.of(context).startClassification,
+                AppLocalizations.of(context).startClassification,
                 style: TextStyle(
                   color: Colors.white60,
                   fontSize: 16,
@@ -231,10 +234,25 @@ class ClassificationButton extends StatelessWidget {
             ],
           ),
           onPressed: () {
-            // Navigasi ke halaman klasifikasi saat tombol ditekan.
-            Navigator.push(
-              parentContext,
-              MaterialPageRoute(builder: (context) => const ClassificationPage()),
+            // Navigasi ke halaman klasifikasi dengan animasi ScaleTransition.
+            Navigator.of(parentContext).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const ClassificationPage(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = 0.0;
+                  const end = 1.0;
+                  const curve = Curves.easeInOut;
+
+                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                  var scaleAnimation = animation.drive(tween);
+
+                  return ScaleTransition(
+                    scale: scaleAnimation,
+                    alignment: Alignment.center, // Mengatur titik pusat animasi.
+                    child: child,
+                  );
+                },
+              ),
             );
           },
         ),
@@ -242,6 +260,8 @@ class ClassificationButton extends StatelessWidget {
     );
   }
 }
+
+
 
 // ========================================================
 // EDUCATION PAGE CLASS
@@ -600,7 +620,7 @@ class _HemorrhageTypesListState extends State<HemorrhageTypesList> {
 // Kartu ini dapat ditekan untuk menavigasi ke halaman detail hemorrhage.
 // ========================================================
 class HemorrhageTypeCard extends StatelessWidget {
-  final HemorrhageType hemorrhageType; // Objek hemorrhageType yang akan ditampilkan.
+  final HemorrhageType hemorrhageType;
 
   const HemorrhageTypeCard({
     required this.hemorrhageType,
@@ -610,48 +630,73 @@ class HemorrhageTypeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0), // Padding horizontal di sekitar kartu.
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: GestureDetector(
         onTap: () {
-          // Navigasi ke halaman detail hemorrhage saat kartu ditekan.
+          // Mengambil ukuran dan posisi tombol
+          final RenderBox renderBox = context.findRenderObject() as RenderBox;
+          final Offset offset = renderBox.localToGlobal(Offset.zero);
+          final Size size = renderBox.size;
+
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => hemorrhageType.page),
+            PageRouteBuilder(
+              pageBuilder: (context, animation, secondaryAnimation) => hemorrhageType.page,
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                // Mengatur Tween untuk Scale
+                const begin = 0.0;
+                const end = 1.0;
+                const curve = Curves.easeInOut;
+
+                var scaleTween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                var scaleAnimation = animation.drive(scaleTween);
+
+                // Mengatur posisi transformasi
+                return ScaleTransition(
+                  scale: scaleAnimation,
+                  alignment: Alignment(
+                    (offset.dx + size.width / 2) / MediaQuery.of(context).size.width * 2 - 1,
+                    (offset.dy + size.height / 2) / MediaQuery.of(context).size.height * 2 - 1,
+                  ),
+                  child: child,
+                );
+              },
+            ),
           );
         },
         child: Container(
-          width: double.infinity, // Lebar kartu penuh.
-          padding: const EdgeInsets.all(8.0), // Padding di dalam kartu.
+          width: double.infinity,
+          padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 23, 25, 30), // Warna latar belakang kartu.
-            borderRadius: BorderRadius.circular(16), // Sudut melengkung pada kartu.
+            color: const Color.fromARGB(255, 23, 25, 30),
+            borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha(50), // Warna bayangan.
-                blurRadius: 4, // Radius blur bayangan.
-                offset: const Offset(2, 2), // Offset bayangan.
+                color: Colors.black.withAlpha(50),
+                blurRadius: 4,
+                offset: const Offset(2, 2),
               ),
             ],
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Menyelaraskan konten di tengah.
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(30), // Sudut melengkung pada gambar.
+                borderRadius: BorderRadius.circular(30),
                 child: Image.asset(
-                  hemorrhageType.image, // Mengambil gambar dari path yang ditentukan.
-                  height: 60, // Tinggi gambar.
-                  width: 60, // Lebar gambar.
-                  fit: BoxFit.cover, // Mengatur cara gambar ditampilkan.
+                  hemorrhageType.image,
+                  height: 60,
+                  width: 60,
+                  fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) {
-                    return const Icon(Icons.broken_image, color: Colors.red); // Menampilkan ikon jika gambar gagal dimuat.
+                    return const Icon(Icons.broken_image, color: Colors.red);
                   },
                 ),
               ),
-              const SizedBox(height: 8), // Jarak antara gambar dan judul.
+              const SizedBox(height: 8),
               Text(
-                hemorrhageType.title, // Menampilkan judul hemorrhage.
-                textAlign: TextAlign.center, // Menyelaraskan teks di tengah.
+                hemorrhageType.title,
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                   color: Colors.white60,
                   fontSize: 14,
@@ -665,6 +710,7 @@ class HemorrhageTypeCard extends StatelessWidget {
     );
   }
 }
+
 
 // ========================================================
 // START CLASSIFICATION BUTTON WIDGET
@@ -689,14 +735,29 @@ class StartClassificationButton extends StatelessWidget {
             elevation: 5, // Elevasi bayangan tombol.
           ),
           onPressed: () {
-            // Navigasi ke halaman klasifikasi saat tombol ditekan.
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ClassificationPage()),
+            // Navigasi ke halaman klasifikasi dengan animasi ScaleTransition.
+            Navigator.of(context).push(
+              PageRouteBuilder(
+                pageBuilder: (context, animation, secondaryAnimation) => const ClassificationPage(),
+                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                  const begin = 0.0;
+                  const end = 1.0;
+                  const curve = Curves.easeInOut;
+
+                  var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                  var scaleAnimation = animation.drive(tween);
+
+                  return ScaleTransition(
+                    scale: scaleAnimation,
+                    alignment: Alignment.center, // Mengatur titik pusat animasi.
+                    child: child,
+                  );
+                },
+              ),
             );
           },
           child: Text(
-          AppLocalizations.of(context).startClassification, // Teks yang ditampilkan pada tombol.
+            AppLocalizations.of(context).startClassification, // Teks yang ditampilkan pada tombol.
             style: TextStyle(color: Colors.white, fontSize: 18), // Gaya teks tombol.
           ),
         ),
@@ -704,6 +765,8 @@ class StartClassificationButton extends StatelessWidget {
     );
   }
 }
+
+
 
 // ========================================================
 // EDUCATION IMAGE WIDGET

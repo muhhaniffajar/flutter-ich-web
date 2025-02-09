@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ich_web/generated/intl/messages_all.dart'; 
 
-class AppLocalizationss {
-  static Future<AppLocalizationss> load(Locale locale) {
+class AppLocalizations {
+  static Future<AppLocalizations> load(Locale locale) {
     final String name = locale.countryCode?.isEmpty ?? true ? locale.languageCode : locale.toString();
     final String localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      return AppLocalizationss();
+      return AppLocalizations();
     });
   }
 
-  static AppLocalizationss of(BuildContext context) {
-    return Localizations.of<AppLocalizationss>(context, AppLocalizationss)!;
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   // Helper method untuk menghindari pengulangan Intl.message
@@ -106,7 +106,7 @@ class AppLocalizationss {
   String get intraparenchymalCause3 => Intl.message('Other conditions such as arteriovenous malformations (AVMs) or aneurysms.', name: 'intraparenchymalCause3');
   String get intraparenchymalCharacteristic1 => Intl.message('Blood is located within the brain parenchyma.', name: 'intraparenchymalCharacteristic1');
   String get intraparenchymalCharacteristic2 => Intl.message('Can be detected on imaging studies such as CT scans or MRI.', name: 'intraparenchymalCharacteristic2');
-  String get intraparenchymalSymptom1 => Intl.message('Sudden headache, often described as the \"worst headache of life\".', name: 'intraparenchymalSymptom1');
+  String get intraparenchymalSymptom1 => Intl.message('Sudden headache, often described as the worst headache of life.', name: 'intraparenchymalSymptom1');
   String get intraparenchymalSymptom2 => Intl.message('Nausea and vomiting.', name: 'intraparenchymalSymptom2');
   String get intraparenchymalSymptom3 => Intl.message('Neurological deficits such as weakness, numbness, or speech difficulties.', name: 'intraparenchymalSymptom3');
   String get intraparenchymalSymptom4 => Intl.message('Loss of consciousness in severe cases.', name: 'intraparenchymalSymptom4');
@@ -145,15 +145,15 @@ class AppLocalizationss {
   String get confidence=> Intl.message('Confidence: ', name: 'confidence');
 }
 
-class AppLocalizationssDelegate extends LocalizationsDelegate<AppLocalizationss> {
-  const AppLocalizationssDelegate();
+class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
+  const AppLocalizationsDelegate();
 
   @override
   bool isSupported(Locale locale) => ['en', 'id'].contains(locale.languageCode);
 
   @override
-  Future<AppLocalizationss> load(Locale locale) => AppLocalizationss.load(locale);
+  Future<AppLocalizations> load(Locale locale) => AppLocalizations.load(locale);
 
   @override
-  bool shouldReload(AppLocalizationssDelegate old) => false;
+  bool shouldReload(AppLocalizationsDelegate old) => false;
 }

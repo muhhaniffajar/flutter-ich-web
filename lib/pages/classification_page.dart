@@ -116,7 +116,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    AppLocalizationss.of(context).importantDiagnosticDisclaimer,
+                    AppLocalizations.of(context).importantDiagnosticDisclaimer,
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -125,7 +125,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    AppLocalizationss.of(context).uploadAndClassificationDescription,
+                    AppLocalizations.of(context).uploadAndClassificationDescription,
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 16,
@@ -166,7 +166,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
     return Scaffold(
       appBar: AppBar(
         leading: Tooltip(
-          message: AppLocalizationss.of(context).backToHome,
+          message: AppLocalizations.of(context).backToHome,
           child: IconButton(
             icon: const Icon(Icons.home, color: Colors.white60),
             onPressed: _goToHomePage,
@@ -175,7 +175,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
         backgroundColor: Colors.transparent, // Set AppBar background to transparent
         elevation: 0,
         title: Text(
-          AppLocalizationss.of(context).appTitle,
+          AppLocalizations.of(context).appTitle,
           style: const TextStyle(color: Colors.white60),
         ),
         flexibleSpace: Opacity(
@@ -207,7 +207,7 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                           children: [
                             Center(
                               child: _buildContainer(
-                                title: AppLocalizationss.of(context).uploadDicomFile,
+                                title: AppLocalizations.of(context).uploadDicomFile,
                                 child: UploadFile(
                                   dicomFile: dicomFile,
                                   isLoading: isLoading,
@@ -233,28 +233,28 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                                       Expanded(
                                         flex: 1,
                                         child: _buildContainer(
-                                          title: AppLocalizationss.of(context).heatmapDetection,
+                                          title: AppLocalizations.of(context).heatmapDetection,
                                           child: isLoading
                                               ? const Center(
                                                   child: CircularProgressIndicator(color: Colors.white60),
                                                 )
                                               : responseData != null
                                                   ? DisplayHeatmap(responseData: responseData!)
-                                                  : _buildPlaceholder(AppLocalizationss.of(context).noHeatmapGeneratedYet, height: containerHeight),
+                                                  : _buildPlaceholder(AppLocalizations.of(context).noHeatmapGeneratedYet, height: containerHeight),
                                         ),
                                       ),
                                       const SizedBox(width: 16.0),
                                       Expanded(
                                         flex: 1,
                                         child: _buildContainer(
-                                          title: AppLocalizationss.of(context).processedImage,
+                                          title: AppLocalizations.of(context).processedImage,
                                           child: isLoading
                                               ? const Center(
                                                   child: CircularProgressIndicator(color: Colors.white60),
                                                 )
                                               : responseData != null
                                                   ? DisplayProcessed(responseData: responseData!)
-                                                  : _buildPlaceholder(AppLocalizationss.of(context).noProcessedImageAvailable, height: containerHeight),
+                                                  : _buildPlaceholder(AppLocalizations.of(context).noProcessedImageAvailable, height: containerHeight),
                                         ),
                                       ),
                                     ],
@@ -262,38 +262,38 @@ class ClassificationPageState extends State<ClassificationPage> with SingleTicke
                                 : Column(
                                     children: [
                                       _buildContainer(
-                                        title: AppLocalizationss.of(context).heatmapDetection,
+                                        title: AppLocalizations.of(context).heatmapDetection,
                                         child: isLoading
                                             ? const Center(
                                                 child: CircularProgressIndicator(color: Colors.white60),
                                               )
                                             : responseData != null
                                                 ? DisplayHeatmap(responseData: responseData!)
-                                                : _buildPlaceholder(AppLocalizationss.of(context).noHeatmapGeneratedYet, height: containerHeight),
+                                                : _buildPlaceholder(AppLocalizations.of(context).noHeatmapGeneratedYet, height: containerHeight),
                                       ),
                                       const SizedBox(height: 20),
                                       _buildContainer(
-                                        title: AppLocalizationss.of(context).processedImage,
+                                        title: AppLocalizations.of(context).processedImage,
                                         child: isLoading
                                             ? const Center(
                                                 child: CircularProgressIndicator(color: Colors.white60),
                                               )
                                             : responseData != null
                                                 ? DisplayProcessed(responseData: responseData!)
-                                                : _buildPlaceholder(AppLocalizationss.of(context).noProcessedImageAvailable, height: containerHeight),
+                                                : _buildPlaceholder(AppLocalizations.of(context).noProcessedImageAvailable, height: containerHeight),
                                       ),
                                     ],
                                   ),
                             const SizedBox(height: 20),
                             _buildContainer(
-                              title: AppLocalizationss.of(context).classificationResult,
+                              title: AppLocalizations.of(context).classificationResult,
                               child: isLoading
                                   ? const Center(
                                       child: CircularProgressIndicator(color: Colors.white60),
                                     )
                                   : isClassified && responseData != null
                                       ? DisplayPrediction(responseData: responseData!)
-                                      : _buildPlaceholder(AppLocalizationss.of(context).noClassificationResultAvailable),
+                                      : _buildPlaceholder(AppLocalizations.of(context).noClassificationResultAvailable),
                             ),
                           ],
                         ),
